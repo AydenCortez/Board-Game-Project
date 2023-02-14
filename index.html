@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="boardGame.js"></script>
+    <title>Board Game</title>
+</head>
+<body>
+    <table id="gameBoard">
+        <tr>
+            <td colspan="6" class="blank"></td>
+            <td id="A26"></td>
+            <td id="A27"></td>
+            <td id="A28"></td>
+            <td id="end"></td>
+        </tr><tr>
+            <td colspan="1" class="blank"></td>
+            <td id="A20"></td>
+            <td id="A21"></td>
+            <td id="A22"></td>
+            <td id="A23"></td>
+            <td id="A24"></td>
+            <td id="A25"></td>
+            <td colspan="2" class="blank"></td>
+            <td id="B24"></td>
+        </tr>
+        <tr>
+            <td colspan="1" class="blank"></td>
+            <td id="A19"></td>
+            <td colspan="7" class="blank"></td>
+            <td id="B23"></td>
+        </tr>
+        <tr>
+            <td colspan="1" class="blank"></td>
+            <td id="A18"></td>
+            <td colspan="5" class="blank"></td>
+            <td id="B20"></td>
+            <td id="B21"></td>
+            <td id="B22"></td>
+        </tr>
+        <tr>
+            <td colspan="1" class="blank"></td>
+            <td id="A17"></td>
+            <td id="A16"></td>
+            <td id="A15"></td>
+            <td colspan="3" class="blank"></td>
+            <td id="B19"></td>
+            <td colspan="1" class="blank"></td>
+        </tr>
+        <tr>
+            <td colspan="3" class="blank"></td>
+            <td id="14" class="split"></td>
+            <td id="B15"></td>
+            <td id="B16"></td>
+            <td id="B17"></td>
+            <td id="B18"></td>
+            <td colspan="2" class="blank"></td>
+        </tr>
+        <tr>
+            <td colspan="1" class="blank"></td>
+            <td id="11"></td>
+            <td id="12"></td>
+            <td id="13"></td>
+            <td colspan="6" class="blank"></td>
+        </tr>
+        <tr>
+            <td colspan="1" class="blank"></td>
+            <td id="10"></td>
+            <td colspan="8" class="blank"></td>
+        </tr>
+        <tr>
+            <td colspan="1" class="blank"></td>
+            <td id="9"></td>
+            <td id="8"></td>
+            <td id="7"></td>
+            <td id="6"></td>
+            <td id="5"></td>
+            <td id="4"></td>
+            <td id="3"></td>
+            <td id="2"></td>
+            <td id="1" class="start">
+                <div id="player1"></div>
+                <div id="player2"></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="10" class="blank"></td>
+        </tr>
+    </table>
+    <div id="gameMenu">
+        <div class="gameActions">
+            <input type="button" onclick="rollDie()" value="Roll">
+            <p id="rollText"></p>
+        </div>
+        <div class="gameLog">
+            <h1>Game Log</h1>
+        </div>
+        <div class="startBtn">
+          <input type="button" onclick="theGAME()" value="START">  
+        </div>
+        
+    </div>
+</body>
+</html>

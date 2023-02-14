@@ -1,0 +1,84 @@
+body {
+    display: flex;
+    gap: 5%;
+}
+
+#gameBoard {
+    width: 50vw;
+    height: 50vw;
+    border: 1px solid black;
+    margin-left: 10%;
+}
+
+tr {
+    height: 10%;
+    width: 100%;
+}
+td {
+    width: 10%;
+    height: 10%;
+    border: 1px solid black;
+    padding-left: 4%;
+}
+
+.blank  {
+    border: none;
+}
+
+.start {
+    background-color: rgb(128, 0, 0);
+}
+
+#player1 {
+    width: 20%;
+    height: 20%;
+    background-color: blue;
+}
+
+#player2 {
+    width: 20%;
+    height: 20%;
+    background-color: orange;
+}
+
+.split {
+    background-image: url("/images/switchSpace.png");
+    background-position: center;
+    background-size: contain;
+}
+
+#end {
+    background-color: green;
+}
+
+#gameMenu {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    height: 40vw;
+    border: 1px solid black;
+    text-align: center;
+}
+
+#gameMenu div {
+    display: flex;
+    justify-content: center;
+    height: 45%;
+    width: 100%;
+    border: 1px solid black;
+}
+
+
+.startBtn {
+    height: 10%;
+}
+
+.startBtn input{
+    height: 100%;
+    width: 100%;
+}
+
+.gameActions input{
+    width: 50%;
+    height: 15%;
+}
