@@ -7,9 +7,10 @@
 
     var diceRolled = false;
 
-    const tiles = Array.from(document.querySelectorAll(".tile")); // Elements are now stored in a NodeList, which is an array-like object.
+    const tiles = document.querySelectorAll(".tile");
+    console.log(tiles);
     for (var i = 0; i < tiles.length; i++) {
-        tiles.forEach(i => console.log("Added Tile: " + tiles[i]));
+        console.log("Total Tiles: " + tiles.length);
     }
 
     player1 = {
