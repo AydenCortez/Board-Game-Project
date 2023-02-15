@@ -19,9 +19,28 @@
          switch (die.number){
             case 1:
                 dieImg.style.background = "url(/images/d1.PNG)";
-                console.log("it works");
+                dieImg.style.backgroundSize = "contain";
                 break;
-
+            case 2:
+                dieImg.style.background = "url(/images/d2.PNG)";
+                dieImg.style.backgroundSize = "contain";
+                break;
+            case 3:
+                dieImg.style.background = "url(/images/d3.PNG)";
+                dieImg.style.backgroundSize = "contain";
+                break;
+            case 4:
+                dieImg.style.background = "url(/images/d4.PNG)";
+                dieImg.style.backgroundSize = "contain";
+                break;
+            case 5:
+                dieImg.style.background = "url(/images/d5.PNG)";
+                dieImg.style.backgroundSize = "contain";
+                break;
+            case 6:
+                dieImg.style.background = "url(/images/d6.PNG)";
+                dieImg.style.backgroundSize = "contain";
+                break;
         }
     }
 
