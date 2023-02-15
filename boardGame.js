@@ -7,6 +7,12 @@
 
     var diceRolled = false;
 
+    const tiles = document.querySelectorAll(".tile");
+    console.log(tiles);
+    for (var i = 0; i < tiles.length; i++) {
+        console.log("Total Tiles: " + tiles.length);
+    }
+
     player1 = {
         previousTile: 1,
         currentTile: 1
@@ -16,6 +22,9 @@
         previousTile: 1,
         currentTile: 1
     }
+
+    const player_Won_Msg = "You Win!";
+    const ai_Won_Msg = "You Lose!";
 
     this.rollDie = function () {
         var dieText = document.getElementById("rollText");
