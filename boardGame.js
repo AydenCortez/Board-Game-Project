@@ -12,9 +12,21 @@
         var dieText = document.getElementById("rollText");
         die.number = Math.floor(Math.random() * 6) + 1;
         dieText.textContent = die.number;
+        var dieImg = document.getElementById("die");
+        
         gameLog();
         getPosition();
+         switch (die.number){
+            case 1:
+                dieImg.style.background = "url(/images/d1.PNG)";
+                console.log("it works");
+                break;
+
+        }
     }
+
+   
+    
 
     this.getPosition = function() {
         var nextStep = +previousStep + +die.number;
