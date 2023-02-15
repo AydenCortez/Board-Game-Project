@@ -3,10 +3,17 @@
     var die = {};
     var player1Turn = true;
     var previousStep = 1;
+    var currentStep;
 
     var diceRolled = false;
 
-    
+    player1 = {
+        currentTile: 1
+    }
+
+    player2 = {
+        currentTile: 1
+    }
 
     this.rollDie = function () {
         var dieText = document.getElementById("rollText");
@@ -15,8 +22,7 @@
         var dieImg = document.getElementById("die");
         
         gameLog();
-        getPosition();
-        
+
         switch (die.number){
             case 1:
                 dieImg.style.background = "url(/images/d1.PNG)";
@@ -43,17 +49,19 @@
                 dieImg.style.backgroundSize = "contain";
                 break;
         }
+
+        $("#player1").appendTo("#4");
     }
 
    
     
 
-    this.getPosition = function() {
-        var nextStep = +previousStep + +die.number;
-        console.log(nextStep)
-        previousStep = nextStep;
-        movePlayer();
-    }
+    // this.getPosition = function() {
+    //     currentStep = +previousStep + +die.number;
+    //     console.log(currentStep)
+    //     previousStep = currentStep;
+    //     movePlayer();
+    // }
 
     this.movePlayer = function() {
         
