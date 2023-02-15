@@ -8,10 +8,12 @@
     var diceRolled = false;
 
     player1 = {
+        previousTile: 1,
         currentTile: 1
     }
 
     player2 = {
+        previousTile: 1,
         currentTile: 1
     }
 
@@ -22,6 +24,8 @@
         var dieImg = document.getElementById("die");
         
         gameLog();
+        getPosition();
+        movePlayer(); 
 
         switch (die.number){
             case 1:
@@ -50,20 +54,38 @@
                 break;
         }
 
-        $("#player1").appendTo("#4");
+        
     }
 
    
     
 
-    // this.getPosition = function() {
-    //     currentStep = +previousStep + +die.number;
-    //     console.log(currentStep)
-    //     previousStep = currentStep;
-    //     movePlayer();
-    // }
+    this.getPosition = function() {
+        if (player1Turn) {
+            player1.currentTile = player1.previousTile + die.number;
+            player1.previousTile = player1.currentTile
+            console.log("player 1: " + player1.currentTile)
+        } else {
+            player2.currentTile = player2.previousTile + die.number;
+            player2.previousTile = player2.currentTile
+            console.log("player 2: " + player2.currentTile);
+        }
+    }
+
+    setInterval (this.detectSwitch = function (){
+        if (player1.currentTile > 14 || player2.currentTile > 14){
+            if (player1Turn) {
+                
+            }
+        }
+    }, 500)
 
     this.movePlayer = function() {
+        if (player1Turn) {
+            $("#player1").appendTo("#" + player1.currentTile);
+        } else {
+            $("#player2").appendTo("#" + player2.currentTile);
+        }
         
     }
 
