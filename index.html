@@ -48,7 +48,7 @@
             <td id="A15"></td>
             <td colspan="3" class="blank"></td>
             <td id="B19"></td>
-            <td colspan="1" class="blank"></td>
+            <td colspan="2" class="blank"></td>
         </tr>
         <tr>
             <td colspan="3" class="blank"></td>
@@ -90,13 +90,17 @@
             <td colspan="10" class="blank"></td>
         </tr>
     </table>
-    <div id="gameMenu">
+    <div class="gameMenu">
         <div class="gameActions">
             <input type="button" onclick="rollDie()" value="Roll">
-            <p id="rollText"></p>
+            <h2 id="rollText"></h2>
+            <div id="die"></div>
         </div>
         <div class="gameLog">
             <h1>Game Log</h1>
+            <ul class="gameLogText" id="gameLogDisplay">
+
+            </ul>
         </div>
         <div class="startBtn">
           <input type="button" onclick="theGAME()" value="START">  
