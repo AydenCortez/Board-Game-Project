@@ -7,6 +7,11 @@
 
     var diceRolled = false;
 
+    const tiles = Array.from(document.querySelectorAll(".tile")); // Elements are now stored in a NodeList, which is an array-like object.
+    for (var i = 0; i < tiles.length; i++) {
+        tiles.forEach(i => console.log("Added Tile: " + tiles[i]));
+    }
+
     player1 = {
         currentTile: 1
     }
@@ -14,6 +19,9 @@
     player2 = {
         currentTile: 1
     }
+
+    const player_Won_Msg = "You Win!";
+    const ai_Won_Msg = "You Lose!";
 
     this.rollDie = function () {
         var dieText = document.getElementById("rollText");
