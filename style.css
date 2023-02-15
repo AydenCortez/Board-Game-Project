@@ -21,8 +21,13 @@ td {
     padding-left: 4%;
 }
 
+td:not(.blank) {
+    background-size: cover;
+}
+
 .blank  {
     border: none;
+    background-size: contain;
 }
 
 .start {

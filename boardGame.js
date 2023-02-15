@@ -16,7 +16,8 @@
         
         gameLog();
         getPosition();
-         switch (die.number){
+        
+        switch (die.number){
             case 1:
                 dieImg.style.background = "url(/images/d1.PNG)";
                 dieImg.style.backgroundSize = "contain";
