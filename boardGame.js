@@ -13,6 +13,8 @@
         console.log("Total Tiles: " + tiles.length);
     }
 
+
+    // player objects
     player1 = {
         previousTile: 1,
         currentTile: 1
@@ -26,16 +28,14 @@
     const player_Won_Msg = "You Win!";
     const ai_Won_Msg = "You Lose!";
 
-    this.rollDie = function () {
+    this.doPlayerTurn = function () {
         var dieText = document.getElementById("rollText");
         die.number = Math.floor(Math.random() * 6) + 1;
         dieText.textContent = die.number;
         var dieImg = document.getElementById("die");
-        
-        gameLog();
-        getPosition();
-        movePlayer(); 
 
+
+        // die image display
         switch (die.number){
             case 1:
                 dieImg.style.background = "url(/images/d1.PNG)";
@@ -63,13 +63,7 @@
                 break;
         }
 
-        
-    }
-
-   
-    
-
-    this.getPosition = function() {
+        // get postition
         if (player1Turn) {
             player1.currentTile = player1.previousTile + die.number;
             player1.previousTile = player1.currentTile
@@ -79,26 +73,29 @@
             player2.previousTile = player2.currentTile
             console.log("player 2: " + player2.currentTile);
         }
-    }
 
-    setInterval (this.detectSwitch = function (){
-        if (player1.currentTile > 14 || player2.currentTile > 14){
-            if (player1Turn) {
-                
-            }
-        }
-    }, 500)
-
-    this.movePlayer = function() {
+        // move player
         if (player1Turn) {
             $("#player1").appendTo("#" + player1.currentTile);
         } else {
             $("#player2").appendTo("#" + player2.currentTile);
         }
         
-    }
+        // stop player at switch tile
+        const popup = document.getElementById("popupCont")
 
-    this.gameLog = function(){
+        if (player1.currentTile >= 15){
+                $("#player1").appendTo("#14");
+                popup.style.display = "flex";
+                popup.style.animation = "0.5s fadeIn";
+        }
+        if (player2.currentTile >= 15){
+                $("#player2").appendTo("#14");
+                popup.style.display = "flex";
+                popup.style.animation = "0.5s fadeIn";
+        }
+
+        // game log
         const node = document.createElement("li")
                
         if (player1Turn) {
@@ -110,5 +107,10 @@
             node.appendChild(textNode);
             document.getElementById("gameLogDisplay").appendChild(node); 
         }
-        player1Turn = !player1Turn;
+        
+        // end turn
+        player1Turn = !player1Turn;               
     }
+
+
+

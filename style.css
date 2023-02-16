@@ -3,6 +3,23 @@ body {
     gap: 5%;
 }
 
+@keyframes fadeIn {
+    0% {opacity: 0%;}
+    100% {opacity: 100%;}
+    
+}
+
+.popupCont {
+    position: absolute;
+    display: none;
+    z-index: 0;
+    width: 20%;
+    height:15%;
+    background-color: grey;
+    left: 30%;
+    top: 40%;
+}
+
 #gameBoard {
     width: 48vw;
     height: 48vw;

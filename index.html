@@ -9,6 +9,9 @@
     <title>Board Game</title>
 </head>
 <body>
+    <div class="popupCont" id="popupCont">
+        <div class="popup"></div>
+    </div>
     <table id="gameBoard" style="border-collapse: collapse;">
         <tr>
             <td colspan="6" class="blank"></td>
@@ -52,7 +55,7 @@
         </tr>
         <tr>
             <td colspan="3" class="blank"></td>
-            <td class="tile" id="14" class="split"></td>
+            <td class="tile split" id="14">14</td>
             <td class="tile" id="B15"></td>
             <td class="tile" id="B16"></td>
             <td class="tile" id="B17"></td>
@@ -61,29 +64,30 @@
         </tr>
         <tr>
             <td colspan="1" class="blank"></td>
-            <td class="tile" id="11"></td>
-            <td class="tile" id="12"></td>
-            <td class="tile" id="13"></td>
+            <td class="tile" id="11">11</td>
+            <td class="tile" id="12">12</td>
+            <td class="tile" id="13">13</td>
             <td colspan="6" class="blank"></td>
         </tr>
         <tr>
             <td colspan="1" class="blank"></td>
-            <td class="tile" id="10"></td>
+            <td class="tile" id="10">10</td>
             <td colspan="8" class="blank"></td>
         </tr>
         <tr>
             <td colspan="1" class="blank"></td>
-            <td class="tile" id="9"></td>
-            <td class="tile" id="8"></td>
-            <td class="tile" id="7"></td>
-            <td class="tile" id="6"></td>
-            <td class="tile" id="5"></td>
-            <td class="tile" id="4"></td>
-            <td class="tile" id="3"></td>
-            <td class="tile" id="2"></td>
+            <td class="tile" id="9">9</td>
+            <td class="tile" id="8">8</td>
+            <td class="tile" id="7">7</td>
+            <td class="tile" id="6">6</td>
+            <td class="tile" id="5">5</td>
+            <td class="tile" id="4">4</td>
+            <td class="tile" id="3">3</td>
+            <td class="tile" id="2">2</td>
             <td class="tile" id="1" class="start">
                 <div id="player1"></div>
                 <div id="player2"></div>
+                1
             </td>
         </tr>
         <tr>
@@ -92,7 +96,7 @@
     </table>
     <div class="gameMenu">
         <div class="gameActions">
-            <input type="button" onclick="rollDie()" value="Roll">
+            <input type="button" onclick="doPlayerTurn()" value="Roll">
             <h2 id="rollText"></h2>
             <div id="die"></div>
         </div>
