@@ -15,9 +15,32 @@ body {
     z-index: 0;
     width: 20%;
     height:15%;
-    background-color: grey;
+    background-color: rgb(205, 205, 205);
+    border: 1px solid black;
     left: 30%;
     top: 40%;
+    padding: 1%
+}
+
+.popup {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5%;
+}
+
+.popup h2 {
+    width: 100%;
+    text-align: center;
+}
+
+.popup input {
+    width: 40%;
+    height: 20%;
 }
 
 #gameBoard {
@@ -48,6 +71,7 @@ td:not(.blank) {
 .blank  {
     border: none;
     background-size: contain;
+    opacity: 0%;
 }
 
 .start {
