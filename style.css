@@ -44,9 +44,6 @@ td:not(.blank) {
     background-size: cover;
 }
 
-td:nth-of-type(odd):not(.blank) {
-    background-color: grey;
-}
 
 .blank  {
     border: none;
