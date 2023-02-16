@@ -84,12 +84,12 @@
         // stop player at switch tile
         const popup = document.getElementById("popupCont")
 
-        if (player1.currentTile >= 15){
+        if (player1.currentTile >= 14){
                 $("#player1").appendTo("#14");
                 popup.style.display = "flex";
                 popup.style.animation = "0.5s fadeIn";
         }
-        if (player2.currentTile >= 15){
+        if (player2.currentTile >= 14){
                 $("#player2").appendTo("#14");
                 popup.style.display = "flex";
                 popup.style.animation = "0.5s fadeIn";
