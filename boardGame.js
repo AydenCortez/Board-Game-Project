@@ -41,7 +41,7 @@
 
 
         // die image display
-        switch (die.number){
+        switch (die.number) {
             case 1:
                 dieImg.style.background = "url(/images/d1.PNG)";
                 dieImg.style.backgroundSize = "contain";
@@ -111,13 +111,13 @@
         // stop player at switch tile
         
         
-        if (player1.currentTile >= 14 && player1.switched == false){
+        if (player1.currentTile >= 14 && player1.switched == false) {
                 player1.currentTile = 14;
                 $("#player1").appendTo("#14");
                 popup.style.display = "flex";
                 popup.style.animation = "0.5s fadeIn";
         }
-        if (player2.currentTile >= 14 && player2.switched == false){
+        if (player2.currentTile >= 14 && player2.switched == false) {
                 player2.currentTile = 14;
                 $("#player2").appendTo("#14");
                 popup.style.display = "flex";
@@ -142,7 +142,7 @@
     }
 
     this.pathA = function (){
-        if (player1Turn){
+        if (player1Turn) {
             player1.playerPath = "A"
             player1.switched = true;
         } else {
@@ -154,7 +154,7 @@
     }
 
     this.pathB = function (){
-        if (player1Turn){
+        if (player1Turn) {
             player1.playerPath = "B"
             player1.switched = true;
         } else {
@@ -164,5 +164,3 @@
         popup.style.display = "none";
         console.log(player1.playerPath + player2.playerPath)
     }
-
-    
