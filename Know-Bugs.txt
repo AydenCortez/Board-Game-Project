@@ -1,0 +1,12 @@
+Known Bugs:
+
+- Players cannot get to the last tile.
+
+- The player sometimes skips the split tile, or does not go to it even if it has enough spaces to
+move after rolling the die. Just very weird behaviour.
+
+EXAMPLE: Lets say the blue player is on tile 10. Blue player rolls a 6 and gets the prompt to choose their path.
+However, the blue player does not move and is still on tile 10. On the players next turn, they roll a 2, however, 
+it looks like the player moved 8 tiles. So it seems that the first die roll did not get counted until after choosing their path.
+
+- After the split tile, the player sometimes moves way more than the amount told on the die.

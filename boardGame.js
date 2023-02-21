@@ -35,6 +35,10 @@
 
     this.doPlayerTurn = function () {
         var dieText = document.getElementById("rollText");
+        
+        if (diceRolled)
+            return;
+
         die.number = Math.floor(Math.random() * 6) + 1;
         dieText.textContent = die.number;
         var dieImg = document.getElementById("die");
@@ -112,16 +116,20 @@
         
         
         if (player1.currentTile >= 14 && player1.switched == false) {
+                diceRolled = true;
                 player1.currentTile = 14;
-                $("#player1").appendTo("#14");
+                $("#player1").appendTo("#" + player1.currentTile);
                 popup.style.display = "flex";
                 popup.style.animation = "0.5s fadeIn";
+                console.log(player1.currentTile);
         }
         if (player2.currentTile >= 14 && player2.switched == false) {
+                diceRolled = true;
                 player2.currentTile = 14;
-                $("#player2").appendTo("#14");
+                $("#player2").appendTo("#" + player2.currentTile);
                 popup.style.display = "flex";
                 popup.style.animation = "0.5s fadeIn";
+                console.log(player2.currentTile);
         }
 
         // game log
@@ -138,7 +146,9 @@
         }
         
         // end turn
-        player1Turn = !player1Turn;               
+        player1Turn = !player1Turn;    
+        console.log("Player 1 (blue) current Tile:", player1.currentTile);
+        console.log("Player 2 (orange) current Tile:", player2.currentTile);         
     }
 
     this.pathA = function (){
@@ -151,6 +161,7 @@
         }
         popup.style.display = "none";
         console.log(player1.playerPath + player2.playerPath)
+        diceRolled = false;
     }
 
     this.pathB = function (){
@@ -163,4 +174,5 @@
         }
         popup.style.display = "none";
         console.log(player1.playerPath + player2.playerPath)
+        diceRolled = false;
     }
