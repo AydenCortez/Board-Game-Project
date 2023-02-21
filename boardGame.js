@@ -132,6 +132,19 @@
                 console.log(player2.currentTile);
         }
 
+        // If current tile is greater than or equal to the last tile, put the last tile as the current tile
+
+        if (player1.currentTile >= 39 && player1.switched == false) {
+            diceRolled = true;
+            player1.currentTile = 39;
+            $("#player1").appendTo("#" + player1.currentTile);   
+        }
+        if (player2.currentTile >= 39 && player2.switched == false) {
+            diceRolled = true;
+            player2.currentTile = 39;
+            $("#player2").appendTo("#" + player2.currentTile);
+        }
+
         // game log
         const node = document.createElement("li")
                
