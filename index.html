@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="jquery-3.6.3.js"></script>
+    <script src="Winwheel.js"></script>
     <title>Board Game</title>
 </head>
 <body>
@@ -100,10 +101,32 @@
     </table>
     <div class="gameMenu">
         <div class="gameActions">
-            <input type="button" onclick="doPlayerTurn()" value="Roll">
-            <h2 id="rollText"></h2>
-            <div id="die"></div>
+            <input type="button" onclick="doPlayerTurn()" value="Spin">
+            <div class="wheel-spinner">
+                <div class="number-spun"></div>
+            </div>
+            <canvas id="myCanvas" width="880" height="300">Canvas not supported, use another browser.</canvas>
         </div>
+
+
+        <script>
+            let theWheel = new Winwheel({
+            "canvasId" : "myCanvas",
+            "numSegments" : 6,
+            "fillStyle" : "#e7706f",
+            "lineWidth" : 3,
+            "segments" : 
+            [
+                {'fillStyle' : '#eae56f', 'text' : '1'},
+                {'fillStyle' : '#89f26e', 'text' : '2'},
+                {'fillStyle' : '#7de6ef', 'text' : '3'},
+                {'fillStyle' : '#eae56f', 'text' : '1'},
+                {'fillStyle' : '#89f26e', 'text' : '2'},
+                {'fillStyle' : '#7de6ef', 'text' : '3'}
+            ]
+    });
+        </script>
+
         <div class="gameLog">
             <h1>Game Log</h1>
             <ul class="gameLogText" id="gameLogDisplay">
