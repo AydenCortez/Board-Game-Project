@@ -1,3 +1,4 @@
+    
     var player1 = document.getElementById("player1");
     var player2 = document.getElementById("player2"); 
     const popup = document.getElementById("popupCont")
@@ -6,14 +7,13 @@
     var previousStep = 1;
     var currentStep;
     
-    var diceRolled = false;
+    var spunWheel = false;
 
     const tiles = document.querySelectorAll(".tile");
     console.log(tiles);
     for (var i = 0; i < tiles.length; i++) {
         console.log("Total Tiles: " + tiles.length);
     }
-
 
     // player objects
     player1 = {
@@ -34,50 +34,31 @@
     const ai_Won_Msg = "You Lose!";
 
     this.doPlayerTurn = function () {
-        var dieText = document.getElementById("rollText");
-        
-        if (diceRolled)
+        if (spunWheel)
             return;
 
-        die.number = Math.floor(Math.random() * 6) + 1;
-        dieText.textContent = die.number;
-        var dieImg = document.getElementById("die");
-
-
         // die image display
-        switch (die.number) {
+        switch (spin.number) {
             case 1:
-                dieImg.style.background = "url(/images/d1.PNG)";
-                dieImg.style.backgroundSize = "contain";
+                // dieImg.style.background = "url(/images/d1.PNG)";
+                // dieImg.style.backgroundSize = "contain";
                 break;
             case 2:
-                dieImg.style.background = "url(/images/d2.PNG)";
-                dieImg.style.backgroundSize = "contain";
+                // dieImg.style.background = "url(/images/d2.PNG)";
+                // dieImg.style.backgroundSize = "contain";
                 break;
             case 3:
-                dieImg.style.background = "url(/images/d3.PNG)";
-                dieImg.style.backgroundSize = "contain";
-                break;
-            case 4:
-                dieImg.style.background = "url(/images/d4.PNG)";
-                dieImg.style.backgroundSize = "contain";
-                break;
-            case 5:
-                dieImg.style.background = "url(/images/d5.PNG)";
-                dieImg.style.backgroundSize = "contain";
-                break;
-            case 6:
-                dieImg.style.background = "url(/images/d6.PNG)";
-                dieImg.style.backgroundSize = "contain";
+                // dieImg.style.background = "url(/images/d3.PNG)";
+                // dieImg.style.backgroundSize = "contain";
                 break;
         }
 
         // get postition
         if (player1Turn) {
-            player1.currentTile = player1.previousTile + die.number;
+            player1.currentTile = player1.previousTile + spin.number;
             player1.previousTile = player1.currentTile
         } else {
-            player2.currentTile = player2.previousTile + die.number;
+            player2.currentTile = player2.previousTile + spin.number;
             player2.previousTile = player2.currentTile
         }
 
