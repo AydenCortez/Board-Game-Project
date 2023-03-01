@@ -17,6 +17,14 @@
             <input type="button" id="pathB" value="Path B" onclick="pathB()">
         </div>
     </div>
+    <div class="chaosMeter">
+        <h2>Chaos</h2>
+        <div class="chaosCell" id="Chaos5"></div>
+        <div class="chaosCell" id="Chaos4"></div>
+        <div class="chaosCell" id="Chaos3"></div>
+        <div class="chaosCell" id="Chaos2"></div>
+        <div class="chaosCell" id="Chaos1"></div>
+    </div>
     <table id="gameBoard" style="border-collapse: collapse;">
         <tr>
             <td colspan="6" class="blank"></td>
@@ -101,7 +109,7 @@
     </table>
     <div class="gameMenu">
         <div class="gameActions">
-            <input type="button" onclick="doPlayerTurn()" value="Spin">
+            <input type="button"  value="Spin">
             <div class="wheel-spinner">
                 <div class="number-spun"></div>
             </div>
@@ -124,7 +132,7 @@
                 {'fillStyle' : '#89f26e', 'text' : '2'},
                 {'fillStyle' : '#7de6ef', 'text' : '3'}
             ]
-    });
+            });
         </script>
 
         <div class="gameLog">
@@ -132,9 +140,6 @@
             <ul class="gameLogText" id="gameLogDisplay">
 
             </ul>
-        </div>
-        <div class="startBtn">
-          <input type="button" onclick="theGAME()" value="START">  
         </div>
         
     </div>

@@ -1,16 +1,25 @@
 
+* {
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+
 html {
-    height: 100vh;
     background: url("/images/backgroundImageSpace.jpg") no-repeat;
     background-size: cover;
-    background-position: center;    
+    background-position: center; 
+    height: 110vh;
+    width: 100%;
+    overflow: hidden;
 }
 
 
 
 body {
     display: flex;
-    gap: 5%;
+    gap: 4%;
+   
 }
 
 @keyframes fadeIn {
@@ -57,11 +66,28 @@ body {
     height: 20%;
 }
 
+.chaosMeter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15%;
+    height: 98vh;
+    margin: 0;
+    background-color: rgb(211, 211, 211, 0.75);
+}
+
+.chaosCell {
+    margin: 15%;
+    width: 75px;
+    height: 75px;
+    border: 1px solid black;
+    background-color: white;
+}
+
 #gameBoard {
     width: 1000px;
     height: 1000px;
     border: 1px solid black;
-    margin-left: 10%;
     background-color: rgb(211, 211, 211, 0.75);
 }
 
@@ -128,6 +154,7 @@ td:not(.blank) {
 
 .gameMenu {
     display: flex;
+    margin-top: 5%;
     flex-direction: column;
     width: 20vw;
     height: 40vw;
@@ -138,23 +165,12 @@ td:not(.blank) {
 .gameMenu div {
     display: flex;
     justify-content: center;
-    height: 45%;
+    height: 50%;
     width: 100%;
     border: 1px solid black;
     background-color: rgb(211, 211, 211, 0.75);
 }
 
-
-
-
-.startBtn {
-    height: 10%;
-}
-
-.startBtn input{
-    height: 100%;
-    width: 100%;
-}
 
 .gameLog {
     display: flex;
