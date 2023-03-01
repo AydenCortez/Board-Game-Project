@@ -49,9 +49,35 @@
         player2.currentTile = board1[0];
     }
 
+<<<<<<< HEAD
     function spinWheel() {
         // wheelnumber = document.getElementById('')
         player1.currentTile = board1[testNumber];
         turn *= -1;
     }
     console.log (testNumber)
+=======
+    this.pathB = function (){
+        if (player1Turn) {
+            player1.playerPath = "B"
+            player1.switched = true;
+        } else {
+            player2.playerPath = "B"
+            player2.switched = true;
+        }
+        popup.style.display = "none";
+        console.log(player1.playerPath + player2.playerPath)
+        diceRolled = false;
+    }
+
+    // Wheel Spinner
+    // To-Do: Spinner seems to be too predictable, and needs to be more random?
+    let container = document.querySelector(".wheel-container");
+    let btn = document.getElementById("spin");
+    let number = Math.ceil(Math.random() * 1000);
+
+    btn.onclick = function () {
+    	container.style.transform = "rotate(" + number + "deg)";
+    	number += Math.ceil(Math.random() * 1000);
+    }
+>>>>>>> 8bd6d4ef32710d91800599932257572e8f2f76be
