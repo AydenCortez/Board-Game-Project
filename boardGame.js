@@ -49,14 +49,16 @@
         player2.currentTile = board1[0];
     }
 
-<<<<<<< HEAD
     function spinWheel() {
         // wheelnumber = document.getElementById('')
         player1.currentTile = board1[testNumber];
         turn *= -1;
     }
-    console.log (testNumber)
-=======
+
+    function movePlayers() {
+        boardTiles.forEach((tile, idx) => )
+    }
+
     this.pathB = function (){
         if (player1Turn) {
             player1.playerPath = "B"
@@ -80,4 +82,3 @@
     	container.style.transform = "rotate(" + number + "deg)";
     	number += Math.ceil(Math.random() * 1000);
     }
->>>>>>> 8bd6d4ef32710d91800599932257572e8f2f76be
