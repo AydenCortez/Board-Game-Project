@@ -17,7 +17,7 @@
 
     for (i = 0; i <= 14; i++) {
         board1[i] = document.getElementById(i);
-        console.log(document.getElementById(i))
+        console.log(board1[i])
     }
     // board1.forEach((item, i) => {
     //     item.id  = i + 1;
@@ -31,12 +31,14 @@
 
     // player objects
     player1 = {
+        previousValue: 1,
         currentTile: board1[0], 
         playerPath: board1,
         switched: false
     }
 
     player2 = {
+        previousValue: 1,
         currentTile: board1[0],
         playerPath: board1,
         switched: false
@@ -47,19 +49,19 @@
             return Math.floor(Math.random() * max)
         }
         testNumber = Math.floor(getTest(3) + 1)
-        console.log (testNumber);
+        movePlayers();
+        turn *= -1
     }
 
     function start(){
         turn = 1;
         isWinner = null;
-        player1.classList.add('player1')
-        player2.classList.add('player2')
-        startTile.appendChild(player1)
-        startTile.appendChild(player2)
-        player1.currentTile = board1[0];
-        player2.currentTile = board1[0];
+        $('#player1').appendTo(board1[1]);
+        $('#player2').appendTo(board1[1])
+        player1.currentTile = board1[1];
+        player2.currentTile = board1[1];
     }
+    start();
 
     function spinWheel() {
         // wheelnumber = document.getElementById('')
@@ -68,9 +70,48 @@
     }
 
     function movePlayers() {
+
         if (turn === 1) {
-            player1.currentTile += board1
+            switch (player1.playerPath) {
+                case board1:
+                    player1.currentTile = board1[player1.previousValue + testNumber]
+                    player1.previousValue += +testNumber
+                    console.log('player1 ', player1.previousValue)
+                    break;
+                case path1:
+                    break;
+                case path2:
+                    break;
+
+            }
+        } else {
+            switch (player2.playerPath) {
+                case board1:
+                    player2.currentTile = board1[player2.previousValue + testNumber]
+                    player2.previousValue += +testNumber
+                    console.log('player2 ', player2.previousValue)
+                    break;
+                case path1:
+                    break;
+                case path2:
+                    break;
+
+            }
         }
+        render();
+        switchTile();
+    }
+
+    function switchTile(){
+        if (board1[player1.previousValue + testNumber] >= board1[14]){
+            console.log('I DID IT');
+        }
+
+    }
+
+    function render(){
+        $('#player1').appendTo(player1.currentTile);
+        $('#player2').appendTo(player2.currentTile);
     }
 
 
