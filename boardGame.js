@@ -14,6 +14,18 @@
     
 
     let board1 = ['1', '2', '3', '4', '5', '6','7', '8', '9','10', '11', '12', '13', '14']
+
+    for (i = 0; i <= 14; i++) {
+        board1[i] = document.getElementById(i);
+        console.log(document.getElementById(i))
+    }
+    // board1.forEach((item, i) => {
+    //     item.id  = i + 1;
+    //     board1[i] = document.getElementById(i)
+    //     console.log(document.getElementById(i))
+    // })
+    // console.log (board1);
+    
     let path1 = ['15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28']
     let path2 = ['15', '16', '17', '18', '19', '20', '21', '22', '23']
 
@@ -56,21 +68,12 @@
     }
 
     function movePlayers() {
-        boardTiles.forEach((tile, idx) => )
+        if (turn === 1) {
+            player1.currentTile += board1
+        }
     }
 
-    this.pathB = function (){
-        if (player1Turn) {
-            player1.playerPath = "B"
-            player1.switched = true;
-        } else {
-            player2.playerPath = "B"
-            player2.switched = true;
-        }
-        popup.style.display = "none";
-        console.log(player1.playerPath + player2.playerPath)
-        diceRolled = false;
-    }
+
 
     // Wheel Spinner
     // To-Do: Spinner seems to be too predictable, and needs to be more random?
