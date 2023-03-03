@@ -13,7 +13,7 @@
     var testNumber;
     
 
-    let board1 = ['1', '2', '3', '4', '5', '6','7', '8', '9','10', '11', '12', '13', '14']
+    const board1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 
     for (i = 0; i <= 14; i++) {
         board1[i] = document.getElementById(i);
@@ -58,8 +58,8 @@
         isWinner = null;
         $('#player1').appendTo(board1[1]);
         $('#player2').appendTo(board1[1])
-        player1.currentTile = board1[1];
-        player2.currentTile = board1[1];
+        player1.currentTile = board1[1].id;
+        player2.currentTile = board1[1].id;
     }
     start();
 
@@ -76,7 +76,7 @@
                 case board1:
                     player1.currentTile = board1[player1.previousValue + testNumber]
                     player1.previousValue += +testNumber
-                    console.log('player1 ', player1.previousValue)
+                    // console.log('player1 ', player1.currentTile.id)
                     break;
                 case path1:
                     break;
@@ -89,7 +89,7 @@
                 case board1:
                     player2.currentTile = board1[player2.previousValue + testNumber]
                     player2.previousValue += +testNumber
-                    console.log('player2 ', player2.previousValue)
+                    // console.log('player2 ', player2.currentTile.id)
                     break;
                 case path1:
                     break;
@@ -101,18 +101,32 @@
         render();
         switchTile();
     }
-
+    console.log('Test Tile ', player1.currentTile)
     function switchTile(){
-        if (board1[player1.previousValue + testNumber] >= board1[14]){
-            console.log('I DID IT');
+        if (player1.currentTile.id >= 14){
+            $('#player1').appendTo('#14')
+            // popUp()
+            console.log('test 1');
         }
+        if (player2.currentTile.id >= 14){
+            $('#player2').appendTo('#14')
+            // popUp()
+            console.log('test 2');
+        }
+        
 
+    }
+
+    function popUp (){
+        let popUp = document.getElementById('popupCont')
+        popUp.style.display = 'flex';
     }
 
     function render(){
-        $('#player1').appendTo(player1.currentTile);
-        $('#player2').appendTo(player2.currentTile);
+        $('#player1').appendTo(document.getElementById(player1.currentTile.id));
+        $('#player2').appendTo(document.getElementById(player2.currentTile.id));
     }
+    console.log('#',player1.currentTile)
 
 
 
