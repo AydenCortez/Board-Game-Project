@@ -236,12 +236,36 @@
 
 
     // Wheel Spinner
-    // To-Do: Spinner seems to be too predictable, and needs to be more random?
-    let container = document.querySelector(".wheel-container");
-    let btn = document.getElementById("spin");
-    let number = Math.ceil(Math.random() * 1000);
-
-    btn.onclick = function () {
-    	container.style.transform = "rotate(" + number + "deg)";
-    	number += Math.ceil(Math.random() * 1000);
-    }
+    
+    const spin = () => {
+        const element = document.getElementById('wheel');
+        const flag = document.getElementById('flag');
+        const minSpinCount = 5;
+        
+        const min = minSpinCount * 360;
+        const max = min + 360;
+        let startPosition = 0;
+        const endPosition = Math.floor(Math.random() * (min - max) ) + max;
+        
+        startPosition = element.style.transform.match(/\d+/);
+        
+        while (startPosition > 360) {
+          startPosition = startPosition - 360;
+        }
+        
+        element.style.transitionDuration = '0s';
+        element.style.transform = `rotate(${ startPosition }deg)`;
+        
+        setTimeout(function(){
+          flag.classList.add('wobble-fast');
+          element.style.transitionDuration = '5s';
+          element.style.transform = `rotate(${ startPosition + endPosition }deg)`;
+        }, 50);
+      }
+      
+      const init = () => {
+        // This is necessary for proper rendering
+        document.getElementById('wheel').style.transform = 'rotate(0deg)';
+      }
+      
+      init();

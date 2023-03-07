@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="jquery-3.6.3.js"></script>
     <title>Board Game</title>
@@ -114,18 +117,44 @@
     <div class="gameMenu">
 
         <div class="gameActions">
-            <button id="spin">Spin</button>
-            <span class="wheel-arrow"></span>
-            <div class="wheel-container">
-            <div class="one">1</div>
-            <div class="two">2</div>
-            <div class="three">3</div>
-            <div class="four">1</div>
-            <div class="five">2</div>
-            <div class="six">3</div>
-            <div class="seven">4</div>
-            <div class="eight">4</div>
+            <div class="wheel" id="wheel" onclick="spin()">
+                <div class="option rotation-1">
+                  <div class="value">1</div>
+                </div>
+                
+                <div class="option rotation-2">
+                  <div class="value">2</div>
+                </div>
+                
+                <div class="option rotation-3">
+                  <div class="value">4</div>
+                </div>
+                
+                <div class="option rotation-4">
+                  <div class="value">3</div>
+                </div>
+                
+                <div class="option rotation-5">
+                  <div class="value">4</div>
+                </div>
+                
+                <div class="option rotation-6">
+                  <div class="value">3</div>
+                </div>
+                
+                <div class="option rotation-7">
+                  <div class="value">2</div>
+                </div>
+                
+                <div class="option rotation-8">
+                  <div class="value">1</div>
+                </div>
+                
+            </div>
+            <div class="center" onclick="spin()">Spin</div>
+            <div class="flag" id="flag"></div>
         </div>
+
         <div class="gameLog">
             <h1>Game Log</h1>
             <ul class="gameLogText" id="gameLogDisplay">
