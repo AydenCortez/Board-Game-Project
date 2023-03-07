@@ -138,7 +138,7 @@
             console.log('test 2');
         }
         
-        Winner();
+        // Winner();
     }
 
     // Popup function that lets player choose a path
@@ -184,24 +184,24 @@
         }
     }
 
-    function Winner (){
-        let winPopUp = document.getElementById('winPopupCont');
-        if (player1.playerPath = path1 && player1.currentTile >= 15) {
-            winPopUp.style.display = 'flex';
-            winPopUp.style.animation = '0.5s fadeIn'
-        } else if (player2.playerPath = path1 && player2.currentTile >= 15){
-            winPopUp.style.display = 'flex';
-            winPopUp.style.animation = '0.5s fadeIn'
-        }
+    // function Winner (){
+    //     let winPopUp = document.getElementById('winPopupCont');
+    //     if (player1.playerPath = path1 && player1.currentTile >= 15) {
+    //         winPopUp.style.display = 'flex';
+    //         winPopUp.style.animation = '0.5s fadeIn'
+    //     } else if (player2.playerPath = path1 && player2.currentTile >= 15){
+    //         winPopUp.style.display = 'flex';
+    //         winPopUp.style.animation = '0.5s fadeIn'
+    //     }
 
-        if (player1.playerPath = path2 && player1.currentTile >= 10) {
-            winPopUp.style.display = 'flex';
-            winPopUp.style.animation = '0.5s fadeIn'
-        } else if (player2.playerPath = path2 && player2.currentTile >= 10){
-            winPopUp.style.display = 'flex';
-            winPopUp.style.animation = '0.5s fadeIn'
-        }
-    }
+    //     if (player1.playerPath = path2 && player1.currentTile >= 10) {
+    //         winPopUp.style.display = 'flex';
+    //         winPopUp.style.animation = '0.5s fadeIn'
+    //     } else if (player2.playerPath = path2 && player2.currentTile >= 10){
+    //         winPopUp.style.display = 'flex';
+    //         winPopUp.style.animation = '0.5s fadeIn'
+    //     }
+    // }
 
 
     // Wheel Spinner
