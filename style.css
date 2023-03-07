@@ -47,6 +47,7 @@ body {
     height:15%;
     background-color: rgb(205, 205, 205);
     border: 1px solid black;
+    justify-content: center;
     left: 30%;
     top: 40%;
     padding: 1%

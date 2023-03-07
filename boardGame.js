@@ -15,19 +15,16 @@
     const board1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     for (i = 0; i <= 14; i++) {
         board1[i] = document.getElementById(i);
-        // console.log(board1[i])
     }
     
     let path1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     for (i = 0; i <= 14; i++) {
         path1[i] = document.getElementById('A' + i);
-        // console.log('path 1 ', path1[i])
     }
 
     let path2 = [1, 2, 3, 4, 5, 6, 7, 8]
     for (i = 0; i <= 10; i++) {
         path2[i] = document.getElementById('B' + i);
-        // console.log('path 2 ', path2[i])
     }
 
     // player objects
@@ -54,7 +51,7 @@
         } catch (error) {
             console.log(error)
         }
-        switchTile();
+
         turn *= -1
         if (turn == 1) {
             console.log("player 1's turn")
@@ -85,18 +82,21 @@
                     $('#player1').appendTo(board1[player1.currentTile]);
                     player1.previousValue = player1.currentTile;
                     console.log('player1 moved', testNumber, 'space(s) and is on tile', player1.currentTile)
+                    switchTile();
                     break;
                 case path1:
                     player1.currentTile = player1.previousValue + testNumber;
                     $('#player1').appendTo(path1[player1.currentTile]);
                     player1.previousValue = player1.currentTile;
                     console.log('player1 moved', testNumber, 'space(s) and is on tile', player1.currentTile)
+                    Winner ();
                     break;
                 case path2:
                     player1.currentTile = player1.previousValue + testNumber;
                     $('#player1').appendTo(path2[player1.currentTile]);
                     player1.previousValue = player1.currentTile;
                     console.log('player1 moved', testNumber, 'space(s) and is on tile', player1.currentTile)
+                    Winner ();
                     break;
             }
         } else {
@@ -106,18 +106,21 @@
                     $('#player2').appendTo(board1[player2.currentTile]);
                     player2.previousValue = player2.currentTile;
                     console.log('player2 moved', testNumber, 'space(s) and is on tile', player2.currentTile)
+                    switchTile();
                     break;
                 case path1:
                     player2.currentTile = player2.previousValue + testNumber;
                     $('#player2').appendTo(path1[player2.currentTile]);
                     player2.previousValue = player2.currentTile;
                     console.log('player2 moved', testNumber, 'space(s) and is on tile', player2.currentTile)
+                    Winner ();
                     break;
                 case path2:
                     player2.currentTile = player2.previousValue + testNumber;
                     $('#player2').appendTo(path2[player2.currentTile]);
                     player2.previousValue = player2.currentTile;
                     console.log('player2 moved', testNumber, 'space(s) and is on tile', player2.currentTile)
+                    Winner ();
                     break;
 
             }
@@ -137,8 +140,6 @@
             popUp()
             console.log('test 2');
         }
-        
-        // Winner();
     }
 
     // Popup function that lets player choose a path
@@ -184,8 +185,38 @@
         }
     }
 
-    // function Winner (){
-    //     let winPopUp = document.getElementById('winPopupCont');
+    function Winner (){
+        let winPopUp = document.getElementById('winPopupCont');
+        let winningPlayer = document.getElementById('winningPlayer')
+        if (turn == 1) {
+            if (player1.playerPath == path1 && player1.currentTile >= 15) {
+                winPopUp.style.display = 'flex';
+                $('#player1').appendTo('#end');
+                // winPopUp.style.animation = '0.5s fadeIn'
+                winningPlayer.innerHTML('1')
+            }
+            if (player1.playerPath == path2 && player1.currentTile >= 10) {
+                winPopUp.style.display = 'flex';
+                $('#player1').appendTo('#end');
+                // winPopUp.style.animation = '0.5s fadeIn'
+                winningPlayer.innerHTML('1')
+            }
+        } else {
+            if (player2.playerPath == path1 && player2.currentTile >= 15){
+                winPopUp.style.display = 'flex';
+                $('#player2').appendTo('#end');
+                // winPopUp.style.animation = '0.5s fadeIn'
+                winningPlayer.innerHTML('2')
+            }
+            if (player2.playerPath == path2 && player2.currentTile >= 10){
+                winPopUp.style.display = 'flex';
+                $('#player2').appendTo('#end');
+                // winPopUp.style.animation = '0.5s fadeIn'
+                winningPlayer.innerHTML('2')
+            }
+        }
+    }
+        
     //     if (player1.playerPath = path1 && player1.currentTile >= 15) {
     //         winPopUp.style.display = 'flex';
     //         winPopUp.style.animation = '0.5s fadeIn'
