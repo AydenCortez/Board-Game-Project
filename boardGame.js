@@ -11,6 +11,7 @@
 
     var testNumber;
     
+    var isWheelSpinning = false;
 
     const board1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     for (i = 0; i <= 14; i++) {
@@ -237,6 +238,10 @@
     // Wheel Spinner
     
     const spin = () => {
+        if (isWheelSpinning){
+            return;
+        }
+
         const element = document.getElementById('wheel');
         const flag = document.getElementById('flag');
         const minSpinCount = 5;
@@ -260,6 +265,15 @@
           element.style.transitionDuration = '5s';
           element.style.transform = `rotate(${ startPosition + endPosition }deg)`;
         }, 50);
+
+        isWheelSpinning = true;
+        console.log(isWheelSpinning);
+
+        setTimeout(function() {
+            console.log("Spinner Ended");
+            isWheelSpinning = false;
+            console.log(isWheelSpinning);
+       }, 6000);
       }
       
       const init = () => {
@@ -277,3 +291,11 @@
           div.getBoundingClientRect().bottom > element.getBoundingClientRect().bottom
         );
       }
+
+      function wait(ms){
+        var start = new Date().getTime();
+        var end = start;
+        while(end < start + ms) {
+          end = new Date().getTime();
+       }
+     }
