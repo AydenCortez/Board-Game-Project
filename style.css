@@ -165,7 +165,7 @@ td:not(.blank) {
     display: flex;
     margin-top: 15%;
     flex-direction: column;
-    width: 40vw;
+    width: 35vw;
     height: 100%;
     border: 1px solid black;
     text-align: center;

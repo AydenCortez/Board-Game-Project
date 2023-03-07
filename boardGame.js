@@ -234,7 +234,6 @@
     //     }
     // }
 
-
     // Wheel Spinner
     
     const spin = () => {
@@ -256,7 +255,7 @@
         element.style.transitionDuration = '0s';
         element.style.transform = `rotate(${ startPosition }deg)`;
         
-        setTimeout(function(){
+        setTimeout(function() {
           flag.classList.add('wobble-fast');
           element.style.transitionDuration = '5s';
           element.style.transform = `rotate(${ startPosition + endPosition }deg)`;
@@ -264,8 +263,17 @@
       }
       
       const init = () => {
-        // This is necessary for proper rendering
+        // This is necessary for proper rendering                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
         document.getElementById('wheel').style.transform = 'rotate(0deg)';
       }
       
-      init();
+      init()
+
+      const isOnTop = (id) => {
+        let element = document.querySelector(id),
+            divs = document.querySelectorAll('section div');
+      
+        return [...divs].some(div =>
+          div.getBoundingClientRect().bottom > element.getBoundingClientRect().bottom
+        );
+      }
