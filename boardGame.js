@@ -193,26 +193,26 @@
                 winPopUp.style.display = 'flex';
                 $('#player1').appendTo('#end');
                 // winPopUp.style.animation = '0.5s fadeIn'
-                winningPlayer.innerHTML('1')
+                winningPlayer.textContent = "1";
             }
             if (player1.playerPath == path2 && player1.currentTile >= 10) {
                 winPopUp.style.display = 'flex';
                 $('#player1').appendTo('#end');
                 // winPopUp.style.animation = '0.5s fadeIn'
-                winningPlayer.innerHTML('1')
+                winningPlayer.textContent = "1";
             }
         } else {
             if (player2.playerPath == path1 && player2.currentTile >= 15){
                 winPopUp.style.display = 'flex';
                 $('#player2').appendTo('#end');
                 // winPopUp.style.animation = '0.5s fadeIn'
-                winningPlayer.innerHTML('2')
+                winningPlayer.textContent = "2";
             }
             if (player2.playerPath == path2 && player2.currentTile >= 10){
                 winPopUp.style.display = 'flex';
                 $('#player2').appendTo('#end');
                 // winPopUp.style.animation = '0.5s fadeIn'
-                winningPlayer.innerHTML('2')
+                winningPlayer.textContent = "2";
             }
         }
     }
@@ -233,39 +233,3 @@
     //         winPopUp.style.animation = '0.5s fadeIn'
     //     }
     // }
-
-
-    // Wheel Spinner
-    
-    const spin = () => {
-        const element = document.getElementById('wheel');
-        const flag = document.getElementById('flag');
-        const minSpinCount = 5;
-        
-        const min = minSpinCount * 360;
-        const max = min + 360;
-        let startPosition = 0;
-        const endPosition = Math.floor(Math.random() * (min - max) ) + max;
-        
-        startPosition = element.style.transform.match(/\d+/);
-        
-        while (startPosition > 360) {
-          startPosition = startPosition - 360;
-        }
-        
-        element.style.transitionDuration = '0s';
-        element.style.transform = `rotate(${ startPosition }deg)`;
-        
-        setTimeout(function(){
-          flag.classList.add('wobble-fast');
-          element.style.transitionDuration = '5s';
-          element.style.transform = `rotate(${ startPosition + endPosition }deg)`;
-        }, 50);
-      }
-      
-      const init = () => {
-        // This is necessary for proper rendering
-        document.getElementById('wheel').style.transform = 'rotate(0deg)';
-      }
-      
-      init();
