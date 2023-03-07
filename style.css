@@ -246,13 +246,5 @@ td:not(.blank) {
     background-size: 10%;    
 } */
 
-  
-body {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #222;
-  overflow: hidden;
-}
+/* Roll Tetrahedron Die */
+

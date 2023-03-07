@@ -11,6 +11,7 @@
 
     var testNumber;
     
+    var isWheelSpinning = false;
 
     const board1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     for (i = 0; i <= 14; i++) {
@@ -233,3 +234,5 @@
     //         winPopUp.style.animation = '0.5s fadeIn'
     //     }
     // }
+
+    // Tetrahedron Die
