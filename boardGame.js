@@ -6,9 +6,10 @@
     var currentStep;
     let boardTiles = document.querySelectorAll('tile');
     const gameLog = document.getElementById('gameLogDisplay');
-
+    var chaosTimer = 0;
+    var chaosValue = 1;
     const startTile = document.getElementById("1");
-
+    turn = 1
     var testNumber;
     
     // Assign board spaces from HTML to arrays
@@ -28,11 +29,10 @@
     }
 
     // chaos meter array
-    const chaos = [1, 2, 3, 4, 5]
-    for (i = 1; i <=4; i++) {
-        chaos[i] = document.getElementById('Chaos' + i);
-        console.log(chaos[i])
-        chaos[i].style.backgroundColor = 'red';
+    var chaosMeter = [1, 2, 3, 4, 5]
+    for (i = 0; i <=5; i++) {
+        chaosMeter[i] = document.getElementById('Chaos' + i);
+        console.log(chaosMeter[i])
     }
 
 
@@ -50,6 +50,20 @@
     }
 
 
+    // Starts the game and resets the values
+    function start(){
+        turn = 1;
+        isWinner = null;
+        player1.currentTile = 1;
+        player2.currentTile = 1;        
+        $('#player1').appendTo(board1[player1.currentTile]);
+        $('#player2').appendTo(board1[player1.currentTile]);
+        chaos = chaosMeter[chaosValue];
+        chaos.style.backgroundColor = "red";
+    }
+    start();
+
+
     function testButton (){
         function getTest (max) {
             return Math.floor(Math.random() * max)
@@ -62,25 +76,21 @@
         }
 
         turn *= -1
-        if (turn == 1) {
-            console.log("player 1's turn")
-        } else {
-            console.log("player 2's turn")
+        // if (turn == 1) {
+        //     console.log("player 1's turn")
+        // } else {
+        //     console.log("player 2's turn")
+        // }
+        chaosTimer += 1;
+        console.log('Timer', chaosTimer)
+        console.log('Chaos', chaosMeter[chaosValue])
+        try {
+            setChaos();
+        } catch (error) {
+            console.log(error)
         }
 
     }
-
-    // Starts the game and resets the values
-    function start(){
-        turn = 1;
-        isWinner = null;
-        player1.currentTile = 1;
-        player2.currentTile = 1;        
-        $('#player1').appendTo(board1[player1.currentTile]);
-        $('#player2').appendTo(board1[player1.currentTile]);
-
-    }
-    start();
 
     // Uses the 3 arrays to move the player incrementally
     function movePlayers() {
@@ -136,6 +146,19 @@
         }
         gameLog.scrollTop = gameLog.scrollHeight;
     }
+
+    function setChaos (){
+        if (chaosTimer == 8 || chaosTimer == 16 || chaosTimer == 24 || chaosTimer == 32) {
+            chaosValue += 1;
+            $('#gameLogDisplay').append('<li style=color:red; font-weight:bold;>' + '!! The chaos has increased to ' + chaosValue + '!!' + '</li>')
+            // chaosMeter = chaosMeter[chaosValue];
+        } else {
+            return chaosValue;
+        };
+        // return chaosMeter;
+        chaosMeter[chaosValue].style.backgroundColor = "red";
+    }
+
 
     // Checks if a player reached the switch tile and executes the prompt
     function switchTile(){
