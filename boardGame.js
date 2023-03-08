@@ -11,7 +11,9 @@
 
     var testNumber;
     
-    var isWheelSpinning = false;
+    // Die Rolling Variables
+    var dieNumberLanded = 0;
+    var isDieRolling = false;
 
     const board1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     for (i = 0; i <= 14; i++) {
@@ -235,4 +237,63 @@
     //     }
     // }
 
-    // Tetrahedron Die
+    // Die
+    //select the classes we require
+    var cube = document.querySelector('.cube');
+    var rollBtn = document.querySelector('.rollBtn');
+    var currentClass = '';
+
+    //this function will generate a random number between 1 and 6 (or whatever value you send it)
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    }
+
+    //our main roll dice function on click
+    function rollDice() {
+    console.log("Is Die Rolling? " + isDieRolling);
+    if (isDieRolling)
+        return;
+    isDieRolling = true;
+    //genberate a random number between 1 and 6 with out getRandomInt function
+     var randNum = getRandomInt(1,7); 
+      console.log(randNum)
+      //generate a class with the random number between 1 - 6 called showClass
+      var showClass = 'show-' + randNum;
+      console.log(showClass)
+    // if there is a class already selected remove it
+      if ( currentClass ) {
+        cube.classList.remove( currentClass );
+      }
+    // add the new showclass with the generated number
+      cube.classList.add(showClass);
+    //set the current class to the randomly generated number
+      currentClass = showClass;
+
+      setTimeout(function() {
+        switch (randNum) {
+            case 1:
+            case 2:
+                isDieRolling = false;
+                return dieNumberLanded = 1;
+                break;
+            case 3:
+            case 4:
+                isDieRolling = false;
+                return dieNumberLanded = 2;
+                break;
+            case 5:
+            case 6:
+                isDieRolling = false;
+                return dieNumberLanded = 3;
+                break;
+            default:
+                return 0;
+        }
+        }, 1500);
+    }
+    // set initial side
+    rollDice();
+    // on click eventlistener for the button element
+    rollBtn.addEventListener("click", rollDice);
