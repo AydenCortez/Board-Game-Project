@@ -19,7 +19,8 @@ body {
     display: flex;
     margin:0;
 	padding:0;
-	background-color: #34495e;
+	background: url(images/space-background.jpg);
+    background-size: cover;
 	display:flex;
 	align-items:center;
 	justify-content: center;
@@ -256,7 +257,7 @@ td:not(.blank) {
 .rollBtn {
   background:#151e27;
   color:white;
-  border:none;
+  border: white solid 1px;
   margin:auto 0;
   font-size:1.5em;
   margin-top:1em;
@@ -264,7 +265,8 @@ td:not(.blank) {
 }
 
 .rollBtn:hover {
-    background: #3a4040;
+    background: #ecf0f1;
+    color: #2c3e50;
 }
 
 /* styling for 3D Cube */
