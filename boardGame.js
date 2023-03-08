@@ -14,7 +14,7 @@
     
 
     // Assign board spaces from HTML to arrays
-=======
+    
     // Die Rolling Variables
     var dieNumberLanded = 0;
     var isDieRolling = false;
