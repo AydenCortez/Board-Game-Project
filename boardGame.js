@@ -5,14 +5,13 @@
     var previousStep = 1;
     var currentStep;
     let boardTiles = document.querySelectorAll('tile');
-    var spunWheel = false;
+    const gameLog = document.getElementById('gameLogDisplay');
 
     const startTile = document.getElementById("1");
 
     var testNumber;
     
-    var isWheelSpinning = false;
-
+    // Assign board spaces from HTML to arrays
     const board1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     for (i = 0; i <= 14; i++) {
         board1[i] = document.getElementById(i);
@@ -27,6 +26,15 @@
     for (i = 0; i <= 10; i++) {
         path2[i] = document.getElementById('B' + i);
     }
+
+    // chaos meter array
+    const chaos = [1, 2, 3, 4, 5]
+    for (i = 1; i <=4; i++) {
+        chaos[i] = document.getElementById('Chaos' + i);
+        console.log(chaos[i])
+        chaos[i].style.backgroundColor = 'red';
+    }
+
 
     // player objects
     player1 = {
@@ -74,7 +82,7 @@
     }
     start();
 
-    // Uses the 3 arrays to move the player in an incremental way
+    // Uses the 3 arrays to move the player incrementally
     function movePlayers() {
         if (turn === 1) {
             switch (player1.playerPath) {
@@ -82,21 +90,21 @@
                     player1.currentTile = player1.previousValue + testNumber;
                     $('#player1').appendTo(board1[player1.currentTile]);
                     player1.previousValue = player1.currentTile;
-                    console.log('player1 moved', testNumber, 'space(s) and is on tile', player1.currentTile)
+                    $('#gameLogDisplay').append('<li style=color:#34495e>' + '-- Player 1 moved ' + testNumber + ' space(s)' + '</li>')
                     switchTile();
                     break;
                 case path1:
                     player1.currentTile = player1.previousValue + testNumber;
                     $('#player1').appendTo(path1[player1.currentTile]);
                     player1.previousValue = player1.currentTile;
-                    console.log('player1 moved', testNumber, 'space(s) and is on tile', player1.currentTile)
+                    $('#gameLogDisplay').append('<li style=color:#34495e;>' + '-- Player 1 moved ' + testNumber + ' space(s)' + '</li>')
                     Winner ();
                     break;
                 case path2:
                     player1.currentTile = player1.previousValue + testNumber;
                     $('#player1').appendTo(path2[player1.currentTile]);
                     player1.previousValue = player1.currentTile;
-                    console.log('player1 moved', testNumber, 'space(s) and is on tile', player1.currentTile)
+                    $('#gameLogDisplay').append('<li style=color:#34495e;>' + '-- Player 1 moved ' + testNumber + ' space(s)' + '</li>')
                     Winner ();
                     break;
             }
@@ -106,27 +114,27 @@
                     player2.currentTile = player2.previousValue + testNumber;
                     $('#player2').appendTo(board1[player2.currentTile]);
                     player2.previousValue = player2.currentTile;
-                    console.log('player2 moved', testNumber, 'space(s) and is on tile', player2.currentTile)
+                    $('#gameLogDisplay').append('<li style=color:#6e0000;>' + '-- Player 2 moved ' + testNumber + ' space(s)' + '</li>')
                     switchTile();
                     break;
                 case path1:
                     player2.currentTile = player2.previousValue + testNumber;
                     $('#player2').appendTo(path1[player2.currentTile]);
                     player2.previousValue = player2.currentTile;
-                    console.log('player2 moved', testNumber, 'space(s) and is on tile', player2.currentTile)
+                    $('#gameLogDisplay').append('<li style=color:#6e0000;>' + '-- Player 2 moved ' + testNumber + ' space(s)' + '</li>')
                     Winner ();
                     break;
                 case path2:
                     player2.currentTile = player2.previousValue + testNumber;
                     $('#player2').appendTo(path2[player2.currentTile]);
                     player2.previousValue = player2.currentTile;
-                    console.log('player2 moved', testNumber, 'space(s) and is on tile', player2.currentTile)
+                    $('#gameLogDisplay').append('<li style=color:#6e0000;>' + '-- Player 2 moved ' + testNumber + ' space(s)' + '</li>')
                     Winner ();
                     break;
 
             }
         }
-
+        gameLog.scrollTop = gameLog.scrollHeight;
     }
 
     // Checks if a player reached the switch tile and executes the prompt
@@ -157,13 +165,13 @@
             player1.playerPath = path1
             player1.currentTile = 1
             player1.previousValue = 1
-            console.log('--player1 has chosen path1')
+            $('#gameLogDisplay').append('<li>' + '!- Player 1 has chosen path 1' + '</li>')
             popUp.style.display = 'none';
         } else {
             player2.playerPath = path1
             player2.currentTile = 1
             player2.previousValue = 1
-            console.log('--player2 has chosen path1')
+            $('#gameLogDisplay').append('<li>' + '!- Player 2 has chosen path 1' + '</li>')
             popUp.style.display = 'none';
         }
     }
@@ -175,13 +183,13 @@
             player1.playerPath = path2
             player1.currentTile = 1
             player1.previousValue = 1
-            console.log('--player1 has chosen path2')
+            $('#gameLogDisplay').append('<li>' + '!- Player 1 has chosen path 2' + '</li>')
             popUp.style.display = 'none';
         } else {
             player2.playerPath = path2
             player2.currentTile = 1
             player2.previousValue = 1
-            console.log('--player2 has chosen path2')
+            $('#gameLogDisplay').append('<li>' + '!- Player 2 has chosen path 2' + '</li>')
             popUp.style.display = 'none';
         }
     }
@@ -193,46 +201,29 @@
             if (player1.playerPath == path1 && player1.currentTile >= 15) {
                 winPopUp.style.display = 'flex';
                 $('#player1').appendTo('#end');
-                // winPopUp.style.animation = '0.5s fadeIn'
+                winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
             }
             if (player1.playerPath == path2 && player1.currentTile >= 10) {
                 winPopUp.style.display = 'flex';
                 $('#player1').appendTo('#end');
-                // winPopUp.style.animation = '0.5s fadeIn'
+                winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
             }
         } else {
             if (player2.playerPath == path1 && player2.currentTile >= 15){
                 winPopUp.style.display = 'flex';
                 $('#player2').appendTo('#end');
-                // winPopUp.style.animation = '0.5s fadeIn'
+                winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "2";
             }
             if (player2.playerPath == path2 && player2.currentTile >= 10){
                 winPopUp.style.display = 'flex';
                 $('#player2').appendTo('#end');
-                // winPopUp.style.animation = '0.5s fadeIn'
+                winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "2";
             }
         }
     }
-        
-    //     if (player1.playerPath = path1 && player1.currentTile >= 15) {
-    //         winPopUp.style.display = 'flex';
-    //         winPopUp.style.animation = '0.5s fadeIn'
-    //     } else if (player2.playerPath = path1 && player2.currentTile >= 15){
-    //         winPopUp.style.display = 'flex';
-    //         winPopUp.style.animation = '0.5s fadeIn'
-    //     }
-
-    //     if (player1.playerPath = path2 && player1.currentTile >= 10) {
-    //         winPopUp.style.display = 'flex';
-    //         winPopUp.style.animation = '0.5s fadeIn'
-    //     } else if (player2.playerPath = path2 && player2.currentTile >= 10){
-    //         winPopUp.style.display = 'flex';
-    //         winPopUp.style.animation = '0.5s fadeIn'
-    //     }
-    // }
 
     // Tetrahedron Die
