@@ -39,7 +39,7 @@
             <td class="tile" id="A12" style="background-image: url(images/Tile2.png);"></td>
             <td class="tile" id="A13" style="background-image: url(images/dangerTileDark.png);"></td>
             <td class="tile" id="A14" style="background-image: url(images/Tile2.png);"></td>
-            <td class="tile" id="end" style="background-image: url(images/BlueAirlock.png);"><input type="button" onclick="testButton()"></td>
+            <td class="tile" id="end" style="background-image: url(images/BlueAirlock.png);"></td>
         </tr><tr>
             <td colspan="1" class="blank"></td>
             <td class="tile" id="A6" style="background-image: url(images/Tile2.png);"></td>
@@ -60,7 +60,7 @@
         <tr>
             <td colspan="1" class="blank"></td>
             <td class="tile" id="A4" style="background-image: url(images/Tile2.png);"></td>
-            <td colspan="5" class="blank"></td>
+            <td colspan="5" class="blank"><div class="sign" id="path1Sign"></div></td>
             <td class="tile" id="B6" style="background-image: url(images/dangerTileLight.png);"></td>
             <td class="tile" id="B7" style="background-image: url(images/moneyTileDark.png);" ></td>
             <td class="tile" id="B8" style="background-image: url(images/dangerTileLight.png);"></td>
@@ -88,7 +88,7 @@
             <td class="tile" id="11" style="background-image: url(images/Tile2.png);"></td>
             <td class="tile" id="12" style="background-image: url(images/Tile1.png);"></td>
             <td class="tile" id="13" style="background-image: url(images/moneyTileLight.png);"></td>
-            <td colspan="6" class="blank"></td>
+            <td colspan="6" class="blank"><div class="sign" id="path2Sign">Path 2</div></td>
         </tr>
         <tr>
             <td colspan="1" class="blank"></td>
@@ -116,6 +116,23 @@
     </table>
     <div class="gameMenu">
         <div class="gameActions">
+            <input type="button" onclick="testButton()">
+            <div class="die" id="die">
+                <div class="one">
+                  <div class="value">1</div>
+                </div>
+                
+                <div class="two">
+                  <div class="value">2</div>
+                </div>
+                
+                <div class="three">
+                  <div class="value">3</div>
+                </div>
+                
+                <div class="four">
+                  <div class="value">4</div>
+=======         </div>
             <div class = "scene">
                 <div class="cube">
                     <div class="cube__face cube__face--1">1</div>   

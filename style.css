@@ -15,8 +15,9 @@ html {
 }
 
 body {
-  display: flex;
-  margin:0;
+    gap: 2%;
+    display: flex;
+    margin:0;
 	padding:0;
 	background-color: #34495e;
 	display:flex;
@@ -81,7 +82,7 @@ body {
     flex-direction: column;
     align-items: center;
     width: 15%;
-    height: 998px;
+    height: 96%;
     margin: 0;
     background-color: rgb(211, 211, 211, 0.75);
 }
@@ -95,8 +96,9 @@ body {
 }
 
 #gameBoard {
-    width: 1000px;
-    height: 1000px;
+    aspect-ratio: 1 / 1;
+    /* width: 1000px; */
+    height: 96%;
     border: 1px solid black;
     background-color: rgb(211, 211, 211, 0.75);
 }
@@ -130,8 +132,8 @@ td:not(.blank) {
 }
 
 #player1 {
-    width: 35%;
-    height: 35%;
+    width: 40%;
+    height: 40%;
     background-color: rgb(0, 93, 186, 0.5);
     border-radius: 25px;
     background-image: url("images/Player1.png");
@@ -140,8 +142,8 @@ td:not(.blank) {
 }
 
 #player2 {
-    width: 35%;
-    height: 35%;
+    width: 40%;
+    height: 40%;
     background-color: rgba(197, 0, 0, 0.5);
     border-radius: 25px;
     background-image: url("images/Player2.png");
@@ -161,34 +163,28 @@ td:not(.blank) {
 
 .gameMenu {
     display: flex;
-    margin-top: 15%;
     flex-direction: column;
-    width: 35vw;
-    height: 100%;
+    width: 25vw;
+    height: 96vh;
     border: 1px solid black;
     text-align: center;
 }
 
-/* .gameMenu div {
+.gameMenu div {
     display: flex;
     justify-content: center;
     height: 50%;
     width: 100%;
     border: 1px solid black;
     background-color: rgb(211, 211, 211, 0.75);
-} */
-
-
-.gameLog {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .gameLog {
     display: flex;
     justify-content: flex-start;
-    color: white;
+    flex-direction: column;
+    align-items: center;
+    gap: 5%;
 }
 
 .gameLog ul {
@@ -197,25 +193,35 @@ td:not(.blank) {
     justify-content: flex-start;
     width: 85%;
     height: 100%;
-    max-height: 141px;
+    max-height: 300px;
+    background-color: lightgrey;
     border: 1px solid rgb(255, 255, 255);
     overflow: scroll;
     overflow-x: hidden;
     list-style: none;
     gap: 1%;
     text-align: left;
+    padding: 0px;
 }
 
 .gameLog ul li {
-    width: 65%;
+    width: 100%;
     line-height: 150%;
+    text-indent: 3%;
 }
+
+.gameLog ul li:nth-of-type(even) {
+    background-color: rgb(180, 180, 180);
+}
+
+
 
 .gameActions {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: #6e0000;
 }
 
 /* .gameActions input{
