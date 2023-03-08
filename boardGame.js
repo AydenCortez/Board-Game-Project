@@ -157,7 +157,7 @@
     function setChaos (){
         if (chaosTimer == 8 || chaosTimer == 16 || chaosTimer == 24 || chaosTimer == 32) {
             chaosValue += 1;
-            $('#gameLogDisplay').append('<li style=color:red; font-weight:bold;>' + '!! The chaos has increased to ' + chaosValue + '!!' + '</li>')
+            $('#gameLogDisplay').append('<li style=color:red; font-weight:bold;>' + '!! The chaos has increased to ' + chaosValue + ' !!' + '</li>')
             // chaosMeter = chaosMeter[chaosValue];
         } else {
             return chaosValue;
