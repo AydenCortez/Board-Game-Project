@@ -16,7 +16,7 @@
     // Assign board spaces from HTML to arrays
     
     // Die Rolling Variables
-    var dieNumberLanded = 0;
+    var dieNumberLanded = 3;
     var isDieRolling = false;
 
 
@@ -104,24 +104,24 @@
         if (turn === 1) {
             switch (player1.playerPath) {
                 case board1:
-                    player1.currentTile = player1.previousValue + testNumber;
+                    player1.currentTile = player1.previousValue + dieNumberLanded;
                     $('#player1').appendTo(board1[player1.currentTile]);
                     player1.previousValue = player1.currentTile;
-                    $('#gameLogDisplay').append('<li style=color:#34495e>' + '-- Player 1 moved ' + testNumber + ' space(s)' + '</li>')
+                    $('#gameLogDisplay').append('<li style=color:#34495e>' + '-- Player 1 moved ' + dieNumberLanded + ' space(s)' + '</li>')
                     switchTile();
                     break;
                 case path1:
-                    player1.currentTile = player1.previousValue + testNumber;
+                    player1.currentTile = player1.previousValue + dieNumberLanded;
                     $('#player1').appendTo(path1[player1.currentTile]);
                     player1.previousValue = player1.currentTile;
-                    $('#gameLogDisplay').append('<li style=color:#34495e;>' + '-- Player 1 moved ' + testNumber + ' space(s)' + '</li>')
+                    $('#gameLogDisplay').append('<li style=color:#34495e;>' + '-- Player 1 moved ' + dieNumberLanded + ' space(s)' + '</li>')
                     Winner ();
                     break;
                 case path2:
-                    player1.currentTile = player1.previousValue + testNumber;
+                    player1.currentTile = player1.previousValue + dieNumberLanded;
                     $('#player1').appendTo(path2[player1.currentTile]);
                     player1.previousValue = player1.currentTile;
-                    $('#gameLogDisplay').append('<li style=color:#34495e;>' + '-- Player 1 moved ' + testNumber + ' space(s)' + '</li>')
+                    $('#gameLogDisplay').append('<li style=color:#34495e;>' + '-- Player 1 moved ' + dieNumberLanded + ' space(s)' + '</li>')
                     Winner ();
                     break;
             }
@@ -295,17 +295,20 @@
             case 1:
             case 2:
                 isDieRolling = false;
-                return dieNumberLanded = 1;
+                dieNumberLanded = 1;
+                return movePlayers();
                 break;
             case 3:
             case 4:
                 isDieRolling = false;
-                return dieNumberLanded = 2;
+                dieNumberLanded = 2;
+                return movePlayers();
                 break;
             case 5:
             case 6:
                 isDieRolling = false;
-                return dieNumberLanded = 3;
+                dieNumberLanded = 3;
+                return movePlayers();
                 break;
             default:
                 return 0;
