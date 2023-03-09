@@ -1,7 +1,6 @@
     
     var player1 = document.getElementById("player1");
     var player2 = document.getElementById("player2"); 
-    var player1Turn = true;
     var previousStep = 1;
     var currentStep;
     let boardTiles = document.querySelectorAll('tile');
@@ -42,6 +41,106 @@
         chaosMeter[i] = document.getElementById('Chaos' + i);
         console.log(chaosMeter[i])
     }
+
+    function Card(text, action) {
+        this.text = text;
+        this.action = action;
+    }
+
+    var cards = [];
+
+    cards[0] = new Card('Lose cho points!!!!', losePoints(chaosValue));
+    cards[1] = new Card('Test 2', goBackSpaces(chaosValue, 'Spacing'));
+    cards[2] = new Card('Test 3', goBackSpaces(chaosValue, 'Slip'));
+
+
+    function losePoints (chaos){
+        switch (chaos) {
+            case 1:
+            case 2:
+                if (turn == 1) {
+                    player1.victoryPoints -= 3;
+                } else {
+                    player2.victoryPoints -= 3;
+                }
+                return chaos;
+            case 3:
+            case 4:
+                if (turn == 1) {
+                    player1.victoryPoints -= 4;
+                } else {
+                    player2.victoryPoints -= 4;
+                }
+                return chaos;
+            case 5:
+                if (turn == 1) {
+                    player1.victoryPoints -= 5;
+                } else {
+                    player2.victoryPoints -= 5;
+                }
+                return chaos;
+            default:
+                break;
+        }
+    }
+
+    function goBackSpaces (chaos, cardType){
+        if (cardType == 'Spacing') {
+            switch (chaos) {
+                case 1:
+                    if (turn == 1) {
+                        player1.currentTile -= 1;
+                    } else {
+                        player2.currentTile -= 1;
+                    }
+                    return chaos;
+                case 2:
+                case 3:
+                case 4:
+                    if (turn == 1) {
+                        player1.currentTile -= 2;
+                    } else {
+                        player2.currentTile -= 2;
+                    }
+                    return chaos;
+                case 5:
+                    if (turn == 1) {
+                        player1.currentTile -= 4;
+                    } else {
+                        player2.currentTile -= 4;
+                    }
+                    return chaos;
+                default:
+                    return chaos;
+            }
+        } else if (cardType == 'Slip') {
+            switch (chaos) {
+                case 1:
+                    if (turn == 1) {
+                        player1.currentTile -= 1;
+                    } else {
+                        player2.currentTile -= 1;
+                    }
+                    return chaos;
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    if (turn == 1) {
+                        player1.currentTile -= 2;
+                        player1.victoryPoints -= 1;
+                    } else {
+                        player2.currentTile -= 2;
+                        player2.victoryPoints -=1;
+                    }
+                    return chaos
+                default:
+                    return chaos
+                    
+            }
+        }
+    }
+
 
 
     // player objects
