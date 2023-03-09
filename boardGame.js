@@ -491,6 +491,7 @@
     if (isDieRolling)
         return;
     isDieRolling = true;
+    changeColorDice();
     //genberate a random number between 1 and 6 with out getRandomInt function
      var randNum = getRandomInt(1,7); 
       console.log(randNum)
@@ -539,3 +540,22 @@
 
     // on click eventlistener for the button element
     rollBtn.addEventListener("click", rollDice);
+
+    function changeColorDice() {
+        if (turn == 1) {
+            $(".cube__face--1").css("background", "#3498db");
+            $(".cube__face--2").css("background", "#3498db");
+            $(".cube__face--3").css("background", "#3498db");
+            $(".cube__face--4").css("background", "#3498db");
+            $(".cube__face--5").css("background", "#3498db");
+            $(".cube__face--6").css("background", "#3498db");
+        }
+        else if (turn == -1) {
+            $(".cube__face--1").css("background", "#e74c3c");
+            $(".cube__face--2").css("background", "#e74c3c");
+            $(".cube__face--3").css("background", "#e74c3c");
+            $(".cube__face--4").css("background", "#e74c3c");
+            $(".cube__face--5").css("background", "#e74c3c");
+            $(".cube__face--6").css("background", "#e74c3c");
+        }
+    }

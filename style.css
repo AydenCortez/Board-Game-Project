@@ -321,12 +321,12 @@ td:not(.blank) {
 }
 
 /* individual styling for each numbers face  */
-.cube__face--1  { background: #2ecc71;  opacity: 1;}
-.cube__face--2  {  background: #2ecc71;   opacity: 1; }
+.cube__face--1  { background: #3498db;  opacity: 1;}
+.cube__face--2  {  background: #3498db;   opacity: 1; }
 .cube__face--3  { background: #3498db;   opacity: 1; }
 .cube__face--4  {  background: #3498db;   opacity: 1; }
-.cube__face--5   {  background: #e74c3c;   opacity: 1; }
-.cube__face--6 {  background: #e74c3c;  opacity: 1; }
+.cube__face--5   {  background: #3498db;   opacity: 1; }
+.cube__face--6 {  background: #3498db;  opacity: 1; }
 
 .cube__face--1  { transform: rotateY(  0deg) translateZ(100px); }
 .cube__face--2   { transform: rotateY(180deg) translateZ(100px); }
