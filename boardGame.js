@@ -50,8 +50,9 @@
     var cards = [];
 
     cards[0] = new Card('Lose cho points!!!!', losePoints(chaosValue));
-    cards[1] = new Card('Test 2', goBackSpaces(chaosValue, 'Spacing'));
-    cards[2] = new Card('Test 3', goBackSpaces(chaosValue, 'Slip'));
+    cards[1] = new Card('SPACING', goBackSpaces(chaosValue, 'Spacing'));
+    cards[2] = new Card('BOZO', goBackSpaces(chaosValue, 'Slip'));
+    cards[3] = new Card('Asteroid', backToStart())
 
 
     function losePoints (chaos){
@@ -138,6 +139,17 @@
                     return chaos
                     
             }
+        }
+    }
+
+    function backToStart (){
+        if (turn == 1) {
+            player1.currentTile == 1;
+            $('#player1').appendTo(board1[player1.currentTile]);
+     
+        } else {
+            player2.currentTile == 1;
+            $('#player2').appendTo(board1[player2.currentTile]);
         }
     }
 
