@@ -4,7 +4,6 @@
     var previousStep = 1;
     var currentStep;
     let boardTiles = document.querySelectorAll('tile');
-    console.log(boardTiles)
     const gameLog = document.getElementById('gameLogDisplay');
     var chaosTimer = 0;
     var chaosValue = 1;
@@ -39,7 +38,6 @@
     var chaosMeter = [1, 2, 3, 4, 5]
     for (i = 0; i <=5; i++) {
         chaosMeter[i] = document.getElementById('Chaos' + i);
-        console.log(chaosMeter[i])
     }
 
     function Card(text, action) {
@@ -49,10 +47,10 @@
 
     var cards = [];
 
-    cards[0] = new Card('Lose cho points!!!!', losePoints(chaosValue));
-    cards[1] = new Card('SPACING', goBackSpaces(chaosValue, 'Spacing'));
-    cards[2] = new Card('BOZO', goBackSpaces(chaosValue, 'Slip'));
-    cards[3] = new Card('Asteroid', backToStart())
+    cards[0] = new Card('Lose cho points!!!!', function (){losePoints(chaosValue)});
+    cards[1] = new Card('SPACING', function (){goBackSpaces(chaosValue, 'Spacing')});
+    cards[2] = new Card('BOZO', function (){goBackSpaces(chaosValue, 'Slip')});
+    cards[3] = new Card('Asteroid', function (){backToStart()});
 
 
     function losePoints (chaos){
@@ -144,14 +142,18 @@
 
     function backToStart (){
         if (turn == 1) {
-            player1.currentTile == 1;
-            $('#player1').appendTo(board1[player1.currentTile]);
+            player1.currentTile = 1;
+            player1.playerPath = board1;
+            $('#player1').appendTo([board1[1]]);
      
         } else {
-            player2.currentTile == 1;
-            $('#player2').appendTo(board1[player2.currentTile]);
+            player2.currentTile = 1;
+            player2.playerPath = board1;
+            $('#player2').appendTo(board1[1]);
         }
     }
+
+    console.log(cards[3].action)
 
 
 
