@@ -40,19 +40,20 @@
         chaosMeter[i] = document.getElementById('Chaos' + i);
     }
 
-    function Card(text, action) {
+    function Card(text, desc, action) {
         this.text = text;
+        this.desc = desc
         this.action = action;
     }
 
     var cards = [];
 
-    cards[0] = new Card('Lose cho points!!!!', function (){losePoints(chaosValue)});
-    cards[1] = new Card('SPACING', function (){goBackSpaces(chaosValue, 'Spacing')});
-    cards[2] = new Card('BOZO', function (){goBackSpaces(chaosValue, 'Slip')});
-    cards[3] = new Card('Asteroid', function (){backToStart()});
+    cards[0] = new Card('Lose cho points!!!!', "Someone stole cho' points!!!" ,function (){losePoints(chaosValue)});
+    cards[1] = new Card('SPACING', "The vast nothingness has intruded" ,function (){goBackSpaces(chaosValue, 'Spacing')});
+    cards[2] = new Card('Clumsy', "Someone didn't clean up!" ,function (){goBackSpaces(chaosValue, 'Slip')});
+    cards[3] = new Card('Asteroid', "You are doomed", function (){backToStart()});
 
-
+    console.log(cards.length)
     function losePoints (chaos){
         switch (chaos) {
             case 1:
@@ -153,7 +154,41 @@
         }
     }
 
-    console.log(cards[3].action)
+
+
+    function drawCard (){
+        if (cards.length > 0) {
+            randIn = Math.floor(Math.random() * cards.length);
+            console.log(randIn)
+            cardPicked = cards[randIn];
+            console.log(cardPicked);
+            showCard(cardPicked)
+            return cardPicked;
+        }
+
+    }
+
+    function showCard(card){
+        console.log("this" + card)
+        $('#cardName').text(card.text)
+        $('#cardDesc').text(card.desc)
+        $('.actionCard').css('display', 'flex');
+    }
+
+
+
+    // function hideCard() {
+    //     $('.actionCard').css('display', 'none');
+    // }
+
+    // $('#testBtn').click(function(){
+    //     $('.actionCard').showCard().delay(3000).hideCard();
+    // })
+
+
+
+
+    
 
 
 
