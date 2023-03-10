@@ -52,7 +52,8 @@
     cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', function (){losePoints(chaosValue)});
     cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', function (){goBackSpaces(chaosValue, 'Spacing')});
     cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', function (){goBackSpaces(chaosValue, 'Slip')});
-    cards[3] = new Card('Asteroid', "You are doomed", '/images/placeholderCard.png', function (){backToStart()});
+    cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', function (){backToStart()});
+    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you!!", '/images/placeholderCard.png', function (){losePoints(chaosValue)})
 
     console.log(cards.length)
     function losePoints (chaos){
@@ -164,6 +165,7 @@
             cardPicked = cards[randIn];
             console.log(cardPicked);
             showCard(cardPicked)
+            cardPicked.action
             return cardPicked;
         }
 
@@ -183,7 +185,6 @@
 
 
     function hideCard() {
-        $('.actionCard').css('animation', '0.5s fadeIn reverse');
         $('.actionCard').css('display', 'none');
     }
 
@@ -545,17 +546,14 @@
 
     //our main roll dice function on click
     function rollDice() {
-    console.log("Is Die Rolling? " + isDieRolling);
     if (isDieRolling)
         return;
     isDieRolling = true;
     changeColorDice();
     //genberate a random number between 1 and 6 with out getRandomInt function
      var randNum = getRandomInt(1,7); 
-      console.log(randNum)
       //generate a class with the random number between 1 - 6 called showClass
       var showClass = 'show-' + randNum;
-      console.log(showClass)
     // if there is a class already selected remove it
       if ( currentClass ) {
         cube.classList.remove( currentClass );
