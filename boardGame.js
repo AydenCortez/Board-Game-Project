@@ -4,7 +4,6 @@
     var previousStep = 1;
     var currentStep;
     let boardTiles = document.querySelectorAll('tile');
-    console.log(boardTiles)
     const gameLog = document.getElementById('gameLogDisplay');
     var chaosTimer = 0;
     var chaosValue = 1;
@@ -39,22 +38,22 @@
     var chaosMeter = [1, 2, 3, 4, 5]
     for (i = 0; i <=5; i++) {
         chaosMeter[i] = document.getElementById('Chaos' + i);
-        console.log(chaosMeter[i])
     }
 
-    function Card(text, action) {
+    function Card(text, desc, action) {
         this.text = text;
+        this.desc = desc
         this.action = action;
     }
 
     var cards = [];
 
-    cards[0] = new Card('Lose cho points!!!!', losePoints(chaosValue));
-    cards[1] = new Card('SPACING', goBackSpaces(chaosValue, 'Spacing'));
-    cards[2] = new Card('BOZO', goBackSpaces(chaosValue, 'Slip'));
-    cards[3] = new Card('Asteroid', backToStart())
+    cards[0] = new Card('Lose cho points!!!!', "Someone stole cho' points!!!" ,function (){losePoints(chaosValue)});
+    cards[1] = new Card('SPACING', "The vast nothingness has intruded" ,function (){goBackSpaces(chaosValue, 'Spacing')});
+    cards[2] = new Card('Clumsy', "Someone didn't clean up!" ,function (){goBackSpaces(chaosValue, 'Slip')});
+    cards[3] = new Card('Asteroid', "You are doomed", function (){backToStart()});
 
-
+    console.log(cards.length)
     function losePoints (chaos){
         switch (chaos) {
             case 1:
@@ -144,14 +143,52 @@
 
     function backToStart (){
         if (turn == 1) {
-            player1.currentTile == 1;
-            $('#player1').appendTo(board1[player1.currentTile]);
+            player1.currentTile = 1;
+            player1.playerPath = board1;
+            $('#player1').appendTo([board1[1]]);
      
         } else {
-            player2.currentTile == 1;
-            $('#player2').appendTo(board1[player2.currentTile]);
+            player2.currentTile = 1;
+            player2.playerPath = board1;
+            $('#player2').appendTo(board1[1]);
         }
     }
+
+
+
+    function drawCard (){
+        if (cards.length > 0) {
+            randIn = Math.floor(Math.random() * cards.length);
+            console.log(randIn)
+            cardPicked = cards[randIn];
+            console.log(cardPicked);
+            showCard(cardPicked)
+            return cardPicked;
+        }
+
+    }
+
+    function showCard(card){
+        console.log("this" + card)
+        $('#cardName').text(card.text)
+        $('#cardDesc').text(card.desc)
+        $('.actionCard').css('display', 'flex');
+    }
+
+
+
+    // function hideCard() {
+    //     $('.actionCard').css('display', 'none');
+    // }
+
+    // $('#testBtn').click(function(){
+    //     $('.actionCard').showCard().delay(3000).hideCard();
+    // })
+
+
+
+
+    
 
 
 
