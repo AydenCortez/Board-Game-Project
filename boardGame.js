@@ -53,7 +53,7 @@
     cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', function (){goBackSpaces(chaosValue, 'Spacing')});
     cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', function (){goBackSpaces(chaosValue, 'Slip')});
     cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', function (){backToStart()});
-    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you!!", '/images/placeholderCard.png', function (){losePoints(chaosValue)})
+    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you!!", '/images/Cards/Card_Murdered.png', function (){losePoints(chaosValue)})
 
     console.log(cards.length)
     function losePoints (chaos){
