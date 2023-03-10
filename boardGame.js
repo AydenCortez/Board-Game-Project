@@ -48,10 +48,10 @@
 
     var cards = [];
 
-    cards[0] = new Card('Lose cho points!!!!', "Someone stole cho' points!!!" ,function (){losePoints(chaosValue)});
-    cards[1] = new Card('SPACING', "The vast nothingness has intruded" ,function (){goBackSpaces(chaosValue, 'Spacing')});
-    cards[2] = new Card('Clumsy', "Someone didn't clean up!" ,function (){goBackSpaces(chaosValue, 'Slip')});
-    cards[3] = new Card('Asteroid', "You are doomed", function (){backToStart()});
+    cards[0] = new Card('Lose cho points!!!!', "Someone stole cho' points!!!" , url('/images/Cards/Card_Clumsy.png'), function (){losePoints(chaosValue)});
+    cards[1] = new Card('SPACING', "The vast nothingness has intruded" , url('/images/Cards/Card_Clumsy.png'), function (){goBackSpaces(chaosValue, 'Spacing')});
+    cards[2] = new Card('Clumsy', "Someone didn't clean up!" , url('/images/Cards/Card_Clumsy.png'), function (){goBackSpaces(chaosValue, 'Slip')});
+    cards[3] = new Card('Asteroid', "You are doomed", url('/images/placeholderCard.png'), function (){backToStart()});
 
     console.log(cards.length)
     function losePoints (chaos){
