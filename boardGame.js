@@ -11,7 +11,6 @@
     turn = 1
     var testNumber;
     
-
     // Assign board spaces from HTML to arrays
     
     // Die Rolling Variables
@@ -47,15 +46,9 @@
         this.action = action;
     }
 
-    var cards = [];
 
-    cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', function (){losePoints(chaosValue)});
-    cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', function (){goBackSpaces(chaosValue, 'Spacing')});
-    cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', function (){goBackSpaces(chaosValue, 'Slip')});
-    cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', function (){backToStart()});
-    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you!!", '/images/Cards/Card_Murdered.png', function (){losePoints(chaosValue)})
 
-    console.log(cards.length)
+
     function losePoints (chaos){
         switch (chaos) {
             case 1:
@@ -156,23 +149,29 @@
         }
     }
 
+    var cards = [];
+
+    cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', losePoints(chaosValue));
+    cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', function(){goBackSpaces(chaosValue, 'Spacing')} );
+    cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', function(){goBackSpaces(chaosValue, 'Slip')} );
+    cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', function(){backToStart()} );
+    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you!!", '/images/Cards/Card_Murdered.png', function(){losePoints(chaosValue)} )
+
+    console.log(cards[3])
+
 
 
     function drawCard (){
         if (cards.length > 0) {
             randIn = Math.floor(Math.random() * cards.length);
-            console.log(randIn)
             cardPicked = cards[randIn];
-            console.log(cardPicked);
-            showCard(cardPicked)
-            cardPicked.action
-            return cardPicked;
+            showCard(cardPicked);
+            cards[randIn].action;
         }
 
     }
 
     function showCard(card){
-        console.log("this" + card)
         $('#cardName').text(card.text)
         $('#cardDesc').text(card.desc)
         document.getElementById('cardImg').src= card.image
