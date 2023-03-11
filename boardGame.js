@@ -219,6 +219,9 @@
         player2.currentTile = 1;        
         $('#player1').appendTo(board1[player1.currentTile]);
         $('#player2').appendTo(board1[player1.currentTile]);
+        // $(player1.victoryPoints).appendTo('#player1VP')
+        // document.getElementById('player1VP').innerText(player1.victoryPoints);
+        // document.getElementById('player2VP').innerText(player2.victoryPoints);
         chaos = chaosMeter[chaosValue];
         chaos.style.backgroundColor = "red";
     }
@@ -312,9 +315,11 @@
         if (turn == 1) {
             player1.victoryPoints += dieNumberLanded;
             $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 1 gained ' + dieNumberLanded + ' victory points' + '</li>')
+            // document.getElementById('player1VP').textContent(player1.victoryPoints);
         } else {
             player2.victoryPoints += dieNumberLanded;
             $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 2 gained ' + dieNumberLanded + ' victory points' + '</li>')
+            // document.getElementById('player2VP').textContent(player2.victoryPoints);
         }
         turn *= -1;
         return dieNumberLanded;
