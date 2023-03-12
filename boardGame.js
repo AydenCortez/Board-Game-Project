@@ -46,9 +46,6 @@
         this.action = action;
     }
 
-
-
-
     function losePoints (chaos){
         switch (chaos) {
             case 1:
