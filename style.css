@@ -16,7 +16,7 @@ html {
 
 body {
     gap: 2%;
-    display: flex;
+    display: none;
     margin:0;
 	padding:0;
 	background: url(images/space-background.jpg);

@@ -39,13 +39,66 @@
         chaosMeter[i] = document.getElementById('Chaos' + i);
     }
 
-    function Card(text, desc, image, action) {
-        this.text = text;
+    function Card(title, desc, image, action, Atype) {
+        this.title = title;
         this.desc = desc;
         this.image = image;
         this.action = action;
+        this.Atype = Atype;
     }
 
+    var cards = [];
+
+    cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', 'losePoints');
+    cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', 'goBackSpaces', 'spacing');
+    cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', 'goBackSpaces', 'slipped');
+    cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', 'backToStart');
+    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you!! Luckily there's cloning!", '/images/Cards/Card_Murdered.png', 'losePoints')
+
+
+    function drawCard (){
+        if (cards.length > 0) {
+            randIn = Math.floor(Math.random() * cards.length);
+            cardPicked = cards[randIn];
+            console.log(cardPicked.action)
+            showCard(cardPicked)
+            switch(cardPicked.action){
+                case 'losePoints':
+                    losePoints(chaosValue);
+                    console.log('something worked')
+                    break;
+                case 'goBackSpaces':
+                    goBackSpaces(chaosValue, cardPicked.Atype);
+                    console.log('something worked');
+                    break;
+                case 'backToStart':
+                    backToStart();
+                    console.log('something worked');
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    function showCard(card){
+        $('#cardName').text(card.title)
+        $('#cardDesc').text(card.desc)
+        document.getElementById('cardImg').src= card.image
+        $('.actionCard').css('display', 'flex');
+        $('.actionCard').css('animation', '0.5s fadeIn');
+
+    }
+
+
+
+
+    function hideCard() {
+        $('.actionCard').css('display', 'none');
+    }
+
+    console.log(cards.length)
     function losePoints (chaos){
         switch (chaos) {
             case 1:
@@ -77,120 +130,116 @@
     }
 
     function goBackSpaces (chaos, cardType){
-        if (cardType == 'Spacing') {
+        console.log('test')
+        if (cardType == 'spacing') {
+            console.log('test for spacing')
             switch (chaos) {
                 case 1:
                     if (turn == 1) {
                         player1.currentTile -= 1;
+                        player1.previousValue = player1.currentTile;
                     } else {
                         player2.currentTile -= 1;
+                        player2.previousValue = player2.currentTile;
                     }
-                    return chaos;
+                    break;
                 case 2:
                 case 3:
                 case 4:
                     if (turn == 1) {
                         player1.currentTile -= 2;
+                        player1.previousValue = player1.currentTile;
                     } else {
                         player2.currentTile -= 2;
+                        player2.previousValue = player2.currentTile;
                     }
-                    return chaos;
+                    break;
                 case 5:
                     if (turn == 1) {
                         player1.currentTile -= 4;
+                        player1.previousValue = player1.currentTile;
                     } else {
                         player2.currentTile -= 4;
+                        player2.previousValue = player2.currentTile;
                     }
-                    return chaos;
+                    break
                 default:
-                    return chaos;
+                    break;
             }
-        } else if (cardType == 'Slip') {
+        } else if (cardType == 'slipped') {
+            console.log('test for slipped')
             switch (chaos) {
                 case 1:
                     if (turn == 1) {
                         player1.currentTile -= 1;
+                        player1.previousValue = player1.currentTile;
                     } else {
                         player2.currentTile -= 1;
+                        player2.previousValue = player2.currentTile;
                     }
-                    return chaos;
+                    break;
                 case 2:
                 case 3:
                 case 4:
                 case 5:
                     if (turn == 1) {
                         player1.currentTile -= 2;
+                        player1.previousValue = player1.currentTile;
                         player1.victoryPoints -= 1;
                     } else {
                         player2.currentTile -= 2;
+                        player2.previousValue = player2.currentTile;
                         player2.victoryPoints -=1;
                     }
-                    return chaos
+                    break;
                 default:
-                    return chaos
-                    
+                    break;
             }
         }
+        console.log('test one last time')
+        switch (player1.playerPath) {
+            case board1:
+                $('#player1').appendTo(board1[player1.currentTile]);
+                break
+            case path1:
+                $('#player1').appendTo(path1[player1.currentTile]);
+                break;
+            case path2:
+                $('#player1').appendTo(path2[player1.currentTile]);
+                break;
+            default:
+                break;
+        }
+        switch (player2.playerPath) {
+            case board1:
+                $('#player2').appendTo(board1[player2.currentTile]);
+                break
+            case path1:
+                $('#player2').appendTo(path1[player2.currentTile]);
+                break;
+            case path2:
+                $('#player2').appendTo(path2[player2.currentTile]);
+                break;
+            default:
+                break;
+        }
+
     }
 
     function backToStart (){
         if (turn == 1) {
             player1.currentTile = 1;
+            player1.previousValue = 1;
             player1.playerPath = board1;
             $('#player1').appendTo([board1[1]]);
      
         } else {
             player2.currentTile = 1;
+            player1.previousValue = 1;
             player2.playerPath = board1;
             $('#player2').appendTo(board1[1]);
         }
     }
-
-    var cards = [];
-
-    cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', losePoints(chaosValue));
-    cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', function(){goBackSpaces(chaosValue, 'Spacing')} );
-    cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', function(){goBackSpaces(chaosValue, 'Slip')} );
-    cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', function(){backToStart()} );
-    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you!!", '/images/Cards/Card_Murdered.png', function(){losePoints(chaosValue)} )
-
-    console.log(cards[3])
-
-
-
-    function drawCard (){
-        if (cards.length > 0) {
-            randIn = Math.floor(Math.random() * cards.length);
-            cardPicked = cards[randIn];
-            showCard(cardPicked);
-            cards[randIn].action;
-        }
-
-    }
-
-    function showCard(card){
-        $('#cardName').text(card.text)
-        $('#cardDesc').text(card.desc)
-        document.getElementById('cardImg').src= card.image
-        $('.actionCard').css('display', 'flex');
-        $('.actionCard').css('animation', '0.5s fadeIn');
-
-    }
-
-
-
-
-    function hideCard() {
-        $('.actionCard').css('display', 'none');
-    }
-
-
-
-
-
-    
-
-
 
     // player objects
     player1 = {
@@ -512,7 +561,7 @@
                 player1.victoryPoints += 5;
                 document.getElementById('player1VP').textContent = player1.victoryPoints;
             }
-            if (player1.playerPath == path2 && player1.currentTile >= 10) {
+            if (player1.playerPath == path2 && player1.currentTile >= 11) {
                 winPopUp.style.display = 'flex';
                 $('#player1').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
@@ -529,7 +578,7 @@
                 player2.victoryPoints += 5;
                 document.getElementById('player2VP').textContent = player2.victoryPoints;
             }
-            if (player2.playerPath == path2 && player2.currentTile >= 10){
+            if (player2.playerPath == path2 && player2.currentTile >= 11){
                 winPopUp.style.display = 'flex';
                 $('#player2').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
