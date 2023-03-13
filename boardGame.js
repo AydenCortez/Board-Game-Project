@@ -46,6 +46,45 @@
         this.action = action;
     }
 
+    var cards = [];
+
+    cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', function (){losePoints(chaosValue)});
+    cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', function (){goBackSpaces(chaosValue, 'Spacing')});
+    cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', function (){goBackSpaces(chaosValue, 'Slip')});
+    cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', function (){backToStart()});
+    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you!! Luckily there's cloning!", '/images/Cards/Card_Murdered.png', function (){losePoints(chaosValue)})
+
+    function drawCard (){
+        if (cards.length > 0) {
+            randIn = Math.floor(Math.random() * cards.length);
+            console.log(randIn)
+            cardPicked = cards[randIn];
+            console.log(cardPicked);
+            showCard(cardPicked)
+            cardPicked.action
+            return cardPicked;
+        }
+
+    }
+
+    function showCard(card){
+        console.log("this" + card)
+        $('#cardName').text(card.text)
+        $('#cardDesc').text(card.desc)
+        document.getElementById('cardImg').src= card.image
+        $('.actionCard').css('display', 'flex');
+        $('.actionCard').css('animation', '0.5s fadeIn');
+
+    }
+
+
+
+
+    function hideCard() {
+        $('.actionCard').css('display', 'none');
+    }
+
+    console.log(cards.length)
     function losePoints (chaos){
         switch (chaos) {
             case 1:
@@ -161,14 +200,18 @@
     function drawCard (){
         if (cards.length > 0) {
             randIn = Math.floor(Math.random() * cards.length);
+            console.log(randIn)
             cardPicked = cards[randIn];
-            showCard(cardPicked);
-            cards[randIn].action;
+            console.log(cardPicked);
+            showCard(cardPicked)
+            cardPicked.action
+            return cardPicked;
         }
 
     }
 
     function showCard(card){
+        console.log("this" + card)
         $('#cardName').text(card.text)
         $('#cardDesc').text(card.desc)
         document.getElementById('cardImg').src= card.image
@@ -512,7 +555,7 @@
                 player1.victoryPoints += 5;
                 document.getElementById('player1VP').textContent = player1.victoryPoints;
             }
-            if (player1.playerPath == path2 && player1.currentTile >= 10) {
+            if (player1.playerPath == path2 && player1.currentTile >= 11) {
                 winPopUp.style.display = 'flex';
                 $('#player1').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
@@ -529,7 +572,7 @@
                 player2.victoryPoints += 5;
                 document.getElementById('player2VP').textContent = player2.victoryPoints;
             }
-            if (player2.playerPath == path2 && player2.currentTile >= 10){
+            if (player2.playerPath == path2 && player2.currentTile >= 11){
                 winPopUp.style.display = 'flex';
                 $('#player2').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
