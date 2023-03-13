@@ -11,7 +11,6 @@
     turn = 1
     var testNumber;
     
-
     // Assign board spaces from HTML to arrays
     
     // Die Rolling Variables
@@ -40,20 +39,13 @@
         chaosMeter[i] = document.getElementById('Chaos' + i);
     }
 
-    function Card(text, desc, action) {
+    function Card(text, desc, image, action) {
         this.text = text;
-        this.desc = desc
+        this.desc = desc;
+        this.image = image;
         this.action = action;
     }
 
-    var cards = [];
-
-    cards[0] = new Card('Lose cho points!!!!', "Someone stole cho' points!!!" ,function (){losePoints(chaosValue)});
-    cards[1] = new Card('SPACING', "The vast nothingness has intruded" ,function (){goBackSpaces(chaosValue, 'Spacing')});
-    cards[2] = new Card('Clumsy', "Someone didn't clean up!" ,function (){goBackSpaces(chaosValue, 'Slip')});
-    cards[3] = new Card('Asteroid', "You are doomed", function (){backToStart()});
-
-    console.log(cards.length)
     function losePoints (chaos){
         switch (chaos) {
             case 1:
@@ -154,36 +146,44 @@
         }
     }
 
+    var cards = [];
+
+    cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', losePoints(chaosValue));
+    cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', function(){goBackSpaces(chaosValue, 'Spacing')} );
+    cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', function(){goBackSpaces(chaosValue, 'Slip')} );
+    cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', function(){backToStart()} );
+    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you!!", '/images/Cards/Card_Murdered.png', function(){losePoints(chaosValue)} )
+
+    console.log(cards[3])
+
 
 
     function drawCard (){
         if (cards.length > 0) {
             randIn = Math.floor(Math.random() * cards.length);
-            console.log(randIn)
             cardPicked = cards[randIn];
-            console.log(cardPicked);
-            showCard(cardPicked)
-            return cardPicked;
+            showCard(cardPicked);
+            cards[randIn].action;
         }
 
     }
 
     function showCard(card){
-        console.log("this" + card)
         $('#cardName').text(card.text)
         $('#cardDesc').text(card.desc)
+        document.getElementById('cardImg').src= card.image
         $('.actionCard').css('display', 'flex');
+        $('.actionCard').css('animation', '0.5s fadeIn');
+
     }
 
 
 
-    // function hideCard() {
-    //     $('.actionCard').css('display', 'none');
-    // }
 
-    // $('#testBtn').click(function(){
-    //     $('.actionCard').showCard().delay(3000).hideCard();
-    // })
+    function hideCard() {
+        $('.actionCard').css('display', 'none');
+    }
+
 
 
 
@@ -216,6 +216,9 @@
         player2.currentTile = 1;        
         $('#player1').appendTo(board1[player1.currentTile]);
         $('#player2').appendTo(board1[player1.currentTile]);
+        // $(player1.victoryPoints).appendTo('#player1VP')
+        document.getElementById('player1VP').textContent = player1.victoryPoints;
+        document.getElementById('player2VP').textContent = player2.victoryPoints;
         chaos = chaosMeter[chaosValue];
         chaos.style.backgroundColor = "red";
     }
@@ -309,9 +312,11 @@
         if (turn == 1) {
             player1.victoryPoints += dieNumberLanded;
             $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 1 gained ' + dieNumberLanded + ' victory points' + '</li>')
+            document.getElementById('player1VP').textContent = player1.victoryPoints;
         } else {
             player2.victoryPoints += dieNumberLanded;
             $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 2 gained ' + dieNumberLanded + ' victory points' + '</li>')
+            document.getElementById('player2VP').textContent = player2.victoryPoints;
         }
         turn *= -1;
         return dieNumberLanded;
@@ -396,6 +401,7 @@
                         break;
                     case board1[4]:
                     case board1[10]:
+                        drawCard();
                         $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
                         turn *= -1;
                         break;
@@ -411,6 +417,7 @@
                     case path1[3]:
                     case path1[10]:
                     case path1[13]:
+                        drawCard();
                         $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
                         turn *= -1;
                         break;
@@ -429,6 +436,7 @@
                     case path2[6]:
                     case path2[8]:
                     case path2[9]:
+                        drawCard();
                         $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
                         turn *= -1;
                         break;
@@ -445,6 +453,7 @@
                         break;
                     case board1[4]:
                     case board1[10]:
+                        drawCard();
                         $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
                         turn *= -1;
                         break;
@@ -460,6 +469,7 @@
                     case path1[3]:
                     case path1[10]:
                     case path1[13]:
+                        drawCard();
                         $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
                         turn *= -1;
                         break;
@@ -478,6 +488,7 @@
                     case path2[6]:
                     case path2[8]:
                     case path2[9]:
+                        drawCard();
                         $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
                         turn *= -1;
                         break;
@@ -498,12 +509,16 @@
                 $('#player1').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
+                player1.victoryPoints += 5;
+                document.getElementById('player1VP').textContent = player1.victoryPoints;
             }
             if (player1.playerPath == path2 && player1.currentTile >= 10) {
                 winPopUp.style.display = 'flex';
                 $('#player1').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
+                player1.victoryPoints += 5;
+                document.getElementById('player1VP').textContent = player1.victoryPoints;
             }
         } else {
             if (player2.playerPath == path1 && player2.currentTile >= 15){
@@ -511,12 +526,16 @@
                 $('#player2').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "2";
+                player2.victoryPoints += 5;
+                document.getElementById('player2VP').textContent = player2.victoryPoints;
             }
             if (player2.playerPath == path2 && player2.currentTile >= 10){
                 winPopUp.style.display = 'flex';
                 $('#player2').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "2";
+                player2.victoryPoints += 5;
+                document.getElementById('player2VP').textContent = player2.victoryPoints;
             }
         }
     }
@@ -536,17 +555,14 @@
 
     //our main roll dice function on click
     function rollDice() {
-    console.log("Is Die Rolling? " + isDieRolling);
     if (isDieRolling)
         return;
     isDieRolling = true;
     changeColorDice();
     //genberate a random number between 1 and 6 with out getRandomInt function
      var randNum = getRandomInt(1,7); 
-      console.log(randNum)
       //generate a class with the random number between 1 - 6 called showClass
       var showClass = 'show-' + randNum;
-      console.log(showClass)
     // if there is a class already selected remove it
       if ( currentClass ) {
         cube.classList.remove( currentClass );

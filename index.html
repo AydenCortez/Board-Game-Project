@@ -26,8 +26,9 @@
         </div>
     </div>
     <div class="actionCard">
+        <input type="button" class="dismissBtn" onclick="hideCard()" value="x">
         <h3 id="cardName"></h3>
-        <img src="images/placeholderCard.png" alt="card image">
+        <img id="cardImg" src="images/placeholderCard.png" alt="card image">
         <p class="cardDesc" id="cardDesc">Lorem ipsum, dolor sit amet consectetur adipisicinisquam?</p>
     </div>
     <div class="chaosMeter">
@@ -134,6 +135,18 @@
                 </div>
             </div>
           <button class = "rollBtn">Roll the Dice</button>
+        </div>
+        <div class="playerCards">
+            <div class="player1Card">
+                <img src="images/Player1.png" alt="">
+                <p style="font-weight: bolder;">Player1</p>
+                <p>Points: <span id="player1VP"></span></p>
+            </div>
+            <div class="player2Card">
+                <img src="images/Player2.png" alt="">
+                <p style="font-weight: bolder;">Player 2</p>
+                <p>Points: <span id="player2VP"></span></p>
+            </div>
         </div>
         <div class="gameLog">
             <h1>Game Log</h1>
