@@ -53,7 +53,12 @@
     cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', 'goBackSpaces', 'spacing');
     cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', 'goBackSpaces', 'slipped');
     cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', 'backToStart');
-    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you!! Luckily there's cloning!", '/images/Cards/Card_Murdered.png', 'losePoints')
+    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you! You were cloned.", '/images/Cards/Card_Murdered.png', 'losePoints')
+    cards[5] = new Card('Portal', 'Portal 3 confirmed', '/images/Cards/Card_Portal.png', 'switchPlayers')
+    cards[6] = new Card('BLACK HOLE', 'Oh no....', '/images/Cards/Card_Singularity.png')
+    cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png'  )
+
+
 
 
     function drawCard (){
@@ -79,6 +84,7 @@
                     break;
             }
         }
+        underFlow();
 
     }
 
@@ -127,6 +133,8 @@
             default:
                 break;
         }
+        document.getElementById('player1VP').textContent = player1.victoryPoints;
+        document.getElementById('player2VP').textContent = player2.victoryPoints;
     }
 
     function goBackSpaces (chaos, cardType){
@@ -238,6 +246,17 @@
             player1.previousValue = 1;
             player2.playerPath = board1;
             $('#player2').appendTo(board1[1]);
+        }
+    }
+
+    function underFlow (){
+        if (player1.victoryPoints < 0) {
+            player1.victoryPoints = 0;
+            document.getElementById('player1VP').textContent = player1.victoryPoints;
+        }
+        if (player2.victoryPoints < 0) {
+            player2.victoryPoints = 0
+            document.getElementById('player2VP').textContent = player2.victoryPoints;
         }
     }
 
