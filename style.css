@@ -94,7 +94,7 @@ body {
     right: 50%;
     z-index: 2;
     box-shadow: 5px 5px 0px black;
-    padding: 1% 2px 1% 2px;
+    padding: 0% 2px 1% 2px;
 }
 
 .actionCard h3 {
@@ -111,7 +111,7 @@ body {
     width: 25px;
     height: 25px;
     left: 85px;
-    bottom: 15px;
+    top: 5px;
     background: none;
 }
 
