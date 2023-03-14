@@ -39,24 +39,30 @@
         chaosMeter[i] = document.getElementById('Chaos' + i);
     }
 
-    function Card(title, desc, image, action, Atype) {
+    function Card(title, desc, image, action, Atype, hover, chaos1, chaos2, chaos3, chaos4, chaos5) {
         this.title = title;
         this.desc = desc;
+        this.hover = hover
         this.image = image;
         this.action = action;
         this.Atype = Atype;
+        this.chaos1 = chaos1
+        this.chaos2 = chaos2
+        this.chaos3 = chaos3
+        this.chaos4 = chaos4
+        this.chaos5 = chaos5
     }
 
     var cards = [];
 
-    cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', 'losePoints');
-    cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', 'goBackSpaces', 'spacing');
-    cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', 'goBackSpaces', 'slipped');
-    cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', 'backToStart');
-    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you! You were cloned.", '/images/Cards/Card_Murdered.png', 'losePoints')
-    cards[5] = new Card('Portal', 'Portal 3 confirmed', '/images/Cards/Card_Portal.png', 'switchPlayers')
-    cards[6] = new Card('BLACK HOLE', 'Oh no....', '/images/Cards/Card_Singularity.png')
-    cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png'  )
+    cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', 'losePoints', null, "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points');
+    cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', 'goBackSpaces', 'spacing', "Go Back Spaces", 'Chaos 1: 1 Space', 'Chaos 2-4: 2 Spaces', 'Chaos 5: 4 Spaces');
+    cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', 'goBackSpaces', 'slipped', "Go back/Lose Points", 'Chaos 1: 1 Space', 'Chaos 2-5: 2 Spaces, 1 Point');
+    cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', 'backToStart', null, "Go Back to Start");
+    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you! You were cloned.", '/images/Cards/Card_Murdered.png', 'losePoints', null, "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points')
+    cards[5] = new Card('Portal', 'Portal 3 confirmed', '/images/Cards/Card_Portal.png',  'switchPlayers', null, "Switch Players")
+    cards[6] = new Card('BLACK HOLE', 'Oh no....', '/images/Cards/Card_Singularity.png', 'switchPoints', null, 'Youre screwed')
+    cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png', null, null, 'Lose Turn(s)')
 
 
 
@@ -65,7 +71,7 @@
         if (cards.length > 0) {
             randIn = Math.floor(Math.random() * cards.length);
             cardPicked = cards[randIn];
-            console.log(cardPicked.action)
+            console.log(cardPicked)
             showCard(cardPicked)
             switch(cardPicked.action){
                 case 'losePoints':
@@ -80,6 +86,11 @@
                     backToStart();
                     console.log('something worked');
                     break;
+                case 'switchPlayers':
+                    switchPlayers();
+                    break;
+                case 'switchPoints':
+                    switchPoints();
                 default:
                     break;
             }
@@ -89,9 +100,35 @@
     }
 
     function showCard(card){
-        $('#cardName').text(card.title)
-        $('#cardDesc').text(card.desc)
-        document.getElementById('cardImg').src= card.image
+        $('#cardName').text(card.title);
+        $('#cardDesc').text(card.desc);
+        document.getElementById('cardImg').src= card.image;
+        $('#cardHover').text(card.hover);
+        if (card.chaos1 != undefined) {
+            $('#chaosCon1').text(card.chaos1);
+        } else {
+            $('#chaosCon1').text('');
+        }
+        if (card.chaos2 != undefined) {
+            $('#chaosCon2').text(card.chaos2);
+        } else {
+            $('#chaosCon2').text(''); 
+        }
+        if (card.chaos3 != undefined) {
+            $('#chaosCon3').text(card.chaos3);
+        } else {
+            $('#chaosCon3').text('');
+        }
+        if (card.chaos4 != undefined) {
+            $('#chaosCon4').text(card.chaos4);
+        } else {
+            $('#chaosCon4').text('');
+        }
+        if (card.chaos5 != undefined) {
+            $('#chaosCon5').text(card.chaos5);
+        } else {
+            $('#chaosCon5').text('');
+        }
         $('.actionCard').css('display', 'flex');
         $('.actionCard').css('animation', '0.5s fadeIn');
 
@@ -249,15 +286,31 @@
         }
     }
 
+
+
+
+
     function underFlow (){
         if (player1.victoryPoints < 0) {
             player1.victoryPoints = 0;
-            document.getElementById('player1VP').textContent = player1.victoryPoints;
         }
         if (player2.victoryPoints < 0) {
             player2.victoryPoints = 0
-            document.getElementById('player2VP').textContent = player2.victoryPoints;
         }
+        if (player1.currentTile < 0) {
+            player1.currentTile = 0;
+            player1.previousValue = 0;
+        }
+        if (player2.currentTile < 0) {
+            player2.currentTile = 0;
+            player2.previousValue = 0;
+        }
+        updateVC();
+    }
+
+    function updateVC (){
+        document.getElementById('player1VP').textContent = player1.victoryPoints;
+        document.getElementById('player2VP').textContent = player2.victoryPoints;
     }
 
     // player objects
@@ -275,7 +328,6 @@
         victoryPoints: 0,
     }
 
-
     // Starts the game and resets the values
     function start(){
         turn = 1;
@@ -285,8 +337,7 @@
         $('#player1').appendTo(board1[player1.currentTile]);
         $('#player2').appendTo(board1[player1.currentTile]);
         // $(player1.victoryPoints).appendTo('#player1VP')
-        document.getElementById('player1VP').textContent = player1.victoryPoints;
-        document.getElementById('player2VP').textContent = player2.victoryPoints;
+        updateVC();
         chaos = chaosMeter[chaosValue];
         chaos.style.backgroundColor = "red";
     }
@@ -380,12 +431,11 @@
         if (turn == 1) {
             player1.victoryPoints += dieNumberLanded;
             $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 1 gained ' + dieNumberLanded + ' victory points' + '</li>')
-            document.getElementById('player1VP').textContent = player1.victoryPoints;
         } else {
             player2.victoryPoints += dieNumberLanded;
             $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 2 gained ' + dieNumberLanded + ' victory points' + '</li>')
-            document.getElementById('player2VP').textContent = player2.victoryPoints;
         }
+        updateVC();
         turn *= -1;
         return dieNumberLanded;
     }
@@ -568,6 +618,26 @@
 
     }
 
+    function switchPlayers (){
+        tempPos = player1.playerPath;
+        tempNum = player1.currentTile;
+        player1.playerPath = player2.playerPath;
+        player2Path = tempPos;
+        player1.currentTile = player2.currentTile;
+        player2.currentTile = tempNum;
+        player1.previousValue = player1.currentTile;
+        player2.previousValue = player2.currentTile;
+        $('#player1').appendTo(player1.playerPath[player1.currentTile])
+        $('#player2').appendTo(player2.playerPath[player2.currentTile])
+    }
+
+    function switchPoints (){
+        tempNum = player1.victoryPoints;
+        player1.victoryPoints = player2.victoryPoints;
+        player2.victoryPoints = tempNum;
+
+    }
+
     function Winner (){
         let winPopUp = document.getElementById('winPopupCont');
         let winningPlayer = document.getElementById('winningPlayer')
@@ -578,7 +648,6 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
                 player1.victoryPoints += 5;
-                document.getElementById('player1VP').textContent = player1.victoryPoints;
             }
             if (player1.playerPath == path2 && player1.currentTile >= 11) {
                 winPopUp.style.display = 'flex';
@@ -586,7 +655,6 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
                 player1.victoryPoints += 5;
-                document.getElementById('player1VP').textContent = player1.victoryPoints;
             }
         } else {
             if (player2.playerPath == path1 && player2.currentTile >= 15){
@@ -595,7 +663,6 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "2";
                 player2.victoryPoints += 5;
-                document.getElementById('player2VP').textContent = player2.victoryPoints;
             }
             if (player2.playerPath == path2 && player2.currentTile >= 11){
                 winPopUp.style.display = 'flex';
@@ -603,9 +670,9 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "2";
                 player2.victoryPoints += 5;
-                document.getElementById('player2VP').textContent = player2.victoryPoints;
             }
         }
+        updateVC();
     }
 
     // Die

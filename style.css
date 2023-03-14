@@ -147,6 +147,45 @@ body {
     padding: 0% 3% 0% 3%;
 }
 
+
+.dropdown {
+    display: block;
+    margin-top: 5%;
+    width: 100%;
+    height: 15%;
+    text-align: center;
+    padding: 5%;
+    background-color: rgb(226, 226, 226);
+}
+
+.dropdownCont {
+    width: 100%;
+    background-color: rgb(226, 226, 226);
+    display: none;
+}
+
+.dropdownCont {
+    padding-left: 0px;
+}
+
+.dropdownCont ul li {
+    font-size: 0.8rem;
+    list-style-position: inside;
+    list-style: none;
+    padding: 0;
+    margin-left: 0;
+    text-align: left;
+}
+
+.dropdownCont ul li span {
+    width: 100%;
+}
+
+.dropdown:hover .dropdownCont {
+    display: flex;
+    list-style: none;
+}
+
 .chaosMeter {
     display: flex;
     flex-direction: column;
