@@ -61,7 +61,7 @@
     cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', 'backToStart', null, "Go Back to Start");
     cards[4] = new Card('Murdered', "Some rando [UNALIVED] you! You were cloned.", '/images/Cards/Card_Murdered.png', 'losePoints', null, "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points')
     cards[5] = new Card('Portal', 'Portal 3 confirmed', '/images/Cards/Card_Portal.png',  'switchPlayers', null, "Switch Players")
-    cards[6] = new Card('BLACK HOLE', 'Oh no....', '/images/Cards/Card_Singularity.png', null, null, 'Youre screwed')
+    cards[6] = new Card('BLACK HOLE', 'Oh no....', '/images/Cards/Card_Singularity.png', 'switchPoints', null, 'Youre screwed')
     cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png', null, null, 'Lose Turn(s)')
 
 
@@ -86,6 +86,11 @@
                     backToStart();
                     console.log('something worked');
                     break;
+                case 'switchPlayers':
+                    switchPlayers();
+                    break;
+                case 'switchPoints':
+                    switchPoints();
                 default:
                     break;
             }
@@ -288,12 +293,24 @@
     function underFlow (){
         if (player1.victoryPoints < 0) {
             player1.victoryPoints = 0;
-            document.getElementById('player1VP').textContent = player1.victoryPoints;
         }
         if (player2.victoryPoints < 0) {
             player2.victoryPoints = 0
-            document.getElementById('player2VP').textContent = player2.victoryPoints;
         }
+        if (player1.currentTile < 0) {
+            player1.currentTile = 0;
+            player1.previousValue = 0;
+        }
+        if (player2.currentTile < 0) {
+            player2.currentTile = 0;
+            player2.previousValue = 0;
+        }
+        updateVC();
+    }
+
+    function updateVC (){
+        document.getElementById('player1VP').textContent = player1.victoryPoints;
+        document.getElementById('player2VP').textContent = player2.victoryPoints;
     }
 
     // player objects
@@ -320,8 +337,7 @@
         $('#player1').appendTo(board1[player1.currentTile]);
         $('#player2').appendTo(board1[player1.currentTile]);
         // $(player1.victoryPoints).appendTo('#player1VP')
-        document.getElementById('player1VP').textContent = player1.victoryPoints;
-        document.getElementById('player2VP').textContent = player2.victoryPoints;
+        updateVC();
         chaos = chaosMeter[chaosValue];
         chaos.style.backgroundColor = "red";
     }
@@ -415,12 +431,11 @@
         if (turn == 1) {
             player1.victoryPoints += dieNumberLanded;
             $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 1 gained ' + dieNumberLanded + ' victory points' + '</li>')
-            document.getElementById('player1VP').textContent = player1.victoryPoints;
         } else {
             player2.victoryPoints += dieNumberLanded;
             $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 2 gained ' + dieNumberLanded + ' victory points' + '</li>')
-            document.getElementById('player2VP').textContent = player2.victoryPoints;
         }
+        updateVC();
         turn *= -1;
         return dieNumberLanded;
     }
@@ -603,9 +618,24 @@
 
     }
 
-    function switchPlayers (player1Pos, player2Pos){
-       $('#player1').appendTo(player2Pos)
-       $('#player2').appendTo(player1Pos)
+    function switchPlayers (){
+        tempPos = player1.playerPath;
+        tempNum = player1.currentTile;
+        player1.playerPath = player2.playerPath;
+        player2Path = tempPos;
+        player1.currentTile = player2.currentTile;
+        player2.currentTile = tempNum;
+        player1.previousValue = player1.currentTile;
+        player2.previousValue = player2.currentTile;
+        $('#player1').appendTo(player1.playerPath[player1.currentTile])
+        $('#player2').appendTo(player2.playerPath[player2.currentTile])
+    }
+
+    function switchPoints (){
+        tempNum = player1.victoryPoints;
+        player1.victoryPoints = player2.victoryPoints;
+        player2.victoryPoints = tempNum;
+
     }
 
     function Winner (){
@@ -618,7 +648,6 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
                 player1.victoryPoints += 5;
-                document.getElementById('player1VP').textContent = player1.victoryPoints;
             }
             if (player1.playerPath == path2 && player1.currentTile >= 11) {
                 winPopUp.style.display = 'flex';
@@ -626,7 +655,6 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
                 player1.victoryPoints += 5;
-                document.getElementById('player1VP').textContent = player1.victoryPoints;
             }
         } else {
             if (player2.playerPath == path1 && player2.currentTile >= 15){
@@ -635,7 +663,6 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "2";
                 player2.victoryPoints += 5;
-                document.getElementById('player2VP').textContent = player2.victoryPoints;
             }
             if (player2.playerPath == path2 && player2.currentTile >= 11){
                 winPopUp.style.display = 'flex';
@@ -643,9 +670,9 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "2";
                 player2.victoryPoints += 5;
-                document.getElementById('player2VP').textContent = player2.victoryPoints;
             }
         }
+        updateVC();
     }
 
     // Die
