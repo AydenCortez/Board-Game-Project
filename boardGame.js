@@ -39,24 +39,30 @@
         chaosMeter[i] = document.getElementById('Chaos' + i);
     }
 
-    function Card(title, desc, image, action, Atype) {
+    function Card(title, desc, image, action, Atype, hover, chaos1, chaos2, chaos3, chaos4, chaos5) {
         this.title = title;
         this.desc = desc;
+        this.hover = hover
         this.image = image;
         this.action = action;
         this.Atype = Atype;
+        this.chaos1 = chaos1
+        this.chaos2 = chaos2
+        this.chaos3 = chaos3
+        this.chaos4 = chaos4
+        this.chaos5 = chaos5
     }
 
     var cards = [];
 
-    cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', 'losePoints');
-    cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', 'goBackSpaces', 'spacing');
-    cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', 'goBackSpaces', 'slipped');
-    cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', 'backToStart');
-    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you! You were cloned.", '/images/Cards/Card_Murdered.png', 'losePoints')
-    cards[5] = new Card('Portal', 'Portal 3 confirmed', '/images/Cards/Card_Portal.png', 'switchPlayers')
-    cards[6] = new Card('BLACK HOLE', 'Oh no....', '/images/Cards/Card_Singularity.png')
-    cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png'  )
+    cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', 'losePoints', null, "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points');
+    cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', 'goBackSpaces', 'spacing', "Go Back Spaces", 'Chaos 1: 1 Space', 'Chaos 2-4: 2 Spaces', 'Chaos 5: 4 Spaces');
+    cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', 'goBackSpaces', 'slipped', "Go back / Lose Points", 'Chaos 1: 1 Space', 'Chaos 2-5: 1 Space, 1 Point');
+    cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', 'backToStart', null, "Go Back to Start");
+    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you! You were cloned.", '/images/Cards/Card_Murdered.png', 'losePoints', null, "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points')
+    cards[5] = new Card('Portal', 'Portal 3 confirmed', '/images/Cards/Card_Portal.png',  'switchPlayers', null, "Switch Players")
+    cards[6] = new Card('BLACK HOLE', 'Oh no....', '/images/Cards/Card_Singularity.png', null, null, 'Youre screwed')
+    cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png', null, null, 'Lose Turn(s)')
 
 
 
@@ -65,7 +71,7 @@
         if (cards.length > 0) {
             randIn = Math.floor(Math.random() * cards.length);
             cardPicked = cards[randIn];
-            console.log(cardPicked.action)
+            console.log(cardPicked)
             showCard(cardPicked)
             switch(cardPicked.action){
                 case 'losePoints':
@@ -89,9 +95,35 @@
     }
 
     function showCard(card){
-        $('#cardName').text(card.title)
-        $('#cardDesc').text(card.desc)
-        document.getElementById('cardImg').src= card.image
+        $('#cardName').text(card.title);
+        $('#cardDesc').text(card.desc);
+        document.getElementById('cardImg').src= card.image;
+        $('#cardHover').text(card.hover);
+        if (card.chaos1 != undefined) {
+            $('#chaosCon1').text(card.chaos1);
+        } else {
+            $('#chaosCon1').text('');
+        }
+        if (card.chaos2 != undefined) {
+            $('#chaosCon2').text(card.chaos2);
+        } else {
+            $('#chaosCon2').text(''); 
+        }
+        if (card.chaos3 != undefined) {
+            $('#chaosCon3').text(card.chaos3);
+        } else {
+            $('#chaosCon3').text('');
+        }
+        if (card.chaos4 != undefined) {
+            $('#chaosCon4').text(card.chaos4);
+        } else {
+            $('#chaosCon4').text('');
+        }
+        if (card.chaos5 != undefined) {
+            $('#chaosCon5').text(card.chaos5);
+        } else {
+            $('#chaosCon5').text('');
+        }
         $('.actionCard').css('display', 'flex');
         $('.actionCard').css('animation', '0.5s fadeIn');
 
