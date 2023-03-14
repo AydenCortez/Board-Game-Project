@@ -57,7 +57,7 @@
 
     cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', 'losePoints', null, "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points');
     cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', 'goBackSpaces', 'spacing', "Go Back Spaces", 'Chaos 1: 1 Space', 'Chaos 2-4: 2 Spaces', 'Chaos 5: 4 Spaces');
-    cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', 'goBackSpaces', 'slipped', "Go back/Lose Points", 'Chaos 1: 1 Space', 'Chaos 2-5: 1 Space, 1 Point');
+    cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', 'goBackSpaces', 'slipped', "Go back/Lose Points", 'Chaos 1: 1 Space', 'Chaos 2-5: 2 Spaces, 1 Point');
     cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', 'backToStart', null, "Go Back to Start");
     cards[4] = new Card('Murdered', "Some rando [UNALIVED] you! You were cloned.", '/images/Cards/Card_Murdered.png', 'losePoints', null, "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points')
     cards[5] = new Card('Portal', 'Portal 3 confirmed', '/images/Cards/Card_Portal.png',  'switchPlayers', null, "Switch Players")
@@ -281,6 +281,10 @@
         }
     }
 
+
+
+
+
     function underFlow (){
         if (player1.victoryPoints < 0) {
             player1.victoryPoints = 0;
@@ -306,7 +310,6 @@
         playerPath: board1,
         victoryPoints: 0,
     }
-
 
     // Starts the game and resets the values
     function start(){
@@ -598,6 +601,11 @@
             }
         }
 
+    }
+
+    function switchPlayers (player1Pos, player2Pos){
+       $('#player1').appendTo(player2Pos)
+       $('#player2').appendTo(player1Pos)
     }
 
     function Winner (){
