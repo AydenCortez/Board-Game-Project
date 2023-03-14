@@ -27,7 +27,7 @@
             <p style="color: green"> +5 Victory Points</p>
         </div>
     </div>
-    <div class="actionCard">
+    <div class="actionCard" draggable="true">
         <input type="button" class="dismissBtn" onclick="hideCard()" value="x">
         <h3 id="cardName">TEST CARD</h3>
         <img id="cardImg" src="images/placeholderCard.png" alt="card image">
@@ -60,7 +60,7 @@
             <td class="tile" id="A12" style="background-image: url(images/Tile2.png);"></td>
             <td class="tile" id="A13" style="background-image: url(images/dangerTileDark.png);"></td>
             <td class="tile" id="A14" style="background-image: url(images/Tile2.png);"></td>
-            <td class="tile" id="end" style="background-image: url(images/BlueAirlock.png);"><input type="button" id="testBtn" onclick="switchPlayers(player1.playerPath[player1.currentTile], player2.playerPath[player2.currentTile])"></td>
+            <td class="tile" id="end" style="background-image: url(images/BlueAirlock.png);"><input type="button" id="testBtn" onclick="drawCard()"></td>
         </tr><tr>
             <td colspan="1" class="blank"></td>
             <td class="tile" id="A6" style="background-image: url(images/Tile2.png);"></td>

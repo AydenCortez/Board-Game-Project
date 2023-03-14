@@ -56,12 +56,12 @@
     var cards = [];
 
     cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', 'losePoints', null, "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points');
-    cards[1] = new Card('SPACING', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', 'goBackSpaces', 'spacing', "Go Back Spaces", 'Chaos 1: 1 Space', 'Chaos 2-4: 2 Spaces', 'Chaos 5: 4 Spaces');
+    cards[1] = new Card('Spacing', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', 'goBackSpaces', 'spacing', "Go Back Spaces", 'Chaos 1: 1 Space', 'Chaos 2-4: 2 Spaces', 'Chaos 5: 4 Spaces');
     cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', 'goBackSpaces', 'slipped', "Go back/Lose Points", 'Chaos 1: 1 Space', 'Chaos 2-5: 2 Spaces, 1 Point');
     cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', 'backToStart', null, "Go Back to Start");
-    cards[4] = new Card('Murdered', "Some rando [UNALIVED] you! You were cloned.", '/images/Cards/Card_Murdered.png', 'losePoints', null, "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points')
+    cards[4] = new Card('Murdered', "Someone [UNALIVED] you! You were cloned.", '/images/Cards/Card_Murdered.png', 'losePoints', null, "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points')
     cards[5] = new Card('Portal', 'Portal 3 confirmed', '/images/Cards/Card_Portal.png',  'switchPlayers', null, "Switch Players")
-    cards[6] = new Card('BLACK HOLE', 'Oh no....', '/images/Cards/Card_Singularity.png', 'switchPoints', null, 'Youre screwed')
+    cards[6] = new Card('Black Hole', 'Oh no....', '/images/Cards/Card_Singularity.png', 'switchPoints', null, 'Switch Victory Points')
     cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png', null, null, 'Lose Turn(s)')
 
 
@@ -280,7 +280,7 @@
      
         } else {
             player2.currentTile = 1;
-            player1.previousValue = 1;
+            player2.previousValue = 1;
             player2.playerPath = board1;
             $('#player2').appendTo(board1[1]);
         }
@@ -328,6 +328,22 @@
         victoryPoints: 0,
     }
 
+    var chaosImg = ['/images/Chaos_Symbols/Chaos_Symbol_2.png', '/images/Chaos_Symbols/Chaos_Symbol_3.png', '/images/Chaos_Symbols/Chaos_Symbol_4.png', '/images/Chaos_Symbols/Chaos_Symbol_5.png'];
+    var chaosImg2 = [];
+
+    function setChaos (){
+        if (chaosTimer == 8 || chaosTimer == 16 || chaosTimer == 24 || chaosTimer == 32) {
+            chaosValue += 1;
+            $('#gameLogDisplay').append('<li style=color:red; font-weight:bold;>' + '!! The chaos has increased to ' + chaosValue + ' !!' + '</li>')
+        } else {
+            return chaosValue;
+        };
+        // return chaosMeter;
+        randIn = Math.floor(Math.random() * chaosImg.length);
+        $(chaosMeter[chaosValue]).css('background', 'url(' + chaosImg[randIn] + ')');
+        chaosImg2.push(chaosImg[randIn]);
+    }
+
     // Starts the game and resets the values
     function start(){
         turn = 1;
@@ -339,7 +355,7 @@
         // $(player1.victoryPoints).appendTo('#player1VP')
         updateVC();
         chaos = chaosMeter[chaosValue];
-        chaos.style.backgroundColor = "red";
+        $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)')
     }
     start();
 
@@ -439,18 +455,6 @@
         turn *= -1;
         return dieNumberLanded;
     }
-
-    function setChaos (){
-        if (chaosTimer == 8 || chaosTimer == 16 || chaosTimer == 24 || chaosTimer == 32) {
-            chaosValue += 1;
-            $('#gameLogDisplay').append('<li style=color:red; font-weight:bold;>' + '!! The chaos has increased to ' + chaosValue + ' !!' + '</li>')
-        } else {
-            return chaosValue;
-        };
-        // return chaosMeter;
-        chaosMeter[chaosValue].style.backgroundColor = "red";
-    }
-
 
     // Checks if a player reached the switch tile and executes the prompt
     function switchTile(){
@@ -635,7 +639,7 @@
         tempNum = player1.victoryPoints;
         player1.victoryPoints = player2.victoryPoints;
         player2.victoryPoints = tempNum;
-
+        updateVC();
     }
 
     function Winner (){
