@@ -703,7 +703,3 @@
             $(".cube__face--6").css("background", "#e74c3c");
         }
     }
-
-    function I_HATE_VALVE (){
-        $('.helpMenu').css('visibility', 'visible')
-    }
