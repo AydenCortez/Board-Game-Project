@@ -11,13 +11,11 @@
     turn = 1
     var testNumber;
     
-    // Assign board spaces from HTML to arrays
-    
     // Die Rolling Variables
     var dieNumberLanded = 3;
     var isDieRolling = false;
 
-
+     // Assign board spaces from HTML to arrays
     const board1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     for (i = 0; i <= 14; i++) {
         board1[i] = document.getElementById(i);
@@ -38,6 +36,21 @@
     for (i = 0; i <=5; i++) {
         chaosMeter[i] = document.getElementById('Chaos' + i);
     }
+
+        // player objects
+        player1 = {
+            previousValue: 1,
+            currentTile: 0, 
+            playerPath: board1,
+            victoryPoints: 0,
+        }
+    
+        player2 = {
+            previousValue: 1,
+            currentTile: 0,
+            playerPath: board1,
+            victoryPoints: 0,
+        }
 
     function Card(title, desc, image, action, Atype, hover, chaos1, chaos2, chaos3, chaos4, chaos5) {
         this.title = title;
@@ -62,8 +75,7 @@
     cards[4] = new Card('Murdered', "Someone [UNALIVED] you! You were cloned.", '/images/Cards/Card_Murdered.png', 'losePoints', 'murdered', "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points')
     cards[5] = new Card('Portal', 'Portal 3 confirmed', '/images/Cards/Card_Portal.png',  'switchPlayers', null, "Switch Players")
     cards[6] = new Card('Black Hole', 'Oh no....', '/images/Cards/Card_Singularity.png', 'switchPoints', null, 'Switch Victory Points')
-    cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png', 'losepoints', 'hazard', 'Lose Points', 'Chaos 1-2: 2 Points', 'Chaos 3-4: 3 Points', 'Chaos 5: 6 Points')
-
+    cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png', 'losePoints', 'hazard', 'Lose Points', 'Chaos 1-2: 2 Points', 'Chaos 3-4: 3 Points', 'Chaos 5: 6 Points')
 
 
 
@@ -71,20 +83,17 @@
         if (cards.length > 0) {
             randIn = Math.floor(Math.random() * cards.length);
             cardPicked = cards[randIn];
-            console.log(cardPicked)
             showCard(cardPicked)
             switch(cardPicked.action){
                 case 'losePoints':
                     losePoints(chaosValue, cardPicked.Atype);
-                    console.log('something worked')
+                    console.log(cardPicked.Atype)
                     break;
                 case 'goBackSpaces':
                     goBackSpaces(chaosValue, cardPicked.Atype);
-                    console.log('something worked');
                     break;
                 case 'backToStart':
                     backToStart();
-                    console.log('something worked');
                     break;
                 case 'switchPlayers':
                     switchPlayers();
@@ -142,8 +151,6 @@
     function hideCard() {
         $('.actionCard').css('display', 'none');
     }
-
-    console.log(cards.length)
     function losePoints (chaos, cardType){
         if (cardType == 'murdered') {
             switch (chaos) {
@@ -174,6 +181,7 @@
                     break;
             }
         } else if (cardType == 'hazard') {
+            console.log('hazard was tripped')
             switch (chaos) {
                 case 1:
                 case 2:
@@ -310,7 +318,6 @@
                     break;
             }
         }
-        console.log('test one last time')
         switch (player1.playerPath) {
             case board1:
                 $('#player1').appendTo(board1[player1.currentTile]);
@@ -382,21 +389,6 @@
         document.getElementById('player2VP').textContent = player2.victoryPoints;
     }
 
-    // player objects
-    player1 = {
-        previousValue: 1,
-        currentTile: 0, 
-        playerPath: board1,
-        victoryPoints: 0,
-    }
-
-    player2 = {
-        previousValue: 1,
-        currentTile: 0,
-        playerPath: board1,
-        victoryPoints: 0,
-    }
-
     var chaosImg = ['/images/Chaos_Symbols/Chaos_Symbol_2.png', '/images/Chaos_Symbols/Chaos_Symbol_3.png', '/images/Chaos_Symbols/Chaos_Symbol_4.png', '/images/Chaos_Symbols/Chaos_Symbol_5.png'];
     var chaosImg2 = [];
 
@@ -437,8 +429,6 @@
 
     }
     // start();
-
-
     // Uses the 3 arrays to move the player incrementally
     function movePlayers() {
         if (turn === 1) {
