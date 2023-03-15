@@ -545,7 +545,7 @@
                 case path2[8]:
                 case path2[9]:
                     drawCard();
-                    $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
+                    $('#gameLogDisplay').append('<li>' + 'Player 1 drew a card' + '</li>');
                     turn *= -1;
                     break;
                 default:
@@ -573,7 +573,7 @@
                 case path2[8]:
                 case path2[9]:
                     drawCard();
-                    $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
+                    $('#gameLogDisplay').append('<li>' + 'Player 2 drew a card' + '</li>');
                     turn *= -1;
                     break;
                 default:

@@ -429,13 +429,13 @@ td:not(.blank) {
   width:200px;
 }
 
-@keyframes fadeRoll {
+@keyframes fadeBtn {
     0% {background-color: #2c3e50; color: #ecf0f1;}
     100% {background-color: #ecf0f1; color: #2c3e50;}
 }
 
 .rollBtn:hover {
-    animation: 0.25s fadeRoll;
+    animation: 0.25s fadeBtn;
     background: #ecf0f1;
     color: #2c3e50;
 }
@@ -523,4 +523,12 @@ label { margin-right: 10px; }
     background-color: #2c3e50;
     color: #ecf0f1;
     border: 1px solid #ecf0f1;
+    font-size: 1.2rem;
+}
+
+.helpButton:hover, #startBtn:hover, #creditsBtn:hover {
+    animation: 0.5s fadeBtn;
+    background: #ecf0f1;
+    color: #2c3e50;
+    cursor: context-menu;
 }
