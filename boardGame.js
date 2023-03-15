@@ -707,5 +707,11 @@
 // Help Page
 
 function toggleHelp () {
-    $('.helpMenu').css('visibility', 'visible')
+    toggle = 1
+    if (toggle == 1) {
+        $('.helpMenu').css('visibility', 'visible')
+    } else {
+        $('.helpMenu').css('visibility', 'hidden')
+    } 
+    toggle *= -1;
 }
