@@ -30,7 +30,7 @@ body {
 
 #overlay {
     position: fixed; /* Sit on top of the page content */
-    display: none; /* Hidden by default */
+    /* display: none; Hidden by default */
     width: 100%; /* Full width (cover the whole page) */
     height: 100%; /* Full height (cover the whole page) */
     top: 0;
@@ -39,8 +39,8 @@ body {
     bottom: 0;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-    cursor: pointer; /* Add a pointer on hover */
-  }
+    /* cursor: pointer; Add a pointer on hover */
+}
 
 @keyframes fadeIn {
     0% {opacity: 0%;}
@@ -489,9 +489,26 @@ td:not(.blank) {
 label { margin-right: 10px; }
 
 /* Help Page */
-.helpPage {
-    background: white;
+
+.helpMenu {
+    display: flex;
+    justify-content: center;
     visibility: hidden;
+}
+
+.helpPage {
+    background: #3f4d7a;
+    width: 50%;
+    padding: 2%;
+    color: white;
+}
+
+hr {
+    margin: 1% 0 1% 0;
+}
+
+#helpPageSpace {
+    margin-top: 1%;
 }
 
 .helpButton {
@@ -502,6 +519,7 @@ label { margin-right: 10px; }
     padding: 0px;
     width: 10%;
     height: 10%;
+    z-index: 2;
     /* width: 50px;
     height: 50px; */
     z-index: 2;

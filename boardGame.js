@@ -703,3 +703,16 @@
             $(".cube__face--6").css("background", "#e74c3c");
         }
     }
+
+// Help Page
+
+$(".helpButton").click(function() {
+    var helpMenu = document.getElementsByClassName(".helpMenu");
+
+    if (helpMenu.style.visibility == "visible") {
+        helpMenu.style.visibility = "hidden";
+    }
+    else {
+        helpMenu.style.visibility = "visible";
+    }
+});
