@@ -432,69 +432,37 @@
     // Uses the 3 arrays to move the player incrementally
     function movePlayers() {
         if (turn === 1) {
-            switch (player1.playerPath) {
-                case board1:
-                    player1.currentTile = player1.previousValue + dieNumberLanded;
-                    $('#player1').appendTo(board1[player1.currentTile]);
-                    player1.previousValue = player1.currentTile;
-                    $('#gameLogDisplay').append('<li style=color:#34495e>' + '-- Player 1 moved ' + dieNumberLanded + ' space(s)' + '</li>')
-                    switchTile();
-                    break;
-                case path1:
-                    player1.currentTile = player1.previousValue + dieNumberLanded;
-                    $('#player1').appendTo(path1[player1.currentTile]);
-                    player1.previousValue = player1.currentTile;
-                    $('#gameLogDisplay').append('<li style=color:#34495e;>' + '-- Player 1 moved ' + dieNumberLanded + ' space(s)' + '</li>')
-                    Winner ();
-                    break;
-                case path2:
-                    player1.currentTile = player1.previousValue + dieNumberLanded;
-                    $('#player1').appendTo(path2[player1.currentTile]);
-                    player1.previousValue = player1.currentTile;
-                    $('#gameLogDisplay').append('<li style=color:#34495e;>' + '-- Player 1 moved ' + dieNumberLanded + ' space(s)' + '</li>')
-                    Winner ();
-                    break;
-            }
+            player1.currentTile = player1.previousValue + dieNumberLanded;
+            $('#player1').appendTo(player1.playerPath[player1.currentTile]);
+            player1.previousValue = player1.currentTile;
+            $('#gameLogDisplay').append('<li style=color:#34495e>' + '-- Player 1 moved ' + dieNumberLanded + ' space(s)' + '</li>')
+            switchTile();
+            Winner();
         } else {
-            switch (player2.playerPath) {
-                case board1:
-                    player2.currentTile = player2.previousValue + dieNumberLanded;
-                    $('#player2').appendTo(board1[player2.currentTile]);
-                    player2.previousValue = player2.currentTile;
-                    $('#gameLogDisplay').append('<li style=color:#6e0000;>' + '-- Player 2 moved ' + dieNumberLanded + ' space(s)' + '</li>')
-                    switchTile();
-                    break;
-                case path1:
-                    player2.currentTile = player2.previousValue + dieNumberLanded;
-                    $('#player2').appendTo(path1[player2.currentTile]);
-                    player2.previousValue = player2.currentTile;
-                    $('#gameLogDisplay').append('<li style=color:#6e0000;>' + '-- Player 2 moved ' + dieNumberLanded + ' space(s)' + '</li>')
-                    Winner ();
-                    break;
-                case path2:
-                    player2.currentTile = player2.previousValue + dieNumberLanded;
-                    $('#player2').appendTo(path2[player2.currentTile]);
-                    player2.previousValue = player2.currentTile;
-                    $('#gameLogDisplay').append('<li style=color:#6e0000;>' + '-- Player 2 moved ' + dieNumberLanded + ' space(s)' + '</li>')
-                    Winner ();
-                    break;
-
-            }
+            player2.currentTile = player2.previousValue + dieNumberLanded;
+            $('#player2').appendTo(player2.playerPath[player2.currentTile]);
+            player2.previousValue = player2.currentTile;
+            $('#gameLogDisplay').append('<li style=color:#6e0000;>' + '-- Player 2 moved ' + dieNumberLanded + ' space(s)' + '</li>')
+            switchTile();
+            Winner();
         }
         gameLog.scrollTop = gameLog.scrollHeight;
     }
 
     function moneyTile (){
+        randIn = Math.floor(Math.random() * 4);
+        console.log(randIn)
         if (turn == 1) {
-            player1.victoryPoints += dieNumberLanded;
-            $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 1 gained ' + dieNumberLanded + ' victory points' + '</li>')
+            player1.victoryPoints += randIn;
+            $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 1 gained ' + randIn + ' victory points' + '</li>')
         } else {
-            player2.victoryPoints += dieNumberLanded;
-            $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 2 gained ' + dieNumberLanded + ' victory points' + '</li>')
+            player2.victoryPoints += randIn;
+            $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 2 gained ' + randIn + ' victory points' + '</li>')
         }
         updateVC();
+        gameLog.scrollTop = gameLog.scrollHeight;
         turn *= -1;
-        return dieNumberLanded;
+        return randIn;
     }
 
     // Checks if a player reached the switch tile and executes the prompt
@@ -556,108 +524,60 @@
 
     function turnAction (){
         if (turn == 1){
-            if (player1.playerPath == board1) {
-                switch (board1[player1.currentTile]) {
-                    case board1[7]:
-                    case board1[13]:
-                        moneyTile();
-                        break;
-                    case board1[4]:
-                    case board1[10]:
-                        drawCard();
-                        $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
-                        turn *= -1;
-                        break;
-                    default:
-                        turn *= -1
-                }
-            } else if (player1.playerPath == path1) {
-                switch (path1[player1.currentTile]) {
-                    case path1[1]:
-                    case path1[8]:
-                        moneyTile();
-                        break;
-                    case path1[3]:
-                    case path1[10]:
-                    case path1[13]:
-                        drawCard();
-                        $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
-                        turn *= -1;
-                        break;
-                    default:
-                        turn *= -1;
-                }
-            } else if (player1.playerPath == path2) {
-                switch (path2[player1.currentTile]) {
-                    case path2[3]:
-                    case path2[5]:
-                    case path2[7]:
-                        moneyTile();
-                        break;
-                    case path2[2]:
-                    case path2[4]:
-                    case path2[6]:
-                    case path2[8]:
-                    case path2[9]:
-                        drawCard();
-                        $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
-                        turn *= -1;
-                        break;
-                    default:
-                        turn *= -1
-                }
+            switch (player1.playerPath[player1.currentTile]) {
+                case board1[7]:
+                case board1[13]:
+                case path1[1]:
+                case path1[8]:
+                case path2[3]:
+                case path2[5]:
+                case path2[7]:
+                    moneyTile();
+                    break;
+                case board1[4]:
+                case board1[10]:
+                case path1[3]:
+                case path1[10]:
+                case path1[13]:
+                case path2[2]:
+                case path2[4]:
+                case path2[6]:
+                case path2[8]:
+                case path2[9]:
+                    drawCard();
+                    $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
+                    turn *= -1;
+                    break;
+                default:
+                    turn *= -1
             }
         } else {
-            if (player2.playerPath == board1) {
-                switch (board1[player2.currentTile]) {
-                    case board1[7]:
-                    case board1[13]:
-                        moneyTile();
-                        break;
-                    case board1[4]:
-                    case board1[10]:
-                        drawCard();
-                        $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
-                        turn *= -1;
-                        break;
-                    default:
-                        turn *= -1
-                }
-            } else if (player2.playerPath == path1) {
-                switch (path1[player2.currentTile]) {
-                    case path1[1]:
-                    case path1[8]:
-                        moneyTile();
-                        break;
-                    case path1[3]:
-                    case path1[10]:
-                    case path1[13]:
-                        drawCard();
-                        $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
-                        turn *= -1;
-                        break;
-                    default:
-                        turn *= -1;
-                }
-            } else if (player2.playerPath == path2) {
-                switch (path2[player2.currentTile]) {
-                    case path2[3]:
-                    case path2[5]:
-                    case path2[7]:
-                        moneyTile();
-                        break;
-                    case path2[2]:
-                    case path2[4]:
-                    case path2[6]:
-                    case path2[8]:
-                    case path2[9]:
-                        drawCard();
-                        $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
-                        turn *= -1;
-                        break;
-                    default:
-                        turn *= -1
-                }
+            switch (player2.playerPath[player2.currentTile]) {
+                case board1[7]:
+                case board1[13]:
+                case path1[1]:
+                case path1[8]:
+                case path2[3]:
+                case path2[5]:
+                case path2[7]:
+                    moneyTile();
+                    break;
+                case board1[4]:
+                case board1[10]:
+                case path1[3]:
+                case path1[10]:
+                case path1[13]:
+                case path2[2]:
+                case path2[4]:
+                case path2[6]:
+                case path2[8]:
+                case path2[9]:
+                    drawCard();
+                    $('#gameLogDisplay').append('<li>' + 'Somethings supposed to happen here....' + '</li>');
+                    turn *= -1;
+                    break;
+                default:
+                    turn *= -1
             }
         }
 
