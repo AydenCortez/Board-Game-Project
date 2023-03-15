@@ -12,7 +12,10 @@
     <title>Board Game</title>
 </head>
 <body>
+    <div id="title"></div>
     <button class="helpButton">Help</button>
+    <input type="button" value="START" id="startBtn" onclick="start()">
+    <input type="button" value="Credits" id="creditsBtn">
 
     <div class="popupCont" id="popupCont">
         <div class="popup">
@@ -54,7 +57,7 @@
         <div class="chaosCell" id="Chaos2"></div>
         <div class="chaosCell" id="Chaos1"></div>
     </div>
-    <table id="gameBoard" style="border-collapse: collapse;">
+    <table id="gameBoard" style="display: none;">
         <tr>
             <td colspan="6" class="blank"></td>
             <td class="tile" id="A12" style="background-image: url(images/Tile2.png);"></td>
@@ -149,7 +152,7 @@
                     <div class="cube__face cube__face--6">3</div>
                 </div>
             </div>
-          <button class = "rollBtn">Roll the Dice</button>
+          <button class = "rollBtn">Roll the Die</button>
         </div>
         <div class="playerCards">
             <div class="player1Card">

@@ -55,14 +55,14 @@
 
     var cards = [];
 
-    cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', 'losePoints', null, "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points');
+    cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', 'givePoints', null, "Give Points", 'Chaos 1-2: 1 Point', 'Chaos 3-4: 2 Points', 'Chaos 5: 3 Points');
     cards[1] = new Card('Spacing', "The vast nothingness has intruded" , '/images/Cards/Card_Spaced.png', 'goBackSpaces', 'spacing', "Go Back Spaces", 'Chaos 1: 1 Space', 'Chaos 2-4: 2 Spaces', 'Chaos 5: 4 Spaces');
     cards[2] = new Card('Clumsy', "Someone didn't clean up!" , '/images/Cards/Card_Clumsy.png', 'goBackSpaces', 'slipped', "Go back/Lose Points", 'Chaos 1: 1 Space', 'Chaos 2-5: 2 Spaces, 1 Point');
     cards[3] = new Card('Asteroid', "You are doomed", '/images/Cards/Card_Asteroid.png', 'backToStart', null, "Go Back to Start");
-    cards[4] = new Card('Murdered', "Someone [UNALIVED] you! You were cloned.", '/images/Cards/Card_Murdered.png', 'losePoints', null, "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points')
+    cards[4] = new Card('Murdered', "Someone [UNALIVED] you! You were cloned.", '/images/Cards/Card_Murdered.png', 'losePoints', 'murdered', "Lose Points", 'Chaos 1-2: 3 Points', 'Chaos 3-4: 4 Points', 'Chaos 5: 5 Points')
     cards[5] = new Card('Portal', 'Portal 3 confirmed', '/images/Cards/Card_Portal.png',  'switchPlayers', null, "Switch Players")
     cards[6] = new Card('Black Hole', 'Oh no....', '/images/Cards/Card_Singularity.png', 'switchPoints', null, 'Switch Victory Points')
-    cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png', null, null, 'Lose Turn(s)')
+    cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png', 'losepoints', 'hazard', 'Lose Points', 'Chaos 1-2: 2 Points', 'Chaos 3-4: 3 Points', 'Chaos 5: 6 Points')
 
 
 
@@ -75,7 +75,7 @@
             showCard(cardPicked)
             switch(cardPicked.action){
                 case 'losePoints':
-                    losePoints(chaosValue);
+                    losePoints(chaosValue, cardPicked.Atype);
                     console.log('something worked')
                     break;
                 case 'goBackSpaces':
@@ -91,6 +91,8 @@
                     break;
                 case 'switchPoints':
                     switchPoints();
+                case 'givePoints':
+                    givePoints(chaosValue);
                 default:
                     break;
             }
@@ -142,36 +144,103 @@
     }
 
     console.log(cards.length)
-    function losePoints (chaos){
-        switch (chaos) {
-            case 1:
-            case 2:
-                if (turn == 1) {
-                    player1.victoryPoints -= 3;
-                } else {
-                    player2.victoryPoints -= 3;
-                }
-                return chaos;
-            case 3:
-            case 4:
-                if (turn == 1) {
-                    player1.victoryPoints -= 4;
-                } else {
-                    player2.victoryPoints -= 4;
-                }
-                return chaos;
-            case 5:
-                if (turn == 1) {
-                    player1.victoryPoints -= 5;
-                } else {
-                    player2.victoryPoints -= 5;
-                }
-                return chaos;
-            default:
-                break;
+    function losePoints (chaos, cardType){
+        if (cardType == 'murdered') {
+            switch (chaos) {
+                case 1:
+                case 2:
+                    if (turn == 1) {
+                        player1.victoryPoints -= 3;
+                    } else {
+                        player2.victoryPoints -= 3;
+                    }
+                    return chaos;
+                case 3:
+                case 4:
+                    if (turn == 1) {
+                        player1.victoryPoints -= 4;
+                    } else {
+                        player2.victoryPoints -= 4;
+                    }
+                    return chaos;
+                case 5:
+                    if (turn == 1) {
+                        player1.victoryPoints -= 5;
+                    } else {
+                        player2.victoryPoints -= 5;
+                    }
+                    return chaos;
+                default:
+                    break;
+            }
+        } else if (cardType == 'hazard') {
+            switch (chaos) {
+                case 1:
+                case 2:
+                    if (turn == 1) {
+                        player1.victoryPoints -= 2;
+                    } else {
+                        player2.victoryPoints -= 2;
+                    }
+                    return chaos;
+                case 3:
+                case 4:
+                    if (turn == 1) {
+                        player1.victoryPoints -= 3;
+                    } else {
+                        player2.victoryPoints -= 3;
+                    }
+                    return chaos;
+                case 5:
+                    if (turn == 1) {
+                        player1.victoryPoints -= 6;
+                    } else {
+                        player2.victoryPoints -= 6;
+                    }
+                    return chaos;
+                default:
+                    break;
+            }
         }
-        document.getElementById('player1VP').textContent = player1.victoryPoints;
-        document.getElementById('player2VP').textContent = player2.victoryPoints;
+
+        updateVC();
+    }
+
+    function givePoints (chaos){
+        if (turn == 1) {
+            switch (chaos) {
+                case 1:
+                case 2:
+                    player1.victoryPoints -= 1;
+                    player2.victoryPoints += 1;
+                case 3:
+                case 4:
+                    player1.victoryPoints -= 2;
+                    player2.victoryPoints += 2;
+                case 5:
+                    player1.victoryPoints -= 3;
+                    player2.victoryPoints -= 3;
+                default:
+                    break;
+            }
+        } else {
+            switch (chaos) {
+                case 1:
+                case 2:
+                    player2.victoryPoints -= 2;
+                    player1.victoryPoints += 2;
+                case 3:
+                case 4:
+                    player2.victoryPoints -= 3;
+                    player1.victoryPoints += 3
+                case 5:
+                    player2.victoryPoints -= 6;
+                    player1.victoryPoints -= 6;
+                default:
+                    break;
+            }
+        }
+        updateVC();
     }
 
     function goBackSpaces (chaos, cardType){
@@ -340,8 +409,9 @@
         };
         // return chaosMeter;
         randIn = Math.floor(Math.random() * chaosImg.length);
-        $(chaosMeter[chaosValue]).css('background', 'url(' + chaosImg[randIn] + ')');
-        chaosImg2.push(chaosImg[randIn]);
+        chaosPic = chaosImg.splice(randIn, 1)
+        $(chaosMeter[chaosValue]).css('background', 'url(' + chaosPic + ')');
+        chaosImg2.push(chaosPic);
     }
 
     // Starts the game and resets the values
@@ -356,37 +426,18 @@
         updateVC();
         chaos = chaosMeter[chaosValue];
         $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)')
-    }
-    start();
-
-
-    function testButton (){
-        function getTest (max) {
-            return Math.floor(Math.random() * max)
-        }
-        testNumber = Math.floor(getTest(3) + 1)
-        try {
-            movePlayers();
-        } catch (error) {
-            console.log(error)
-        }
-
-        turn *= -1
-        // if (turn == 1) {
-        //     console.log("player 1's turn")
-        // } else {
-        //     console.log("player 2's turn")
-        // }
-        chaosTimer += 1;
-        console.log('Timer', chaosTimer)
-        console.log('Chaos', chaosMeter[chaosValue])
-        try {
-            setChaos();
-        } catch (error) {
-            console.log(error)
-        }
+        $('.chaosMeter, .gameMenu, #gameBoard, .sign').css('animation', '2s fadeIn')
+        $('.chaosMeter, .gameMenu, .sign').css('display', 'flex')
+        $('#startBtn, #creditsBtn, #title').css('display', 'none')
+        $('#gameBoard').removeAttr('style')
+        $('.helpButton').css('top', '5%',)
+        $('.helpButton').css('left', '22%',)
+        $('.helpButton').css('width', '5%',)
+        $('.helpButton').css('height', '5%',)
 
     }
+    // start();
+
 
     // Uses the 3 arrays to move the player incrementally
     function movePlayers() {
