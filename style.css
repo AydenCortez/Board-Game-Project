@@ -491,6 +491,7 @@ label { margin-right: 10px; }
 /* Help Page */
 .helpPage {
     background: white;
+    visibility: hidden;
 }
 
 .helpButton {

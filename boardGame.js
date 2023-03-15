@@ -319,33 +319,8 @@
                     break;
             }
         }
-        switch (player1.playerPath) {
-            case board1:
-                $('#player1').appendTo(board1[player1.currentTile]);
-                break
-            case path1:
-                $('#player1').appendTo(path1[player1.currentTile]);
-                break;
-            case path2:
-                $('#player1').appendTo(path2[player1.currentTile]);
-                break;
-            default:
-                break;
-        }
-        switch (player2.playerPath) {
-            case board1:
-                $('#player2').appendTo(board1[player2.currentTile]);
-                break
-            case path1:
-                $('#player2').appendTo(path1[player2.currentTile]);
-                break;
-            case path2:
-                $('#player2').appendTo(path2[player2.currentTile]);
-                break;
-            default:
-                break;
-        }
-
+        $('#player1').appendTo(player1.playerPath[player1.currentTile]);
+        $('#player2').appendTo(player2.playerPath[player2.currentTile]);
     }
 
     function backToStart (){
@@ -485,6 +460,7 @@
         let popUp = document.getElementById('popupCont')
         popUp.style.display = 'flex';
         popUp.style.animation = '0.5s fadeIn'
+        $('.rollBtn').css('display', 'none')
     }
 
     // If a player chose path 1 on the popup
@@ -503,6 +479,7 @@
             $('#gameLogDisplay').append('<li>' + '!- Player 2 has chosen path 1' + '</li>')
             popUp.style.display = 'none';
         }
+        $('.rollBtn').css('display', 'block')
     }
 
     // If a player chose path 2 on the popup
@@ -521,6 +498,7 @@
             $('#gameLogDisplay').append('<li>' + '!- Player 2 has chosen path 2' + '</li>')
             popUp.style.display = 'none';
         }
+        $('.rollBtn').css('display', 'block')
     }
 
     function turnAction (){
@@ -724,4 +702,8 @@
             $(".cube__face--5").css("background", "#e74c3c");
             $(".cube__face--6").css("background", "#e74c3c");
         }
+    }
+
+    function I_HATE_VALVE (){
+        $('.helpMenu').css('visibility', 'visible')
     }
