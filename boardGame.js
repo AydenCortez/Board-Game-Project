@@ -714,3 +714,13 @@ function toggleHelp () {
     } 
     Helptoggle *= -1;
 }
+
+    // function toggleHelp() {
+    //     if ($('.helpMenu').is(':hidden')) {
+    //         console.log("Hid");
+    //         $('.helpMenu').css('visibility', 'hidden');
+    //     } else if ($('.helpMenu').is(':visible')){
+    //         console.log("Vis");
+    //         $('.helpMenu').css('visibility', 'visible');
+    //     } 
+    // }
