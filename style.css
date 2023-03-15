@@ -503,6 +503,7 @@ label { margin-right: 10px; }
     height: 10%;
     /* width: 50px;
     height: 50px; */
+    z-index: 2;
 }
 
 #startBtn {
@@ -527,7 +528,7 @@ label { margin-right: 10px; }
 }
 
 .helpButton:hover, #startBtn:hover, #creditsBtn:hover {
-    animation: 0.5s fadeBtn;
+    animation: 0.25s fadeBtn;
     background: #ecf0f1;
     color: #2c3e50;
     cursor: context-menu;

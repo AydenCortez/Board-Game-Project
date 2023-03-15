@@ -106,6 +106,7 @@
                     break;
             }
         }
+        gameLog.scrollTop = gameLog.scrollHeight;
         underFlow();
 
     }
@@ -487,7 +488,7 @@
     }
 
     // If a player chose path 1 on the popup
-    function pathA (){
+    function Path1 (){
         let popUp = document.getElementById('popupCont')
         if (turn == -1) {
             player1.playerPath = path1
@@ -505,7 +506,7 @@
     }
 
     // If a player chose path 2 on the popup
-    function pathB (){
+    function Path2 (){
         let popUp = document.getElementById('popupCont')
         if (turn == -1) {
             player1.playerPath = path2
@@ -545,7 +546,7 @@
                 case path2[8]:
                 case path2[9]:
                     drawCard();
-                    $('#gameLogDisplay').append('<li>' + 'Player 1 drew a card' + '</li>');
+                    $('#gameLogDisplay').append('<li>' + '+- Player 1 drew a card' + '</li>');
                     turn *= -1;
                     break;
                 default:
@@ -573,7 +574,7 @@
                 case path2[8]:
                 case path2[9]:
                     drawCard();
-                    $('#gameLogDisplay').append('<li>' + 'Player 2 drew a card' + '</li>');
+                    $('#gameLogDisplay').append('<li>' + '+- Player 2 drew a card' + '</li>');
                     turn *= -1;
                     break;
                 default:
