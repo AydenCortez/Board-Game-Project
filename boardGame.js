@@ -814,3 +814,16 @@
             $(".cube__face--6").css("background", "#e74c3c");
         }
     }
+
+// Help Page
+
+$(".helpButton").click(function() {
+    var helpMenu = document.getElementById(".helpMenu");
+
+    if (helpMenu.style.visibility == "hidden") {
+        helpMenu.style.visibility = "visible";
+    }
+    else {
+        helpMenu.style.visibility = "hidden";
+    }
+});
