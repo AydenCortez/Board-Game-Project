@@ -706,13 +706,6 @@
 
 // Help Page
 
-$(".helpButton").click(function() {
-    var helpMenu = document.getElementsByClassName(".helpMenu");
-
-    if (helpMenu.style.visibility == "visible") {
-        helpMenu.style.visibility = "hidden";
-    }
-    else {
-        helpMenu.style.visibility = "visible";
-    }
-});
+function toggleHelp () {
+    $('.helpMenu').css('visibility', 'visible')
+}
