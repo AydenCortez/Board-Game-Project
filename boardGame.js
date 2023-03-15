@@ -318,33 +318,8 @@
                     break;
             }
         }
-        switch (player1.playerPath) {
-            case board1:
-                $('#player1').appendTo(board1[player1.currentTile]);
-                break
-            case path1:
-                $('#player1').appendTo(path1[player1.currentTile]);
-                break;
-            case path2:
-                $('#player1').appendTo(path2[player1.currentTile]);
-                break;
-            default:
-                break;
-        }
-        switch (player2.playerPath) {
-            case board1:
-                $('#player2').appendTo(board1[player2.currentTile]);
-                break
-            case path1:
-                $('#player2').appendTo(path1[player2.currentTile]);
-                break;
-            case path2:
-                $('#player2').appendTo(path2[player2.currentTile]);
-                break;
-            default:
-                break;
-        }
-
+        $('#player1').appendTo(player1.playerPath[player1.currentTile]);
+        $('#player2').appendTo(player2.playerPath[player2.currentTile]);
     }
 
     function backToStart (){
@@ -484,10 +459,11 @@
         let popUp = document.getElementById('popupCont')
         popUp.style.display = 'flex';
         popUp.style.animation = '0.5s fadeIn'
+        $('.rollBtn').css('display', 'none')
     }
 
     // If a player chose path 1 on the popup
-    function pathA (){
+    function Path1 (){
         let popUp = document.getElementById('popupCont')
         if (turn == -1) {
             player1.playerPath = path1
@@ -502,10 +478,11 @@
             $('#gameLogDisplay').append('<li>' + '!- Player 2 has chosen path 1' + '</li>')
             popUp.style.display = 'none';
         }
+        $('.rollBtn').css('display', 'block')
     }
 
     // If a player chose path 2 on the popup
-    function pathB (){
+    function Path2 (){
         let popUp = document.getElementById('popupCont')
         if (turn == -1) {
             player1.playerPath = path2
@@ -520,6 +497,7 @@
             $('#gameLogDisplay').append('<li>' + '!- Player 2 has chosen path 2' + '</li>')
             popUp.style.display = 'none';
         }
+        $('.rollBtn').css('display', 'block')
     }
 
     function turnAction (){
@@ -545,7 +523,7 @@
                 case path2[8]:
                 case path2[9]:
                     drawCard();
-                    $('#gameLogDisplay').append('<li>' + 'Player 1 drew a card' + '</li>');
+                    $('#gameLogDisplay').append('<li>' + '+- Player 1 drew a card' + '</li>');
                     turn *= -1;
                     break;
                 default:
@@ -573,7 +551,7 @@
                 case path2[8]:
                 case path2[9]:
                     drawCard();
-                    $('#gameLogDisplay').append('<li>' + 'Player 2 drew a card' + '</li>');
+                    $('#gameLogDisplay').append('<li>' + '+- Player 2 drew a card' + '</li>');
                     turn *= -1;
                     break;
                 default:
@@ -724,16 +702,3 @@
             $(".cube__face--6").css("background", "#e74c3c");
         }
     }
-
-// Help Page
-
-$(".helpButton").click(function() {
-    var helpMenu = document.getElementById(".helpMenu");
-
-    if (helpMenu.style.visibility == "hidden") {
-        helpMenu.style.visibility = "visible";
-    }
-    else {
-        helpMenu.style.visibility = "hidden";
-    }
-});
