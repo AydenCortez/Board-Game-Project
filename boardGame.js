@@ -106,6 +106,7 @@
                     break;
             }
         }
+        gameLog.scrollTop = gameLog.scrollHeight;
         underFlow();
 
     }
