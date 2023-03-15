@@ -454,10 +454,10 @@
         console.log(randIn)
         if (turn == 1) {
             player1.victoryPoints += randIn;
-            $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 1 gained ' + randIn + ' victory points' + '</li>')
+            $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 1 gained ' + randIn + ' victory point(s)' + '</li>')
         } else {
             player2.victoryPoints += randIn;
-            $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 2 gained ' + randIn + ' victory points' + '</li>')
+            $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 2 gained ' + randIn + ' victory point(s)' + '</li>')
         }
         updateVC();
         gameLog.scrollTop = gameLog.scrollHeight;
