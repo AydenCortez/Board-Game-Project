@@ -705,13 +705,12 @@
     }
 
 // Help Page
-
+var Helptoggle = 1;
 function toggleHelp () {
-    toggle = 1
-    if (toggle == 1) {
+    if (Helptoggle == 1) {
         $('.helpMenu').css('visibility', 'visible')
-    } else {
+    } else if (Helptoggle == -1){
         $('.helpMenu').css('visibility', 'hidden')
     } 
-    toggle *= -1;
+    Helptoggle *= -1;
 }
