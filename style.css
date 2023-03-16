@@ -295,7 +295,7 @@ td:not(.blank) {
 }
 
 .split {
-    background-image: url("/images/switchSpace.png");
+    background-image: url("/images/Split_Tile.png");
     background-position: center;
     background-size: contain;
 }
