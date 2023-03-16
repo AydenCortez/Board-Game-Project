@@ -416,14 +416,14 @@
             player1.previousValue = player1.currentTile;
             $('#gameLogDisplay').append('<li style=color:#34495e>' + '-- Player 1 moved ' + dieNumberLanded + ' space(s)' + '</li>');
             switchTile();
-            Winner();
+            endTile();
         } else {
             player2.currentTile = player2.previousValue + dieNumberLanded;
             $('#player2').appendTo(player2.playerPath[player2.currentTile]);
             player2.previousValue = player2.currentTile;
             $('#gameLogDisplay').append('<li style=color:#6e0000;>' + '-- Player 2 moved ' + dieNumberLanded + ' space(s)' + '</li>');
             switchTile();
-            Winner();
+            endTile();
         }
         gameLog.scrollTop = gameLog.scrollHeight;
     }
@@ -447,6 +447,7 @@
 
     // Checks if a player reached the switch tile and executes the prompt
     function switchTile(){
+<<<<<<< Updated upstream
         if (player1.currentTile >= 14){
             $('#player1').appendTo('#14');
             popUp();
@@ -454,6 +455,15 @@
         if (player2.currentTile >= 14){
             $('#player2').appendTo('#14');
             popUp();
+=======
+        if (player1.playerPath == board1 && player1.currentTile >= 14){
+            $('#player1').appendTo('#14')
+            popUp()
+        }
+        if (player2.playerPath == board1 && player2.currentTile >= 14){
+            $('#player2').appendTo('#14')
+            popUp()
+>>>>>>> Stashed changes
 
         }
     }
@@ -582,8 +592,8 @@
 
     // Switches the positions of both players. (Used for the portals card)
     function switchPlayers (){
-        tempPos = player1.playerPath;
-        tempNum = player1.currentTile;
+        var tempPos = player1.playerPath;
+        var tempNum = player1.currentTile;
         player1.playerPath = player2.playerPath;
         player2Path = tempPos;
         player1.currentTile = player2.currentTile;
@@ -596,14 +606,19 @@
 
     // This will switch the points of both player's current balance of victory points. (Used for the black hole card)
     function switchPoints (){
-        tempNum = player1.victoryPoints;
+        var tempNum = player1.victoryPoints;
         player1.victoryPoints = player2.victoryPoints;
         player2.victoryPoints = tempNum;
+<<<<<<< Updated upstream
         updateVP();
+=======
+        console.log('player 1 points: ', player1.victoryPoints, 'player2 points: ', player2.victoryPoints)
+        updateVC();
+>>>>>>> Stashed changes
     }
 
     // Checks for winning player. Runs logic for winning the game, like displaying the winner popup
-    function Winner (){
+    function endTile (){
         let winPopUp = document.getElementById('winPopupCont');
         let winningPlayer = document.getElementById('winningPlayer');
         if (turn == 1) {
@@ -613,6 +628,7 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
                 player1.victoryPoints += 5;
+                winner();
             }
             if (player1.playerPath == path2 && player1.currentTile >= 11) {
                 winPopUp.style.display = 'flex';
@@ -620,6 +636,7 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
                 player1.victoryPoints += 5;
+                winner();
             }
         } else {
             if (player2.playerPath == path1 && player2.currentTile >= 15){
@@ -628,6 +645,7 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "2";
                 player2.victoryPoints += 5;
+                winner();
             }
             if (player2.playerPath == path2 && player2.currentTile >= 11){
                 winPopUp.style.display = 'flex';
@@ -635,9 +653,25 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "2";
                 player2.victoryPoints += 5;
+                winner();
             }
         }
+<<<<<<< Updated upstream
         updateVP();
+=======
+        updateVC();
+
+    }
+
+    function winner (){
+        if (player1.victoryPoints > player2.victoryPoints) {
+            $('#winner').textContent('Player 1 Wins!!!!!!')
+        } else if (player2.victoryPoints < player1.victoryPoints) {
+            $('#winner').textContent('Player 2 Wins!!!!!!')
+        } else {
+            $('#winner').textContent('Its a tie.')
+        }
+>>>>>>> Stashed changes
     }
 
     // The bot rolls teh dice and moves
