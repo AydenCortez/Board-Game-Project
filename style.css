@@ -76,7 +76,7 @@ body {
     text-align: center;
     left: 35%;
     top: 40%;
-    padding: 1%
+    padding: 1%;
 }
 
 .popup {
@@ -124,7 +124,6 @@ body {
     margin-bottom: 5%;
 }
 
-
 .dismissBtn {
     display: flex;
     text-align: center;
@@ -155,7 +154,6 @@ body {
     text-align: center;
     padding: 0% 3% 0% 3%;
 }
-
 
 .dropdown {
     display: block;
@@ -297,7 +295,7 @@ td:not(.blank) {
 }
 
 .split {
-    background-image: url("/images/switchSpace.png");
+    background-image: url("/images/Split_Tile.png");
     background-position: center;
     background-size: contain;
 }
@@ -389,27 +387,6 @@ td:not(.blank) {
     align-items: center;
     color: #6e0000;
 }
-
-/* .gameActions input{
-    width: 50%;
-    height: 15%;
-    background-color: white;
-    border: 1px solid black;
-} */
-
-/* .gameActions input:hover {
-    animation: 0.5s;
-} */
-
-/* .gameActions div {
-    width: 35px;
-    height: 35px;
-    border: none;
-    background-position: center;
-    background-size: 10%;    
-} */
-
-/* Roll Tetrahedron Die */
 
 /* styling for Scene */
 .scene {
