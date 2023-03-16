@@ -1,4 +1,4 @@
-    
+    // Variables
     var player1 = document.getElementById("player1");
     var player2 = document.getElementById("player2"); 
     var currentStep;
@@ -67,6 +67,7 @@
         this.chaos5 = chaos5;
     }
 
+    // All of the different cards
     var cards = [];
 
     cards[0] = new Card('Robbed', "You got robbed!" , '/images/Cards/Card_Robbed.png', 'givePoints', null, "Give Points", 'Chaos 1-2: 1 Point', 'Chaos 3-4: 2 Points', 'Chaos 5: 3 Points');
@@ -79,7 +80,7 @@
     cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png', 'losePoints', 'hazard', 'Lose Points', 'Chaos 1-2: 2 Points', 'Chaos 3-4: 3 Points', 'Chaos 5: 6 Points');
 
 
-
+    // The player draws a random chaos card. (This happens when the player lands on a chaos tile.)
     function drawCard (){
         if (cards.length > 0) {
             randIn = Math.floor(Math.random() * cards.length);
@@ -112,6 +113,7 @@
 
     }
 
+    // Shows a card the player draws from a chaos tile.
     function showCard(card){
         $('#cardName').text(card.title);
         $('#cardDesc').text(card.desc);
@@ -146,12 +148,12 @@
         $('.actionCard').css('animation', '0.5s fadeIn');
     }
 
-
-
-
+    // Hides the card that the player drew
     function hideCard() {
         $('.actionCard').css('display', 'none');
     }
+
+    // Deducts points from a player
     function losePoints (chaos, cardType){
         if (cardType == 'murdered') {
             switch (chaos) {
@@ -212,9 +214,10 @@
             }
         }
 
-        updateVC();
+        updateVP();
     }
-
+    
+    // Adds points to a player
     function givePoints (chaos){
         if (turn == 1) {
             switch (chaos) {
@@ -249,9 +252,10 @@
                     break;
             }
         }
-        updateVC();
+        updateVP();
     }
 
+    // Moves the player piece a set amount of spaces backwards
     function goBackSpaces (chaos, cardType){
         console.log('test')
         if (cardType == 'spacing') {
@@ -321,6 +325,7 @@
         $('#player2').appendTo(player2.playerPath[player2.currentTile]);
     }
 
+    // Moves the player piece to the start tile
     function backToStart (){
         if (turn == 1) {
             player1.currentTile = 1;
@@ -336,10 +341,7 @@
         }
     }
 
-
-
-
-
+    // Prevents the player from having negative amount of points/tiles. 
     function underFlow (){
         if (player1.victoryPoints < 0) {
             player1.victoryPoints = 0;
@@ -355,17 +357,20 @@
             player2.currentTile = 0;
             player2.previousValue = 0;
         }
-        updateVC();
+        updateVP();
     }
 
-    function updateVC (){
+    // Updates the player points
+    function updateVP (){
         document.getElementById('player1VP').textContent = player1.victoryPoints;
         document.getElementById('player2VP').textContent = player2.victoryPoints;
     }
 
+    // Images for the different chaos icons
     var chaosImg = ['/images/Chaos_Symbols/Chaos_Symbol_2.png', '/images/Chaos_Symbols/Chaos_Symbol_3.png', '/images/Chaos_Symbols/Chaos_Symbol_4.png', '/images/Chaos_Symbols/Chaos_Symbol_5.png'];
     var chaosImg2 = [];
 
+    // Updates the number of chaos and chaos icons
     function setChaos (){
         if (chaosTimer == 8 || chaosTimer == 16 || chaosTimer == 24 || chaosTimer == 32) {
             chaosValue += 1;
@@ -389,7 +394,7 @@
         $('#player1').appendTo(board1[player1.currentTile]);
         $('#player2').appendTo(board1[player1.currentTile]);
         // $(player1.victoryPoints).appendTo('#player1VP')
-        updateVC();
+        updateVP();
         chaos = chaosMeter[chaosValue];
         $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)');
         $('.chaosMeter, .gameMenu, #gameBoard, .sign').css('animation', '2s fadeIn');
@@ -423,6 +428,7 @@
         gameLog.scrollTop = gameLog.scrollHeight;
     }
 
+    // Logic for the money tile if a player lands on it
     function moneyTile (){
         randIn = Math.floor(Math.random() * 4);
         console.log(randIn)
@@ -433,7 +439,7 @@
             player2.victoryPoints += randIn;
             $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 2 gained ' + randIn + ' victory point(s)' + '</li>');
         }
-        updateVC();
+        updateVP();
         gameLog.scrollTop = gameLog.scrollHeight;
         turn *= -1;
         return randIn;
@@ -592,7 +598,7 @@
         tempNum = player1.victoryPoints;
         player1.victoryPoints = player2.victoryPoints;
         player2.victoryPoints = tempNum;
-        updateVC();
+        updateVP();
     }
 
     // Checks for winning player. Runs logic for winning the game, like displaying the winner popup
@@ -630,7 +636,7 @@
                 player2.victoryPoints += 5;
             }
         }
-        updateVC();
+        updateVP();
     }
 
     setInterval(function botMove(){
@@ -714,6 +720,7 @@
     // on click eventlistener for the button element
     rollBtn.addEventListener("click", rollDice);
 
+    // Changes the color of the dice based on whose turn it is.
     function changeColorDice() {
         if (turn == 1) {
             $(".cube__face--1").css("background", "#3498db");
@@ -743,13 +750,3 @@ function toggleHelp () {
     } 
     Helptoggle *= -1;
 }
-
-    // function toggleHelp() {
-    //     if ($('.helpMenu').is(':hidden')) {
-    //         console.log("Hid");
-    //         $('.helpMenu').css('visibility', 'hidden');
-    //     } else if ($('.helpMenu').is(':visible')){
-    //         console.log("Vis");
-    //         $('.helpMenu').css('visibility', 'visible');
-    //     } 
-    // }
