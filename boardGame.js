@@ -393,7 +393,7 @@
         player2.currentTile = 1;        
         $('#player1').appendTo(board1[player1.currentTile]);
         $('#player2').appendTo(board1[player1.currentTile]);
-        // $(player1.victoryPoints).appendTo('#player1VP')
+        // $(player1.victoryPoints).appendTo('#player1VP');
         updateVP();
         chaos = chaosMeter[chaosValue];
         $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)');
@@ -431,7 +431,7 @@
     // Logic for the money tile if a player lands on it
     function moneyTile (){
         randIn = Math.floor(Math.random() * 4);
-        console.log(randIn)
+        console.log(randIn);
         if (turn == 1) {
             player1.victoryPoints += randIn;
             $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 1 gained ' + randIn + ' victory point(s)' + '</li>');
@@ -448,12 +448,12 @@
     // Checks if a player reached the switch tile and executes the prompt
     function switchTile(){
         if (player1.currentTile >= 14){
-            $('#player1').appendTo('#14')
-            popUp()
+            $('#player1').appendTo('#14');
+            popUp();
         }
         if (player2.currentTile >= 14){
-            $('#player2').appendTo('#14')
-            popUp()
+            $('#player2').appendTo('#14');
+            popUp();
 
         }
     }
@@ -462,8 +462,8 @@
     function popUp (){
         let popUp = document.getElementById('popupCont');
         popUp.style.display = 'flex';
-        popUp.style.animation = '0.5s fadeIn'
-        $('.rollBtn').css('display', 'none')
+        popUp.style.animation = '0.5s fadeIn';
+        $('.rollBtn').css('display', 'none');
         popupActive = true;
         // if (turn == -1) {
         //     if (player2.isBot) {
@@ -493,7 +493,7 @@
             $('#gameLogDisplay').append('<li>' + '!- Player 2 has chosen path 1' + '</li>');
             popUp.style.display = 'none';
         }
-        $('.rollBtn').css('display', 'block')
+        $('.rollBtn').css('display', 'block');
         popupActive = false;
     }
 
@@ -513,8 +513,8 @@
             $('#gameLogDisplay').append('<li>' + '!- Player 2 has chosen path 2' + '</li>');
             popUp.style.display = 'none';
         }
-        $('.rollBtn').css('display', 'block')
-        popupActive = false;
+        $('.rollBtn').css('display', 'block');
+        popupActive = false;;
     }
 
     // Handles special tiles that players land on. E.g. Landing on a money tile runs moneyTile() function.
@@ -589,8 +589,8 @@
         player2.currentTile = tempNum;
         player1.previousValue = player1.currentTile;
         player2.previousValue = player2.currentTile;
-        $('#player1').appendTo(player1.playerPath[player1.currentTile])
-        $('#player2').appendTo(player2.playerPath[player2.currentTile])
+        $('#player1').appendTo(player1.playerPath[player1.currentTile]);
+        $('#player2').appendTo(player2.playerPath[player2.currentTile]);
     }
 
     // This will switch the points of both player's current balance of victory points. (Used for the black hole card)
@@ -604,7 +604,7 @@
     // Checks for winning player. Runs logic for winning the game, like displaying the winner popup
     function Winner (){
         let winPopUp = document.getElementById('winPopupCont');
-        let winningPlayer = document.getElementById('winningPlayer')
+        let winningPlayer = document.getElementById('winningPlayer');
         if (turn == 1) {
             if (player1.playerPath == path1 && player1.currentTile >= 15) {
                 winPopUp.style.display = 'flex';
@@ -647,7 +647,7 @@
                 }
             }            
         }
-    }, 1000)
+    }, 1000);
 
     // Die
     //select the classes we require
@@ -673,8 +673,8 @@
       //generate a class with the random number between 1 - 6 called showClass
       var showClass = 'show-' + randNum;
     // if there is a class already selected remove it
-      if ( currentClass ) {
-        cube.classList.remove( currentClass );
+      if (currentClass) {
+        cube.classList.remove(currentClass);
       }
     // add the new showclass with the generated number
       cube.classList.add(showClass);
@@ -709,9 +709,9 @@
         setChaos();
         turnAction(); 
         if (turn == -1) {
-            console.log('Its player 2s turn')
+            console.log('Its player 2s turn');
         } else {
-            console.log('Its player 1s turn')
+            console.log('Its player 1s turn');
         }
         }, 1000);
     }
@@ -744,9 +744,9 @@
 var Helptoggle = 1;
 function toggleHelp () {
     if (Helptoggle == 1) {
-        $('.helpMenu').css('visibility', 'visible')
+        $('.helpMenu').css('visibility', 'visible');
     } else if (Helptoggle == -1){
-        $('.helpMenu').css('visibility', 'hidden')
+        $('.helpMenu').css('visibility', 'hidden');
     } 
     Helptoggle *= -1;
 }
