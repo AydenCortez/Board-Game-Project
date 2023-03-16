@@ -450,7 +450,6 @@
             popUp()
         }
     }
-
     // Popup function that lets player choose a path
     var popupActive = false;
     function popUp (){
