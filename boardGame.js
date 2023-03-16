@@ -399,7 +399,7 @@
         $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)');
         $('.chaosMeter, .gameMenu, #gameBoard, .sign').css('animation', '2s fadeIn');
         $('.chaosMeter, .gameMenu, .sign').css('display', 'flex');
-        $('#startBtn, #creditsBtn, #title').css('display', 'none');
+        $('#startBtn, #creditsBtn, #title, .credits').css('display', 'none');
         $('#gameBoard').removeAttr('style');
         $('.helpButton').css('top', '5%',);
         $('.helpButton').css('left', '22%',);
