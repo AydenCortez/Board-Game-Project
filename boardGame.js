@@ -583,16 +583,17 @@
     // Switches the positions of both players. (Used for the portals card)
     function switchPlayers (){
         var player1Pos = player1.playerPath[player1.currentTile];
-        var player2Pos = player2.playerPath[player2.playerPath];
+        var player2Pos = player2.playerPath[player2.currentTile];
         console.log('before', player1Pos, player2Pos)
         var tempPos = player1Pos; 
         player1Pos = player2Pos;
         player2Pos = tempPos;
-        console.log()
-        player1.previousValue = player1.currentTile;
-        player2.previousValue = player2.currentTile;
-        $('#player1').appendTo(player1.playerPath[player1.currentTile]);
-        $('#player2').appendTo(player2.playerPath[player2.currentTile]);
+        console.log('after', player1Pos, player2Pos)
+        player1.previousValue = player1Pos.id;
+        player2.previousValue = player2Pos.id;
+        console
+        $('#player1').appendTo(player1Pos);
+        $('#player2').appendTo(player2Pos);
     }
 
     // This will switch the points of both player's current balance of victory points. (Used for the black hole card)
