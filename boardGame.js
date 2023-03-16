@@ -457,6 +457,7 @@
 
         }
     }
+
     // Popup function that lets player choose a path
     var popupActive = false;
     function popUp (){
@@ -639,6 +640,7 @@
         updateVP();
     }
 
+    // The bot rolls teh dice and moves
     setInterval(function botMove(){
         if (turn == -1) {
             if (player2.isBot) {
