@@ -50,6 +50,7 @@
             currentTile: 0,
             playerPath: board1,
             victoryPoints: 0,
+            isBot: undefined,
         }
 
     function Card(title, desc, image, action, Atype, hover, chaos1, chaos2, chaos3, chaos4, chaos5) {
@@ -383,7 +384,7 @@
     }
 
     // Starts the game and resets the values
-    function start(){
+    function start(isBot){
         turn = 1;
         isWinner = null;
         player1.currentTile = 1;
@@ -402,7 +403,8 @@
         $('.helpButton').css('left', '22%',)
         $('.helpButton').css('width', '5%',)
         $('.helpButton').css('height', '5%',)
-
+        player2.isBot = isBot;
+        console.log(player2.isBot)
     }
     // start();
     // Uses the 3 arrays to move the player incrementally
@@ -618,6 +620,14 @@
         }
         updateVC();
     }
+
+    setInterval(function botMove(){
+        if (turn == -1) {
+            if (player2.isBot) {
+                rollDice();
+            }            
+        }
+    }, 1000)
 
     // Die
     //select the classes we require
