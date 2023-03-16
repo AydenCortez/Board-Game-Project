@@ -216,7 +216,7 @@
 
         updateVP();
     }
-    
+
     // Adds points to a player
     function givePoints (chaos){
         if (turn == 1) {
@@ -447,15 +447,6 @@
 
     // Checks if a player reached the switch tile and executes the prompt
     function switchTile(){
-<<<<<<< Updated upstream
-        if (player1.currentTile >= 14){
-            $('#player1').appendTo('#14');
-            popUp();
-        }
-        if (player2.currentTile >= 14){
-            $('#player2').appendTo('#14');
-            popUp();
-=======
         if (player1.playerPath == board1 && player1.currentTile >= 14){
             $('#player1').appendTo('#14')
             popUp()
@@ -463,7 +454,6 @@
         if (player2.playerPath == board1 && player2.currentTile >= 14){
             $('#player2').appendTo('#14')
             popUp()
->>>>>>> Stashed changes
 
         }
     }
@@ -592,12 +582,13 @@
 
     // Switches the positions of both players. (Used for the portals card)
     function switchPlayers (){
-        var tempPos = player1.playerPath;
-        var tempNum = player1.currentTile;
-        player1.playerPath = player2.playerPath;
-        player2Path = tempPos;
-        player1.currentTile = player2.currentTile;
-        player2.currentTile = tempNum;
+        var player1Pos = player1.playerPath[player1.currentTile];
+        var player2Pos = player2.playerPath[player2.playerPath];
+        console.log('before', player1Pos, player2Pos)
+        var tempPos = player1Pos; 
+        player1Pos = player2Pos;
+        player2Pos = tempPos;
+        console.log()
         player1.previousValue = player1.currentTile;
         player2.previousValue = player2.currentTile;
         $('#player1').appendTo(player1.playerPath[player1.currentTile]);
@@ -609,12 +600,7 @@
         var tempNum = player1.victoryPoints;
         player1.victoryPoints = player2.victoryPoints;
         player2.victoryPoints = tempNum;
-<<<<<<< Updated upstream
         updateVP();
-=======
-        console.log('player 1 points: ', player1.victoryPoints, 'player2 points: ', player2.victoryPoints)
-        updateVC();
->>>>>>> Stashed changes
     }
 
     // Checks for winning player. Runs logic for winning the game, like displaying the winner popup
@@ -656,10 +642,8 @@
                 winner();
             }
         }
-<<<<<<< Updated upstream
         updateVP();
-=======
-        updateVC();
+
 
     }
 
@@ -671,7 +655,6 @@
         } else {
             $('#winner').textContent('Its a tie.')
         }
->>>>>>> Stashed changes
     }
 
     // The bot rolls teh dice and moves
