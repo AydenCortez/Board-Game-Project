@@ -2,7 +2,6 @@
     margin: 0px;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
-
 }
 
 html {
@@ -63,6 +62,11 @@ body {
     width: 1000px;
     height: 250px;
     background: url(/images/TitleOutline.png)
+}
+
+.credits {
+    color: red;
+    margin-bottom: 1%;
 }
 
 .popupCont {
