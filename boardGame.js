@@ -1,7 +1,6 @@
     
     var player1 = document.getElementById("player1");
     var player2 = document.getElementById("player2"); 
-    var previousStep = 1;
     var currentStep;
     let boardTiles = document.querySelectorAll('tile');
     const gameLog = document.getElementById('gameLogDisplay');
@@ -10,6 +9,7 @@
     const startTile = document.getElementById("1");
     turn = 1
     var testNumber;
+
     
     // Die Rolling Variables
     var dieNumberLanded = 3;
@@ -144,7 +144,6 @@
         }
         $('.actionCard').css('display', 'flex');
         $('.actionCard').css('animation', '0.5s fadeIn');
-
     }
 
 
@@ -256,7 +255,6 @@
     function goBackSpaces (chaos, cardType){
         console.log('test')
         if (cardType == 'spacing') {
-            console.log('test for spacing')
             switch (chaos) {
                 case 1:
                     if (turn == 1) {
@@ -291,7 +289,6 @@
                     break;
             }
         } else if (cardType == 'slipped') {
-            console.log('test for slipped')
             switch (chaos) {
                 case 1:
                     if (turn == 1) {
@@ -445,23 +442,33 @@
     // Checks if a player reached the switch tile and executes the prompt
     function switchTile(){
         if (player1.currentTile >= 14){
-            $('#player1').appendTo('#14');
-            popUp();
-            console.log('test 1');
+            $('#player1').appendTo('#14')
+            popUp()
         }
         if (player2.currentTile >= 14){
-            $('#player2').appendTo('#14');
-            popUp();
-            console.log('test 2');
+            $('#player2').appendTo('#14')
+            popUp()
+
         }
     }
-
     // Popup function that lets player choose a path
+    var popupActive = false;
     function popUp (){
         let popUp = document.getElementById('popupCont');
         popUp.style.display = 'flex';
-        popUp.style.animation = '0.5s fadeIn';
-        $('.rollBtn').css('display', 'none');
+        popUp.style.animation = '0.5s fadeIn'
+        $('.rollBtn').css('display', 'none')
+        popupActive = true;
+        // if (turn == -1) {
+        //     if (player2.isBot) {
+        //         randIn = Math.floor(Math.random() * 2)
+        //         if (randIn == 1) {
+        //             Path1();
+        //         } else {
+        //             Path2();
+        //         }
+        //     }
+        // }
     }
 
     // If a player chose path 1 on the popup
@@ -480,7 +487,8 @@
             $('#gameLogDisplay').append('<li>' + '!- Player 2 has chosen path 1' + '</li>');
             popUp.style.display = 'none';
         }
-        $('.rollBtn').css('display', 'block');
+        $('.rollBtn').css('display', 'block')
+        popupActive = false;
     }
 
     // If a player chose path 2 on the popup
@@ -499,7 +507,8 @@
             $('#gameLogDisplay').append('<li>' + '!- Player 2 has chosen path 2' + '</li>');
             popUp.style.display = 'none';
         }
-        $('.rollBtn').css('display', 'block');
+        $('.rollBtn').css('display', 'block')
+        popupActive = false;
     }
 
     // Handles special tiles that players land on. E.g. Landing on a money tile runs moneyTile() function.
@@ -530,7 +539,7 @@
                     turn *= -1;
                     break;
                 default:
-                    turn *= -1
+                    turn *= -1;
             }
         } else {
             switch (player2.playerPath[player2.currentTile]) {
@@ -627,7 +636,9 @@
     setInterval(function botMove(){
         if (turn == -1) {
             if (player2.isBot) {
-                rollDice();
+                if (popupActive == false) {
+                    rollDice();
+                }
             }            
         }
     }, 1000)
@@ -687,10 +698,15 @@
             default:
                 return 0;
         }
-        movePlayers();
+        movePlayers();  
         chaosTimer += 1;
         setChaos();
-        turnAction();
+        turnAction(); 
+        if (turn == -1) {
+            console.log('Its player 2s turn')
+        } else {
+            console.log('Its player 1s turn')
+        }
         }, 1000);
     }
     // set initial side

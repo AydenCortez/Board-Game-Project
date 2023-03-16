@@ -11,167 +11,166 @@
     <script src="jquery-3.6.3.js"></script>
     <title>Board Game</title>
 </head>
-<body>
-    <div id="title"></div>
-    <button class="helpButton" onclick="toggleHelp()">Help</button>
-    <input type="button" value="Player vs Player" id="startBtn" onclick="start(false);">
-    <input type="button" value="Player vs AI" id="creditsBtn" onclick="start(true);">
+    <body>
+        <div id="title"></div>
+        <button class="helpButton" onclick="toggleHelp()">Help</button>
+        <input type="button" value="Player vs Player" id="startBtn" onclick="start(false);">
+        <input type="button" value="Player vs AI" id="creditsBtn" onclick="start(true);">
 
-    <div class="popupCont" id="popupCont">
-        <div class="popup">
-            <h2>Pick a Path</h2>
-            <input type="button" id="pathA" value="Path 1" onclick="Path1()">
-            <input type="button" id="pathB" value="Path 2" onclick="Path2()">
-        </div>
-    </div>
-    <div class="popupCont" id="winPopupCont">
-        <div class="winPopup">
-            <h2>Player <span id="winningPlayer"></span> has made it to the end</h2>
-            <p style="color: green"> +5 Victory Points</p>
-        </div>
-    </div>
-    <div class="actionCard" draggable="true">
-        <input type="button" class="dismissBtn" onclick="hideCard()" value="x">
-        <h3 id="cardName">TEST CARD</h3>
-        <img id="cardImg" src="images/placeholderCard.png" alt="card image">
-        <p class="cardDesc" id="cardDesc">Lorem ipsum, dolor sit amet consectetur adipisicinisquam?</p>
-        <div class="dropdown">
-            <span id="cardHover">Hover</span>
-            <div class="dropdownCont">
-                <ul>
-                    <li><span id="chaosCon1"></span></li>
-                    <li><span id="chaosCon2"></span></li>
-                    <li><span id="chaosCon3"></span></li>
-                    <li><span id="chaosCon4"></span></li>
-                    <li><span id="chaosCon5"></span></li>
-                </ul>
+        <div class="popupCont" id="popupCont">
+            <div class="popup">
+                <h2>Pick a Path</h2>
+                <input type="button" id="pathA" value="Path 1" onclick="Path1()">
+                <input type="button" id="pathB" value="Path 2" onclick="Path2()">
             </div>
         </div>
-
-    </div>
-    <div class="chaosMeter">
-        <h2>Chaos</h2>
-        <div class="chaosCell" id="Chaos5"></div>
-        <div class="chaosCell" id="Chaos4"></div>
-        <div class="chaosCell" id="Chaos3"></div>
-        <div class="chaosCell" id="Chaos2"></div>
-        <div class="chaosCell" id="Chaos1"></div>
-    </div>
-    <table id="gameBoard" style="display: none;">
-        <tr>
-            <td colspan="6" class="blank"></td>
-            <td class="tile" id="A12" style="background-image: url(images/Tile2.png);"></td>
-            <td class="tile" id="A13" style="background-image: url(images/dangerTileDark.png);"></td>
-            <td class="tile" id="A14" style="background-image: url(images/Tile2.png);"></td>
-            <td class="tile" id="end" style="background-image: url(images/BlueAirlock.png);"></td>
-        </tr><tr>
-            <td colspan="1" class="blank"></td>
-            <td class="tile" id="A6" style="background-image: url(images/Tile2.png);"></td>
-            <td class="tile" id="A7" style="background-image: url(images/Tile1.png);" ></td>
-            <td class="tile" id="A8" style="background-image: url(images/moneyTileLight.png);"></td>
-            <td class="tile" id="A9" style="background-image: url(images/Tile1.png);" ></td>
-            <td class="tile" id="A10" style="background-image: url(images/dangerTileLight.png);"></td>
-            <td class="tile" id="A11" style="background-image: url(images/Tile1.png);" ></td>
-            <td colspan="2" class="blank"></td>
-            <td class="tile" id="B10" style="background-image: url(images/Tile2.png);"></td>
-        </tr>
-        <tr>
-            <td colspan="1" class="blank"></td>
-            <td class="tile" id="A5" style="background-image: url(images/Tile1.png);" ></td>
-            <td colspan="7" class="blank"></td>
-            <td class="tile" id="B9" style="background-image: url(images/dangerTileDark.png);" ></td>
-        </tr>
-        <tr>
-            <td colspan="1" class="blank"></td>
-            <td class="tile" id="A4" style="background-image: url(images/Tile2.png);"></td>
-            <td colspan="5" class="blank"><div class="sign" id="path1Sign"></div></td>
-            <td class="tile" id="B6" style="background-image: url(images/dangerTileLight.png);"></td>
-            <td class="tile" id="B7" style="background-image: url(images/moneyTileDark.png);" ></td>
-            <td class="tile" id="B8" style="background-image: url(images/dangerTileLight.png);"></td>
-        </tr>
-        <tr>
-            <td colspan="1" class="blank"></td>
-            <td class="tile" id="A3" style="background-image: url(images/dangerTileDark.png);"></td>
-            <td class="tile" id="A2" style="background-image: url(images/Tile2.png);"></td>
-            <td class="tile" id="A1" style="background-image: url(images/moneyTileDark.png);"></td>
-            <td colspan="3" class="blank"></td>
-            <td class="tile" id="B5" style="background-image: url(images/moneyTileDark.png);"></td>
-            <td colspan="2" class="blank"></td>
-        </tr>
-        <tr>
-            <td colspan="3" class="blank"></td>
-            <td class="tile split" id="14"></td>
-            <td class="tile" id="B1" style="background-image: url(images/Tile1.png);"></td>
-            <td class="tile" id="B2" style="background-image: url(images/dangerTileLight.png);"></td>
-            <td class="tile" id="B3" style="background-image: url(images/moneyTileDark.png);"></td>
-            <td class="tile" id="B4" style="background-image: url(images/dangerTileLight.png);"></td>
-            <td colspan="2" class="blank"></td>
-        </tr>
-        <tr>
-            <td colspan="1" class="blank"></td>
-            <td class="tile" id="11" style="background-image: url(images/Tile2.png);"></td>
-            <td class="tile" id="12" style="background-image: url(images/Tile1.png);"></td>
-            <td class="tile" id="13" style="background-image: url(images/moneyTileLight.png);"></td>
-            <td colspan="6" class="blank"><div class="sign" id="path2Sign">Path 2</div></td>
-        </tr>
-        <tr>
-            <td colspan="1" class="blank"></td>
-            <td class="tile" id="10" style="background-image: url(images/dangerTileDark.png);"></td>
-            <td colspan="8" class="blank"></td>
-        </tr>
-        <tr>
-            <td colspan="1" class="blank"></td>
-            <td class="tile" id="9" style="background-image: url(images/Tile2.png);"></td>
-            <td class="tile" id="8" style="background-image: url(images/Tile1.png);"></td>
-            <td class="tile" id="7" style="background-image: url(images/moneyTileLight.png);"></td>
-            <td class="tile" id="6" style="background-image: url(images/Tile1.png);"></td>
-            <td class="tile" id="5" style="background-image: url(images/Tile2.png);"></td>
-            <td class="tile" id="4" style="background-image: url(images/dangerTileDark.png);"></td>
-            <td class="tile" id="3" style="background-image: url(images/Tile2.png);"></td>
-            <td class="tile" id="2" style="background-image: url(images/Tile1.png);"></td>
-            <td class="tile start" id="1" style="background-image: url(images/GreyAirlock.png);">
-                <div id="player1"></div>
-                <div id="player2"></div>               
-            </td>
-        </tr>
-        <tr>
-            <td colspan="10" class="blank"></td>
-        </tr>
-        <div class="sign" id="path1Sign">Path 1</div>
-        <div class="sign" id="path2Sign">Path 2</div>
-    </table>
-    <div class="gameMenu">
-        <div class="gameActions">
-            <div class = "scene">
-                <div class="cube">
-                    <div class="cube__face cube__face--1">1</div>   
-                    <div class="cube__face cube__face--2">1</div>
-                    <div class="cube__face cube__face--3">2</div>
-                    <div class="cube__face cube__face--4">2</div>
-                    <div class="cube__face cube__face--5">3</div>
-                    <div class="cube__face cube__face--6">3</div>
+        <div class="popupCont" id="winPopupCont">
+            <div class="winPopup">
+                <h2>Player <span id="winningPlayer"></span> has made it to the end</h2>
+                <p style="color: green"> +5 Victory Points</p>
+                <h1 id="winner"></h1>
+            </div>
+        </div>
+        <div class="actionCard" draggable="true">
+            <input type="button" class="dismissBtn" onclick="hideCard()" value="x">
+            <h3 id="cardName">TEST CARD</h3>
+            <img id="cardImg" src="images/placeholderCard.png" alt="card image">
+            <p class="cardDesc" id="cardDesc">Lorem ipsum, dolor sit amet consectetur adipisicinisquam?</p>
+            <div class="dropdown">
+                <span id="cardHover">Hover</span>
+                <div class="dropdownCont">
+                    <ul>
+                        <li><span id="chaosCon1"></span></li>
+                        <li><span id="chaosCon2"></span></li>
+                        <li><span id="chaosCon3"></span></li>
+                        <li><span id="chaosCon4"></span></li>
+                        <li><span id="chaosCon5"></span></li>
+                    </ul>
                 </div>
             </div>
-          <button class = "rollBtn">Roll the Die</button>
         </div>
-        <div class="playerCards">
-            <div class="player1Card">
-                <img src="images/Player1.png" alt="">
-                <p style="font-weight: bolder;">Player1</p>
-                <p>Points: <span id="player1VP"></span></p>
+        <div class="chaosMeter">
+            <h2>Chaos</h2>
+            <div class="chaosCell" id="Chaos5"></div>
+            <div class="chaosCell" id="Chaos4"></div>
+            <div class="chaosCell" id="Chaos3"></div>
+            <div class="chaosCell" id="Chaos2"></div>
+            <div class="chaosCell" id="Chaos1"></div>
+        </div>
+        <table id="gameBoard" style="display: none;">
+            <tr>
+                <td colspan="6" class="blank"></td>
+                <td class="tile" id="A12" style="background-image: url(images/Tile2.png);"></td>
+                <td class="tile" id="A13" style="background-image: url(images/dangerTileDark.png);"></td>
+                <td class="tile" id="A14" style="background-image: url(images/Tile2.png);"></td>
+                <td class="tile" id="end" style="background-image: url(images/BlueAirlock.png);"></td>
+            </tr><tr>
+                <td colspan="1" class="blank"></td>
+                <td class="tile" id="A6" style="background-image: url(images/Tile2.png);"></td>
+                <td class="tile" id="A7" style="background-image: url(images/Tile1.png);" ></td>
+                <td class="tile" id="A8" style="background-image: url(images/moneyTileLight.png);"></td>
+                <td class="tile" id="A9" style="background-image: url(images/Tile1.png);" ></td>
+                <td class="tile" id="A10" style="background-image: url(images/dangerTileLight.png);"></td>
+                <td class="tile" id="A11" style="background-image: url(images/Tile1.png);" ></td>
+                <td colspan="2" class="blank"></td>
+                <td class="tile" id="B10" style="background-image: url(images/Tile2.png);"></td>
+            </tr>
+            <tr>
+                <td colspan="1" class="blank"></td>
+                <td class="tile" id="A5" style="background-image: url(images/Tile1.png);" ></td>
+                <td colspan="7" class="blank"></td>
+                <td class="tile" id="B9" style="background-image: url(images/dangerTileDark.png);" ></td>
+            </tr>
+            <tr>
+                <td colspan="1" class="blank"></td>
+                <td class="tile" id="A4" style="background-image: url(images/Tile2.png);"></td>
+                <td colspan="5" class="blank"><div class="sign" id="path1Sign"></div></td>
+                <td class="tile" id="B6" style="background-image: url(images/dangerTileLight.png);"></td>
+                <td class="tile" id="B7" style="background-image: url(images/moneyTileDark.png);" ></td>
+                <td class="tile" id="B8" style="background-image: url(images/dangerTileLight.png);"></td>
+            </tr>
+            <tr>
+                <td colspan="1" class="blank"></td>
+                <td class="tile" id="A3" style="background-image: url(images/dangerTileDark.png);"></td>
+                <td class="tile" id="A2" style="background-image: url(images/Tile2.png);"></td>
+                <td class="tile" id="A1" style="background-image: url(images/moneyTileDark.png);"></td>
+                <td colspan="3" class="blank"></td>
+                <td class="tile" id="B5" style="background-image: url(images/moneyTileDark.png);"></td>
+                <td colspan="2" class="blank"></td>
+            </tr>
+            <tr>
+                <td colspan="3" class="blank"></td>
+                <td class="tile split" id="14"></td>
+                <td class="tile" id="B1" style="background-image: url(images/Tile1.png);"></td>
+                <td class="tile" id="B2" style="background-image: url(images/dangerTileLight.png);"></td>
+                <td class="tile" id="B3" style="background-image: url(images/moneyTileDark.png);"></td>
+                <td class="tile" id="B4" style="background-image: url(images/dangerTileLight.png);"></td>
+                <td colspan="2" class="blank"></td>
+            </tr>
+            <tr>
+                <td colspan="1" class="blank"></td>
+                <td class="tile" id="11" style="background-image: url(images/Tile2.png);"></td>
+                <td class="tile" id="12" style="background-image: url(images/Tile1.png);"></td>
+                <td class="tile" id="13" style="background-image: url(images/moneyTileLight.png);"></td>
+                <td colspan="6" class="blank"><div class="sign" id="path2Sign">Path 2</div></td>
+            </tr>
+            <tr>
+                <td colspan="1" class="blank"></td>
+                <td class="tile" id="10" style="background-image: url(images/dangerTileDark.png);"></td>
+                <td colspan="8" class="blank"></td>
+            </tr>
+            <tr>
+                <td colspan="1" class="blank"></td>
+                <td class="tile" id="9" style="background-image: url(images/Tile2.png);"></td>
+                <td class="tile" id="8" style="background-image: url(images/Tile1.png);"></td>
+                <td class="tile" id="7" style="background-image: url(images/moneyTileLight.png);"></td>
+                <td class="tile" id="6" style="background-image: url(images/Tile1.png);"></td>
+                <td class="tile" id="5" style="background-image: url(images/Tile2.png);"></td>
+                <td class="tile" id="4" style="background-image: url(images/dangerTileDark.png);"></td>
+                <td class="tile" id="3" style="background-image: url(images/Tile2.png);"></td>
+                <td class="tile" id="2" style="background-image: url(images/Tile1.png);"></td>
+                <td class="tile start" id="1" style="background-image: url(images/GreyAirlock.png);">
+                    <div id="player1"></div>
+                    <div id="player2"></div>               
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10" class="blank"></td>
+            </tr>
+            <div class="sign" id="path1Sign">Path 1</div>
+            <div class="sign" id="path2Sign">Path 2</div>
+        </table>
+        <div class="gameMenu">
+            <div class="gameActions">
+                <div class = "scene">
+                    <div class="cube">
+                        <div class="cube__face cube__face--1">1</div>   
+                        <div class="cube__face cube__face--2">1</div>
+                        <div class="cube__face cube__face--3">2</div>
+                        <div class="cube__face cube__face--4">2</div>
+                        <div class="cube__face cube__face--5">3</div>
+                        <div class="cube__face cube__face--6">3</div>
+                    </div>
+                </div>
+              <button class = "rollBtn">Roll the Die</button>
             </div>
-            <div class="player2Card">
-                <img src="images/Player2.png" alt="">
-                <p style="font-weight: bolder;">Player 2</p>
-                <p>Points: <span id="player2VP"></span></p>
+            <div class="playerCards">
+                <div class="player1Card">
+                    <img src="images/Player1.png" alt="">
+                    <p style="font-weight: bolder;">Player1</p>
+                    <p>Points: <span id="player1VP"></span></p>
+                </div>
+                <div class="player2Card">
+                    <img src="images/Player2.png" alt="">
+                    <p style="font-weight: bolder;">Player 2</p>
+                    <p>Points: <span id="player2VP"></span></p>
+                </div>
+            </div>
+            <div class="gameLog">
+                <h1>Game Log</h1>
+                <ul class="gameLogText" id="gameLogDisplay"></ul>
             </div>
         </div>
-        <div class="gameLog">
-            <h1>Game Log</h1>
-            <ul class="gameLogText" id="gameLogDisplay"></ul>
-        </div>
-    </div>
-
     <div id="overlay" class="helpMenu">
         <div class="helpPage" style="overflow-y: scroll;">
             <button id="closeHelp" onclick="toggleHelp()">Close</button>
@@ -207,8 +206,7 @@
             </ul>
         </div>
     </div>
-</div>
 
-    <script src="boardGame.js"></script>
-</body>
+        <script src="boardGame.js"></script>
+    </body>
 </html>
