@@ -424,7 +424,7 @@
     }
 
     function moneyTile (){
-        randIn = Math.floor(Math.random() * 4);
+        randIn = Math.floor(Math.random() * 5);
         console.log(randIn)
         if (turn == 1) {
             player1.victoryPoints += randIn;
