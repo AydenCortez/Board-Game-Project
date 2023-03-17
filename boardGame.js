@@ -661,19 +661,11 @@
     // Handles checking who the player is once the game ended, and displays a popup of the winner.
     function winner (){
         if (player1.victoryPoints > player2.victoryPoints) {
-<<<<<<< Updated upstream
-            $('#winner').textContent('Player 1 Wins!!!!!!');
-        } else if (player2.victoryPoints > player1.victoryPoints) {
-            $('#winner').textContent('Player 2 Wins!!!!!!');
-        } else {
-            $('#winner').textContent('Its a tie.');
-=======
             document.getElementById('winner').textContent = 'Player 1 Wins!'
         } else if (player2.victoryPoints > player1.victoryPoints) {
             document.getElementById('winner').textContent = 'Player 2 Wins!'
         } else {
             document.getElementById('winner').textContent = "It's a tie."
->>>>>>> Stashed changes
         }
     }
 
