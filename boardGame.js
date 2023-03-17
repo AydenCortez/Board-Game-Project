@@ -7,7 +7,7 @@
     var chaosTimer = 0;
     var chaosValue = 1;
     const startTile = document.getElementById("1");
-    turn = 1
+    var turn = 1;
     var testNumber;
 
     
@@ -16,19 +16,19 @@
     var isDieRolling = false;
 
      // Assign board spaces from HTML to arrays
-    const board1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    const board1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     for (i = 0; i <= 14; i++) {
         board1[i] = document.getElementById(i);
     }
     
     // Assign path 1 spaces from HTML to arrays
-    let path1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    let path1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     for (i = 0; i <= 14; i++) {
         path1[i] = document.getElementById('A' + i);
     }
 
     // Assign path 2 spaces from HTML to arrays
-    let path2 = [1, 2, 3, 4, 5, 6, 7, 8]
+    let path2 = [1, 2, 3, 4, 5, 6, 7, 8];
     for (i = 0; i <= 10; i++) {
         path2[i] = document.getElementById('B' + i);
     }
@@ -364,7 +364,7 @@
     }
 
     // Updates the player points
-    function updateVP (){
+    function updateVP() {
         document.getElementById('player1VP').textContent = player1.victoryPoints;
         document.getElementById('player2VP').textContent = player2.victoryPoints;
     }
@@ -374,7 +374,7 @@
     var chaosImg2 = [];
 
     // Updates the number of chaos and chaos icons
-    function setChaos (){
+    function setChaos() {
         if (chaosTimer == 8 || chaosTimer == 16 || chaosTimer == 24 || chaosTimer == 32) {
             chaosValue += 1;
             $('#gameLogDisplay').append('<li style=color:red; font-weight:bold;>' + '!! The chaos has increased to ' + chaosValue + ' !!' + '</li>');
@@ -389,7 +389,7 @@
     }
 
     // Starts the game and resets the values
-    function start(isBot){
+    function start(isBot) {
         turn = 1;
         isWinner = null;
         player1.currentTile = 1;
@@ -430,7 +430,7 @@
     }
 
     // Logic for the money tile if a player lands on it
-    function moneyTile (){
+    function moneyTile () {
         randIn = Math.floor(Math.random() * 5);
         console.log(randIn)
         if (turn == 1) {
