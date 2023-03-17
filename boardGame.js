@@ -21,11 +21,13 @@
         board1[i] = document.getElementById(i);
     }
     
+    // Assign path 1 spaces from HTML to arrays
     let path1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     for (i = 0; i <= 14; i++) {
         path1[i] = document.getElementById('A' + i);
     }
 
+    // Assign path 2 spaces from HTML to arrays
     let path2 = [1, 2, 3, 4, 5, 6, 7, 8]
     for (i = 0; i <= 10; i++) {
         path2[i] = document.getElementById('B' + i);
@@ -53,6 +55,7 @@
             isBot: undefined,
         }
 
+    // function holding the stats/info of the cards
     function Card(title, desc, image, action, Atype, hover, chaos1, chaos2, chaos3, chaos4, chaos5) {
         this.title = title;
         this.desc = desc;
@@ -448,13 +451,12 @@
     // Checks if a player reached the switch tile and executes the prompt
     function switchTile(){
         if (player1.playerPath == board1 && player1.currentTile >= 14){
-            $('#player1').appendTo('#14')
-            popUp()
+            $('#player1').appendTo('#14');
+            popUp();
         }
         if (player2.playerPath == board1 && player2.currentTile >= 14){
-            $('#player2').appendTo('#14')
-            popUp()
-
+            $('#player2').appendTo('#14');
+            popUp();
         }
     }
 
@@ -515,7 +517,7 @@
             popUp.style.display = 'none';
         }
         $('.rollBtn').css('display', 'block');
-        popupActive = false;;
+        popupActive = false;
     }
 
     // Handles special tiles that players land on. E.g. Landing on a money tile runs moneyTile() function.
@@ -574,7 +576,7 @@
                     turn *= -1;
                     break;
                 default:
-                    turn *= -1
+                    turn *= -1;
             }
         }
 
@@ -644,18 +646,16 @@
             }
         }
         updateVP();
-
-
     }
 
     // Handles checking who the player is once the game ended, and displays a popup of the winner.
     function winner (){
         if (player1.victoryPoints > player2.victoryPoints) {
-            $('#winner').textContent('Player 1 Wins!!!!!!')
+            $('#winner').textContent('Player 1 Wins!!!!!!');
         } else if (player2.victoryPoints > player1.victoryPoints) {
-            $('#winner').textContent('Player 2 Wins!!!!!!')
+            $('#winner').textContent('Player 2 Wins!!!!!!');
         } else {
-            $('#winner').textContent('Its a tie.')
+            $('#winner').textContent('Its a tie.');
         }
     }
 
