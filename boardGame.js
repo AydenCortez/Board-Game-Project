@@ -418,14 +418,13 @@
             $('#player1').appendTo(player1.playerPath[player1.currentTile]);
             player1.previousValue = player1.currentTile;
             $('#gameLogDisplay').append('<li style=color:#34495e>' + '-- Player 1 moved ' + dieNumberLanded + ' space(s)' + '</li>');
-            switchTile();
             endTile();
         } else {
             player2.currentTile = player2.previousValue + dieNumberLanded;
             $('#player2').appendTo(player2.playerPath[player2.currentTile]);
             player2.previousValue = player2.currentTile;
             $('#gameLogDisplay').append('<li style=color:#6e0000;>' + '-- Player 2 moved ' + dieNumberLanded + ' space(s)' + '</li>');
-            Winner();
+            endTile();
         }
         gameLog.scrollTop = gameLog.scrollHeight;
     }
@@ -450,28 +449,33 @@
     // Popup function that lets player choose a path
     var popupActive = false;
     function popUp (){
+        if (turn == 1){
+            $('#player1').appendTo(board1[14]);
+        } else {
+            $('#player2').appendTo(board1[14]);
+        }
         let popUp = document.getElementById('popupCont');
         popUp.style.display = 'flex';
         popUp.style.animation = '0.5s fadeIn';
         $('.rollBtn').css('display', 'none');
         popupActive = true;
-        // if (turn == -1) {
-        //     if (player2.isBot) {
-        //         randIn = Math.floor(Math.random() * 2)
-        //         if (randIn == 1) {
-        //             Path1();
-        //         } else {
-        //             Path2();
-        //         }
-        //     }
-        // }
-
+        console.log('turn is ', turn);
+        if (turn == -1) {
+            if (player2.isBot) {
+                randIn = Math.floor(Math.random() * 2)
+                if (randIn == 1) {
+                    Path1();
+                } else {
+                    Path2();
+                }
+            }
+        }
     }
 
     // If a player chose path 1 on the popup
     function Path1 (){
         let popUp = document.getElementById('popupCont');
-        if (turn == -1) {
+        if (turn == 1) {
             player1.playerPath = path1;
             player1.currentTile = 0;
             player1.previousValue = 0;
@@ -487,12 +491,14 @@
         $('.rollBtn').css('display', 'block');
         popupActive = false;
         turn *= -1;
+        console.log('turn after ', turn);
+        console.log('player Paths ', player1.playerPath, player2.playerPath)
     }
 
     // If a player chose path 2 on the popup
     function Path2 (){
         let popUp = document.getElementById('popupCont');
-        if (turn == -1) {
+        if (turn == 1) {
             player1.playerPath = path2;
             player1.currentTile = 0;
             player1.previousValue = 0;
@@ -508,6 +514,7 @@
         $('.rollBtn').css('display', 'block');
         popupActive = false;
         turn *= -1;
+        console.log('turn after ', turn);
     }
 
     // Handles special tiles that players land on. E.g. Landing on a money tile runs moneyTile() function.
@@ -538,6 +545,9 @@
                     turn *= -1;
                     break;
                 case board1[14]:
+                case board1[15]:
+                case board1[16]:
+                case board1[17]:
                     popUp();
                     break;
                 default:
@@ -570,6 +580,9 @@
                     turn *= -1;
                     break;
                 case board1[14]:
+                case board1[15]:
+                case board1[16]:
+                case board1[17]:
                     popUp();
                     break;
                 default:
@@ -648,11 +661,19 @@
     // Handles checking who the player is once the game ended, and displays a popup of the winner.
     function winner (){
         if (player1.victoryPoints > player2.victoryPoints) {
+<<<<<<< Updated upstream
             $('#winner').textContent('Player 1 Wins!!!!!!');
         } else if (player2.victoryPoints > player1.victoryPoints) {
             $('#winner').textContent('Player 2 Wins!!!!!!');
         } else {
             $('#winner').textContent('Its a tie.');
+=======
+            document.getElementById('winner').textContent = 'Player 1 Wins!'
+        } else if (player2.victoryPoints > player1.victoryPoints) {
+            document.getElementById('winner').textContent = 'Player 2 Wins!'
+        } else {
+            document.getElementById('winner').textContent = "It's a tie."
+>>>>>>> Stashed changes
         }
     }
 
@@ -726,11 +747,11 @@
         chaosTimer += 1;
         setChaos();
         turnAction(); 
-        if (turn == -1) {
-            console.log('Its player 2s turn');
-        } else {
-            console.log('Its player 1s turn');
-        }
+        // if (turn == -1) {
+        //     console.log('Its player 2s turn');
+        // } else {
+        //     console.log('Its player 1s turn');
+        // }
         }, 1000);
     }
     // set initial side
