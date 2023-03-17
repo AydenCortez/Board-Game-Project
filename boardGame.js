@@ -409,6 +409,10 @@
         $('.helpButton').css('width', '5%',);
         $('.helpButton').css('height', '5%',);
         player2.isBot = isBot;
+        if (player2.isBot) {
+            $('#player2').css('background-image', 'url(/images/misc/Player2_AI.png)');
+            document.getElementById('player2Img').src="/images/misc/Player2_AI.png";
+        }
     }
     // start();
     // Uses the 3 arrays to move the player incrementally
