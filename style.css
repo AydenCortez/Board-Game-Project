@@ -5,7 +5,6 @@
 }
 
 html {
-    background: url("/images/Misc/backgroundImageSpace.jpg") no-repeat;
     background-size: cover;
     background-position: center; 
     height: 110vh;
@@ -18,7 +17,7 @@ body {
     display: none;
     margin:0;
 	padding:0;
-	background: url(images/Misc/space-background.jpg);
+	background: url(/images/Misc/space-background.jpg);
     background-size: cover;
 	display:flex;
 	align-items:center;
