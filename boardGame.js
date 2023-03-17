@@ -400,7 +400,7 @@
         $('.helpButton').css('left', '22%',);
         $('.helpButton').css('width', '5%',);
         $('.helpButton').css('height', '5%',);
-
+        player2.isBot = isBot;
     }
     // start();
     // Uses the 3 arrays to move the player incrementally
@@ -410,14 +410,12 @@
             $('#player1').appendTo(player1.playerPath[player1.currentTile]);
             player1.previousValue = player1.currentTile;
             $('#gameLogDisplay').append('<li style=color:#34495e>' + '-- Player 1 moved ' + dieNumberLanded + ' space(s)' + '</li>');
-            switchTile();
             Winner();
         } else {
             player2.currentTile = player2.previousValue + dieNumberLanded;
             $('#player2').appendTo(player2.playerPath[player2.currentTile]);
             player2.previousValue = player2.currentTile;
             $('#gameLogDisplay').append('<li style=color:#6e0000;>' + '-- Player 2 moved ' + dieNumberLanded + ' space(s)' + '</li>');
-            switchTile();
             Winner();
         }
         gameLog.scrollTop = gameLog.scrollHeight;
@@ -439,17 +437,6 @@
         return randIn;
     }
 
-    // Checks if a player reached the switch tile and executes the prompt
-    function switchTile(){
-        if (player1.currentTile >= 14){
-            $('#player1').appendTo('#14')
-            popUp()
-        }
-        if (player2.currentTile >= 14){
-            $('#player2').appendTo('#14')
-            popUp()
-        }
-    }
     // Popup function that lets player choose a path
     var popupActive = false;
     function popUp (){
@@ -489,6 +476,7 @@
         }
         $('.rollBtn').css('display', 'block')
         popupActive = false;
+        turn *= -1;
     }
 
     // If a player chose path 2 on the popup
@@ -509,6 +497,7 @@
         }
         $('.rollBtn').css('display', 'block')
         popupActive = false;
+        turn *= -1;
     }
 
     // Handles special tiles that players land on. E.g. Landing on a money tile runs moneyTile() function.
@@ -538,8 +527,12 @@
                     $('#gameLogDisplay').append('<li>' + '+- Player 1 drew a card' + '</li>');
                     turn *= -1;
                     break;
+                case board1[14]:
+                    popUp();
+                    break;
                 default:
                     turn *= -1;
+                    break;
             }
         } else {
             switch (player2.playerPath[player2.currentTile]) {
@@ -565,6 +558,9 @@
                     drawCard();
                     $('#gameLogDisplay').append('<li>' + '+- Player 2 drew a card' + '</li>');
                     turn *= -1;
+                    break;
+                case board1[14]:
+                    popUp();
                     break;
                 default:
                     turn *= -1
