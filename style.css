@@ -5,7 +5,7 @@
 }
 
 html {
-    background: url("/images/backgroundImageSpace.jpg") no-repeat;
+    background: url("/images/Misc/backgroundImageSpace.jpg") no-repeat;
     background-size: cover;
     background-position: center; 
     height: 110vh;
@@ -18,7 +18,7 @@ body {
     display: none;
     margin:0;
 	padding:0;
-	background: url(images/space-background.jpg);
+	background: url(images/Misc/space-background.jpg);
     background-size: cover;
 	display:flex;
 	align-items:center;
@@ -61,7 +61,7 @@ body {
     top: 20%;
     width: 1000px;
     height: 250px;
-    background: url(/images/TitleOutline.png)
+    background: url(/images/Misc/TitleOutline.png)
 }
 
 .credits {
@@ -283,7 +283,7 @@ td:not(.blank) {
     height: 40%;
     background-color: rgb(0, 93, 186, 0.5);
     border-radius: 25px;
-    background-image: url("images/Player1.png");
+    background-image: url("images/Misc/Player1.png");
     background-size: cover;
     background-position: center;
 }
@@ -293,13 +293,13 @@ td:not(.blank) {
     height: 40%;
     background-color: rgba(197, 0, 0, 0.5);
     border-radius: 25px;
-    background-image: url("images/Player2.png");
+    background-image: url("images/Misc/Player2.png");
     background-size: cover;
     background-position: center;
 }
 
 .split {
-    background-image: url("/images/Split_Tile.png");
+    background-image: url("/images/Tiles/Split_Tile.png");
     background-position: center;
     background-size: contain;
 }
