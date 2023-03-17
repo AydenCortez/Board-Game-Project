@@ -631,6 +631,7 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
                 player1.victoryPoints += 5;
+                $('#popupCont').css('visibility', 'hidden');
                 winner();
             }
             if (player1.playerPath == path2 && player1.currentTile >= 11) {
@@ -639,6 +640,7 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
                 player1.victoryPoints += 5;
+                $('#popupCont').css('visibility', 'hidden');
                 winner();
             }
         } else {
@@ -648,6 +650,7 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "2";
                 player2.victoryPoints += 5;
+                $('#popupCont').css('visibility', 'hidden');
                 winner();
             }
             if (player2.playerPath == path2 && player2.currentTile >= 11){
@@ -656,6 +659,7 @@
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "2";
                 player2.victoryPoints += 5;
+                $('#popupCont').css('visibility', 'hidden');
                 winner();
             }
         }
