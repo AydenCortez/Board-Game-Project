@@ -408,7 +408,7 @@
         $('.helpButton').css('left', '22%',);
         $('.helpButton').css('width', '5%',);
         $('.helpButton').css('height', '5%',);
-
+        player2.isBot = isBot;
     }
     // start();
     // Uses the 3 arrays to move the player incrementally
@@ -425,16 +425,15 @@
             $('#player2').appendTo(player2.playerPath[player2.currentTile]);
             player2.previousValue = player2.currentTile;
             $('#gameLogDisplay').append('<li style=color:#6e0000;>' + '-- Player 2 moved ' + dieNumberLanded + ' space(s)' + '</li>');
-            switchTile();
-            endTile();
+            Winner();
         }
         gameLog.scrollTop = gameLog.scrollHeight;
     }
 
     // Logic for the money tile if a player lands on it
     function moneyTile (){
-        randIn = Math.floor(Math.random() * 4);
-        console.log(randIn);
+        randIn = Math.floor(Math.random() * 5);
+        console.log(randIn)
         if (turn == 1) {
             player1.victoryPoints += randIn;
             $('#gameLogDisplay').append('<li style=color:#20AF30>' + '$- Player 1 gained ' + randIn + ' victory point(s)' + '</li>');
@@ -446,18 +445,6 @@
         gameLog.scrollTop = gameLog.scrollHeight;
         turn *= -1;
         return randIn;
-    }
-
-    // Checks if a player reached the switch tile and executes the prompt
-    function switchTile(){
-        if (player1.playerPath == board1 && player1.currentTile >= 14){
-            $('#player1').appendTo('#14');
-            popUp();
-        }
-        if (player2.playerPath == board1 && player2.currentTile >= 14){
-            $('#player2').appendTo('#14');
-            popUp();
-        }
     }
 
     // Popup function that lets player choose a path
@@ -478,6 +465,7 @@
         //         }
         //     }
         // }
+
     }
 
     // If a player chose path 1 on the popup
@@ -498,6 +486,7 @@
         }
         $('.rollBtn').css('display', 'block');
         popupActive = false;
+        turn *= -1;
     }
 
     // If a player chose path 2 on the popup
@@ -518,6 +507,7 @@
         }
         $('.rollBtn').css('display', 'block');
         popupActive = false;
+        turn *= -1;
     }
 
     // Handles special tiles that players land on. E.g. Landing on a money tile runs moneyTile() function.
@@ -547,8 +537,12 @@
                     $('#gameLogDisplay').append('<li>' + '+- Player 1 drew a card' + '</li>');
                     turn *= -1;
                     break;
+                case board1[14]:
+                    popUp();
+                    break;
                 default:
                     turn *= -1;
+                    break;
             }
         } else {
             switch (player2.playerPath[player2.currentTile]) {
@@ -575,6 +569,9 @@
                     $('#gameLogDisplay').append('<li>' + '+- Player 2 drew a card' + '</li>');
                     turn *= -1;
                     break;
+                case board1[14]:
+                    popUp();
+                    break;
                 default:
                     turn *= -1;
             }
@@ -584,18 +581,18 @@
 
     // Switches the positions of both players. (Used for the portals card)
     function switchPlayers (){
-        var player1Pos = player1.playerPath[player1.currentTile];
-        var player2Pos = player2.playerPath[player2.currentTile];
-        console.log('before', player1Pos, player2Pos)
-        var tempPos = player1Pos; 
-        player1Pos = player2Pos;
-        player2Pos = tempPos;
-        console.log('after', player1Pos, player2Pos)
-        player1.previousValue = player1Pos.id;
-        player2.previousValue = player2Pos.id;
-        console
-        $('#player1').appendTo(player1Pos);
-        $('#player2').appendTo(player2Pos);
+        tempNum = player1.currentTile;
+        tempPath = player1.playerPath;
+        console.log('before:', player1.playerPath[player1.currentTile], player2.playerPath[player2.currentTile])
+        player1.currentTile = player2.currentTile;
+        player2.currentTile = tempNum;
+        player1.playerPath = player2.playerPath;
+        player2.playerPath = tempPath;
+        console.log('after:', player1.playerPath[player1.currentTile], player2.playerPath[player2.currentTile])
+        $('#player1').appendTo(player1.playerPath[player1.currentTile])
+        $('#player2').appendTo(player2.playerPath[player2.currentTile])
+        player1.previousValue = player1.currentTile
+        player2.previousValue = player2.currentTile
     }
 
     // This will switch the points of both player's current balance of victory points. (Used for the black hole card)
