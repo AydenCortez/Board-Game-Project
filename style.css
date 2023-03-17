@@ -17,7 +17,7 @@ body {
     display: none;
     margin:0;
 	padding:0;
-	background: url(/images/Misc/space-background.jpg);
+	background: url(/images/Misc/space-background.webp);
     background-size: cover;
 	display:flex;
 	align-items:center;
