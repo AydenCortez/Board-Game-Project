@@ -838,6 +838,7 @@ function toggleHelp () {
     Helptoggle *= -1;
 }
 
+// Resets the game. (Players are set back to start, values are set back to starting default, etc.)
 function resetGame() {
     player1.playerPath = board1;
     player2.playerPath = board1;
@@ -872,6 +873,7 @@ function resetGame() {
     console.log("Game Ended: " + gameEnded);
 }
 
+// Function that returns the player to main menu
 function returnToMainMenu() {
     resetGame();
     $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)');
