@@ -431,10 +431,10 @@
         $('.chaosMeter, .gameMenu, .sign').css('display', 'flex');
         $('#startBtn, #creditsBtn, #title, .credits').css('display', 'none');
         $('#gameBoard').removeAttr('style');
-        $('.helpButton').css('top', '5%',);
-        $('.helpButton').css('left', '22%',);
-        $('.helpButton').css('width', '5%',);
-        $('.helpButton').css('height', '5%',);
+        $('.helpButton').css('top', '5%');
+        $('.helpButton').css('left', '22%');
+        $('.helpButton').css('width', '5%');
+        $('.helpButton').css('height', '5%');
         player2.isBot = isBot;
         if (player2.isBot) {
             $('#player2').css('background-image', 'url(/images/misc/Player2_AI.png)');
@@ -860,4 +860,18 @@ function resetGame() {
     $(winPopUp).css("display", "none");
     gameEnded = false;
     console.log("Game Ended: " + gameEnded);
+}
+
+function returnToMainMenu() {
+    $(winPopUp).css("display", "none");
+    $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)');
+    $('.chaosMeter, .gameMenu, #gameBoard, .sign').css('display', '2s none');
+    $('.chaosMeter, .gameMenu, .sign').css('display', 'none');
+    $('#startBtn, #creditsBtn, #title, .credits').css('display', 'block');
+    $('#gameBoard').css('display', 'none');
+    $('.helpButton').css('top', '55%');
+    $('.helpButton').css('left', '57%');
+    $('.helpButton').css('width', '10%');
+    $('.helpButton').css('height', '10%');
+    console.log("Returning to main menu...");
 }
