@@ -873,7 +873,7 @@ function resetGame() {
 }
 
 function returnToMainMenu() {
-    $(winPopUp).css("display", "none");
+    resetGame();
     $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)');
     $('.chaosMeter, .gameMenu, #gameBoard, .sign').css('display', '2s none');
     $('.chaosMeter, .gameMenu, .sign').css('display', 'none');
