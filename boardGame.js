@@ -484,10 +484,9 @@
         } else {
             $('#player2').appendTo(board1[14]);
         }
-        let popUp = document.getElementsByClassName('popupCont');
-        // popUp.style.display = 'flex';
-        popUp.foreach(this.style.display = 'flex');
-        popUp.style.animation = '0.5s fadeIn';
+        let splitPopUp = document.getElementById('popupSplitCont');
+        splitPopUp.style.display = 'flex';
+        splitPopUp.style.animation = '0.5s fadeIn';
         $('.rollBtn').css('display', 'none');
         popupActive = true;
         console.log('turn is ', turn);
@@ -651,8 +650,6 @@
 
     // Checks for winning player. Runs logic for winning the game, like displaying the winner popup
     function endTile (){
-        let splitPopUp = document.getElementById('popupSplitCont');
-        splitPopUp.style.display = 'none';
         let winningPlayer = document.getElementById('winningPlayer');
         if (turn == 1) {
             if (player1.playerPath == path1 && player1.currentTile >= 15) {
@@ -817,6 +814,10 @@ function toggleHelp () {
 }
 
 function resetGame() {
+    player1.playerPath = board1;
+    player2.playerPath = board1;
+    player1.currentTile = 1;
+    player2.currentTile = 1;
     player1.victoryPoints = 0;
     player2.victoryPoints = 0;
     $(gameLog).children().remove();
@@ -835,8 +836,5 @@ function resetGame() {
 
     console.log(chaosImg);
     console.log(chaosImg2);
-
-    player1.playerPath = board1;
-    player2.playerPath = board1;
-    $(winPopupCont).css("display", "none");
+    $(winPopUp).css("display", "none");
 }
