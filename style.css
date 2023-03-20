@@ -65,7 +65,7 @@ body {
 
 .credits {
     color: red;
-    margin-bottom: 1%;
+    margin-bottom: 8%;
 }
 
 .popupCont {
@@ -491,7 +491,8 @@ hr {
     margin-top: 1%;
 }
 
-.helpButton {
+.helpButton,
+#mainMenuBtn1 {
     position: absolute;
     left: 57%;
     padding: 0px;
@@ -500,20 +501,20 @@ hr {
     z-index: 2;
 }
 
-#startBtn {
+#startBtnPVP {
     position: absolute;
     width: 10%;
     height: 10%;
 }
 
-#creditsBtn {
+#startBtnAI {
     position: absolute;
     left: 33%;
     width: 10%;
     height: 10%;
 }
 
-.helpButton, #startBtn, #creditsBtn, .resetGameBtn, .mainMenuBtn {
+.helpButton, #startBtnPVP, #startBtnAI, .resetGameBtn, #mainMenuBtn1, .mainMenuBtn2 {
     top: 55%;
     background-color: #2c3e50;
     color: #ecf0f1;
@@ -522,7 +523,7 @@ hr {
 }
 
 .resetGameBtn,
-.mainMenuBtn {
+.mainMenuBtn2 {
     margin-top: 2%;
 }
 
@@ -535,7 +536,7 @@ hr {
     margin: 0% 0% 2% 0%;
 }
 
-.helpButton:hover, #startBtn:hover, #creditsBtn:hover, #closeHelp:hover {
+.helpButton:hover, #startBtnPVP:hover, #startBtnAI:hover, #closeHelp:hover, #mainMenuBtn1:hover, .mainMenuBtn2:hover {
     animation: 0.25s fadeBtn;
     background: #ecf0f1;
     color: #2c3e50;

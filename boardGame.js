@@ -10,6 +10,7 @@
     var turn = 1;
     var testNumber;
     var gameEnded = false;
+    let mainMenuBtn1 = document.getElementById("mainMenuBtn1").style.display = "none";
     
     // Die Rolling Variables
     var dieNumberLanded = 3;
@@ -429,19 +430,28 @@
         $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)');
         $('.chaosMeter, .gameMenu, #gameBoard, .sign').css('animation', '2s fadeIn');
         $('.chaosMeter, .gameMenu, .sign').css('display', 'flex');
-        $('#startBtn, #creditsBtn, #title, .credits').css('display', 'none');
+        $('#startBtnPVP, #startBtnAI, #title, .credits').css('display', 'none');
         $('#gameBoard').removeAttr('style');
         $('.helpButton').css('top', '5%');
         $('.helpButton').css('left', '22%');
         $('.helpButton').css('width', '5%');
         $('.helpButton').css('height', '5%');
+        $('#mainMenuBtn1').css('display', 'block');
+        $('#mainMenuBtn1').css('top', '5%');
+        $('#mainMenuBtn1').css('left', '28%');
+        $('#mainMenuBtn1').css('width', '5%');
+        $('#mainMenuBtn1').css('height', '5%');
         player2.isBot = isBot;
         if (player2.isBot) {
             $('#player2').css('background-image', 'url(/images/misc/Player2_AI.png)');
             document.getElementById('player2Img').src="/images/misc/Player2_AI.png";
         }
+        else {
+            $('#player2').css('background-image', 'url(/images/misc/Player2.png)');
+            document.getElementById('player2Img').src="/images/misc/Player2.png";
+        }
     }
-    // start();
+    
     // Uses the 3 arrays to move the player incrementally
     function movePlayers() {
         if (turn === 1) {
@@ -867,11 +877,13 @@ function returnToMainMenu() {
     $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)');
     $('.chaosMeter, .gameMenu, #gameBoard, .sign').css('display', '2s none');
     $('.chaosMeter, .gameMenu, .sign').css('display', 'none');
-    $('#startBtn, #creditsBtn, #title, .credits').css('display', 'block');
+    $('#startBtnPVP, #startBtnAI, #title, .credits').css('display', 'block');
     $('#gameBoard').css('display', 'none');
+    
     $('.helpButton').css('top', '55%');
     $('.helpButton').css('left', '57%');
     $('.helpButton').css('width', '10%');
     $('.helpButton').css('height', '10%');
+    $('#mainMenuBtn1').css('display', 'none');
     console.log("Returning to main menu...");
 }

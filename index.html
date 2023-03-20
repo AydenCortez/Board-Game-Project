@@ -15,8 +15,9 @@
     <body>
         <div id="title"></div>
         <button class="helpButton" onclick="toggleHelp()">Help</button>
-        <input type="button" value="Player vs Player" id="startBtn" onclick="start(false);">
-        <input type="button" value="Player vs AI" id="creditsBtn" onclick="start(true);">
+        <button id="mainMenuBtn1" onclick="returnToMainMenu()">Main Menu</button> <!--This one is used for mid round, not to be confused with the main menu button in the winPopup-->
+        <input type="button" value="Player vs Player" id="startBtnPVP" onclick="start(false);">
+        <input type="button" value="Player vs AI" id="startBtnAI" onclick="start(true);">
         <p class="credits">Created by Ayden Cortez and Ayden Arakelian.</p>
 
         <div class="popupCont" id="popupSplitCont">
@@ -32,7 +33,7 @@
                 <p style="color: green"> +5 Victory Points</p>
                 <h1 id="winner"></h1>
                 <button class="resetGameBtn" onclick="resetGame()">Play Again?</button>
-                <button class="mainMenuBtn" onclick="returnToMainMenu()">Main Menu</button>
+                <button class="mainMenuBtn2" onclick="returnToMainMenu()">Main Menu</button>
             </div>
         </div>
         <div class="actionCard" draggable="true">
