@@ -19,7 +19,7 @@
         <input type="button" value="Player vs AI" id="creditsBtn" onclick="start(true);">
         <p class="credits">Created by Ayden Cortez and Ayden Arakelian.</p>
 
-        <div class="popupCont" id="popupCont">
+        <div class="popupCont" id="popupSplitCont">
             <div class="popup">
                 <h2>Pick a Path</h2>
                 <input type="button" id="pathA" value="Path 1" onclick="Path1()">
@@ -31,6 +31,7 @@
                 <h2>Player <span id="winningPlayer"></span> has made it to the end</h2>
                 <p style="color: green"> +5 Victory Points</p>
                 <h1 id="winner"></h1>
+            `   <button class="resetGameBtn" onclick="resetGame()">Play Again?</button>
             </div>
         </div>
         <div class="actionCard" draggable="true">

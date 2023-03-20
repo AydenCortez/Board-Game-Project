@@ -397,7 +397,7 @@
 
     // Images for the different chaos icons
     var chaosImg = ['/images/Chaos_Symbols/Chaos_Symbol_2.png', '/images/Chaos_Symbols/Chaos_Symbol_3.png', '/images/Chaos_Symbols/Chaos_Symbol_4.png', '/images/Chaos_Symbols/Chaos_Symbol_5.png'];
-    var chaosImg2 = [];
+    var chaosImg2 = []; // Chaos Images already used
 
     // Updates the number of chaos and chaos icons
     function setChaos() {
@@ -409,7 +409,7 @@
         };
         // return chaosMeter;
         randIn = Math.floor(Math.random() * chaosImg.length);
-        chaosPic = chaosImg.splice(randIn, 1)
+        chaosPic = chaosImg.splice(randIn, 1);
         $(chaosMeter[chaosValue]).css('background', 'url(' + chaosPic + ')');
         chaosImg2.push(chaosPic);
     }
@@ -484,8 +484,9 @@
         } else {
             $('#player2').appendTo(board1[14]);
         }
-        let popUp = document.getElementById('popupCont');
-        popUp.style.display = 'flex';
+        let popUp = document.getElementsByClassName('popupCont');
+        // popUp.style.display = 'flex';
+        popUp.foreach(this.style.display = 'flex');
         popUp.style.animation = '0.5s fadeIn';
         $('.rollBtn').css('display', 'none');
         popupActive = true;
@@ -504,7 +505,7 @@
 
     // If a player chose path 1 on the popup
     function Path1 (){
-        let popUp = document.getElementById('popupCont');
+        let popUp = document.getElementById('popupSplitCont');
         if (turn == 1) {
             player1.playerPath = path1;
             player1.currentTile = 0;
@@ -527,7 +528,7 @@
 
     // If a player chose path 2 on the popup
     function Path2 (){
-        let popUp = document.getElementById('popupCont');
+        let popUp = document.getElementById('popupSplitCont');
         if (turn == 1) {
             player1.playerPath = path2;
             player1.currentTile = 0;
@@ -646,9 +647,12 @@
         updateVP();
     }
 
+    let winPopUp = document.getElementById('winPopupCont');
+
     // Checks for winning player. Runs logic for winning the game, like displaying the winner popup
     function endTile (){
-        let winPopUp = document.getElementById('winPopupCont');
+        let splitPopUp = document.getElementById('popupSplitCont');
+        splitPopUp.style.display = 'none';
         let winningPlayer = document.getElementById('winningPlayer');
         if (turn == 1) {
             if (player1.playerPath == path1 && player1.currentTile >= 15) {
@@ -810,4 +814,29 @@ function toggleHelp () {
         $('.helpMenu').css('visibility', 'hidden');
     } 
     Helptoggle *= -1;
+}
+
+function resetGame() {
+    player1.victoryPoints = 0;
+    player2.victoryPoints = 0;
+    $(gameLog).children().remove();
+    chaosValue = 0;
+    $("#Chaos2, #Chaos3, #Chaos4, #Chaos5").css("background", "white");
+    if (player2.isBot) {
+        start(true);
+    }
+    else {
+        start(false);
+    }
+
+    chaosImg2 = [];
+    chaosImg = [];
+    chaosImg.push('/images/Chaos_Symbols/Chaos_Symbol_2.png', '/images/Chaos_Symbols/Chaos_Symbol_3.png', '/images/Chaos_Symbols/Chaos_Symbol_4.png', '/images/Chaos_Symbols/Chaos_Symbol_5.png') // Chaos Images already used
+
+    console.log(chaosImg);
+    console.log(chaosImg2);
+
+    player1.playerPath = board1;
+    player2.playerPath = board1;
+    $(winPopupCont).css("display", "none");
 }
