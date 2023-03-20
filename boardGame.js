@@ -9,6 +9,8 @@
     const startTile = document.getElementById("1");
     var turn = 1;
     var testNumber;
+    var gameEnded = false;
+    
 
     
     // Die Rolling Variables
@@ -414,7 +416,7 @@
         chaosImg2.push(chaosPic);
     }
 
-    // Starts the game and resets the values
+    // Starts the game with default values
     function start(isBot) {
         turn = 1;
         isWinner = null;
@@ -479,6 +481,9 @@
     // Popup function that lets player choose a path
     var popupActive = false;
     function popUp (){
+        if (gameEnded)
+            return;
+        
         if (turn == 1){
             $('#player1').appendTo(board1[14]);
         } else {
@@ -653,14 +658,17 @@
         let winningPlayer = document.getElementById('winningPlayer');
         if (turn == 1) {
             if (player1.playerPath == path1 && player1.currentTile >= 15) {
+                gameEnded = true;
                 winPopUp.style.display = 'flex';
                 $('#player1').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
                 player1.victoryPoints += 5;
                 winner();
+                gameEnded = true;
             }
             if (player1.playerPath == path2 && player1.currentTile >= 11) {
+                gameEnded = true;
                 winPopUp.style.display = 'flex';
                 $('#player1').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
@@ -669,7 +677,8 @@
                 winner();
             }
         } else {
-            if (player2.playerPath == path1 && player2.currentTile >= 15){
+            if (player2.playerPath == path1 && player2.currentTile >= 15) {
+                gameEnded = true;
                 winPopUp.style.display = 'flex';
                 $('#player2').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
@@ -677,7 +686,8 @@
                 player2.victoryPoints += 5;
                 winner();
             }
-            if (player2.playerPath == path2 && player2.currentTile >= 11){
+            if (player2.playerPath == path2 && player2.currentTile >= 11) {
+                gameEnded = true;
                 winPopUp.style.display = 'flex';
                 $('#player2').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
@@ -686,6 +696,8 @@
                 winner();
             }
         }
+        console.log("Game Ended: " + gameEnded);
+        
         updateVP();
     }
 
@@ -816,13 +828,16 @@ function toggleHelp () {
 function resetGame() {
     player1.playerPath = board1;
     player2.playerPath = board1;
+    $('#player1').appendTo(board1[1]);
+    $('#player2').appendTo(board1[1]);
     player1.currentTile = 1;
     player2.currentTile = 1;
+    player1.previousValue = 0;
+    player2.previousValue = 0;
     player1.victoryPoints = 0;
     player2.victoryPoints = 0;
+
     $(gameLog).children().remove();
-    chaosValue = 0;
-    $("#Chaos2, #Chaos3, #Chaos4, #Chaos5").css("background", "white");
     if (player2.isBot) {
         start(true);
     }
@@ -830,11 +845,16 @@ function resetGame() {
         start(false);
     }
 
+    chaosTimer = 0;
+    chaosValue = 1;
+    $("#Chaos2, #Chaos3, #Chaos4, #Chaos5").css("background", "white");
     chaosImg2 = [];
     chaosImg = [];
-    chaosImg.push('/images/Chaos_Symbols/Chaos_Symbol_2.png', '/images/Chaos_Symbols/Chaos_Symbol_3.png', '/images/Chaos_Symbols/Chaos_Symbol_4.png', '/images/Chaos_Symbols/Chaos_Symbol_5.png') // Chaos Images already used
+    chaosImg.push('/images/Chaos_Symbols/Chaos_Symbol_2.png', '/images/Chaos_Symbols/Chaos_Symbol_3.png', '/images/Chaos_Symbols/Chaos_Symbol_4.png', '/images/Chaos_Symbols/Chaos_Symbol_5.png');
 
     console.log(chaosImg);
     console.log(chaosImg2);
     $(winPopUp).css("display", "none");
+    gameEnded = false;
+    console.log("Game Ended: " + gameEnded);
 }
