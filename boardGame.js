@@ -226,15 +226,24 @@
             switch (chaos) {
                 case 1:
                 case 2:
-                    player1.victoryPoints -= 1;
-                    player2.victoryPoints += 1;
+                    if (player1.victoryPoints > 0) {
+                        player1.victoryPoints -= 1;
+                        player2.victoryPoints += 1;
+                    };
+                    break;
                 case 3:
                 case 4:
-                    player1.victoryPoints -= 2;
-                    player2.victoryPoints += 2;
+                    if (player2.victoryPoints > 0){
+                        player1.victoryPoints -= 2;
+                        player2.victoryPoints += 2;
+                    }
+                    break;
                 case 5:
-                    player1.victoryPoints -= 3;
-                    player2.victoryPoints -= 3;
+                    if (player2.victoryPoints > 0){
+                        player1.victoryPoints -= 3;
+                        player2.victoryPoints -= 3;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -242,20 +251,37 @@
             switch (chaos) {
                 case 1:
                 case 2:
-                    player2.victoryPoints -= 2;
-                    player1.victoryPoints += 2;
+                    if (player2.victoryPoints > 0) {
+                        player2.victoryPoints -= 1;
+                        player1.victoryPoints += 1;
+                    };
+                    break;
                 case 3:
                 case 4:
-                    player2.victoryPoints -= 3;
-                    player1.victoryPoints += 3
+                    if (player2.victoryPoints > 0) {
+                        player2.victoryPoints -= 2;
+                        player1.victoryPoints += 2;
+                    }
+                    break;
                 case 5:
-                    player2.victoryPoints -= 6;
-                    player1.victoryPoints -= 6;
+                    if (player2.victoryPoints > 0){
+                        player2.victoryPoints -= 3;
+                        player1.victoryPoints -= 3;    
+                    }
+                    break;
                 default:
                     break;
             }
         }
         updateVP();
+        underFlow()
+    }
+
+    function testPoints() {
+        player1.victoryPoints += 4;
+        player2.victoryPoints += 4;
+        updateVP();
+        underFlow();
     }
 
     // Moves the player piece a set amount of spaces backwards
