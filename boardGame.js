@@ -835,8 +835,8 @@ function resetGame() {
     $('#player2').appendTo(board1[1]);
     player1.currentTile = 1;
     player2.currentTile = 1;
-    player1.previousValue = 0;
-    player2.previousValue = 0;
+    player1.previousValue = 1;
+    player2.previousValue = 1;
     player1.victoryPoints = 0;
     player2.victoryPoints = 0;
 
