@@ -11,8 +11,6 @@
     var testNumber;
     var gameEnded = false;
     
-
-    
     // Die Rolling Variables
     var dieNumberLanded = 3;
     var isDieRolling = false;
@@ -418,6 +416,7 @@
 
     // Starts the game with default values
     function start(isBot) {
+        $('.rollBtn').css('display', 'block'); // This makes sure the rollBtn is active when a new game starts since the button is disabled once the game ends
         turn = 1;
         isWinner = null;
         player1.currentTile = 1;
@@ -659,16 +658,17 @@
         if (turn == 1) {
             if (player1.playerPath == path1 && player1.currentTile >= 15) {
                 gameEnded = true;
+                $('.rollBtn').css('display', 'none');
                 winPopUp.style.display = 'flex';
                 $('#player1').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
                 winningPlayer.textContent = "1";
                 player1.victoryPoints += 5;
                 winner();
-                gameEnded = true;
             }
             if (player1.playerPath == path2 && player1.currentTile >= 11) {
                 gameEnded = true;
+                $('.rollBtn').css('display', 'none');
                 winPopUp.style.display = 'flex';
                 $('#player1').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
@@ -679,6 +679,7 @@
         } else {
             if (player2.playerPath == path1 && player2.currentTile >= 15) {
                 gameEnded = true;
+                $('.rollBtn').css('display', 'none');
                 winPopUp.style.display = 'flex';
                 $('#player2').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
@@ -688,6 +689,7 @@
             }
             if (player2.playerPath == path2 && player2.currentTile >= 11) {
                 gameEnded = true;
+                $('.rollBtn').css('display', 'none');
                 winPopUp.style.display = 'flex';
                 $('#player2').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
@@ -712,9 +714,10 @@
         }
     }
 
-    // The bot rolls teh dice and moves
+    // The bot rolls the die and moves
     setInterval(function botMove(){
-        if (turn == -1) {
+        // The bot will check if it is their turn and if the game has ended. The bot checks if it has ended so it does not continue rolling indefinitely
+        if (turn == -1 && !gameEnded) { 
             if (player2.isBot) {
                 if (popupActive == false) {
                     rollDice();
