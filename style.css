@@ -536,7 +536,7 @@ hr {
     margin: 0% 0% 2% 0%;
 }
 
-.helpButton:hover, #startBtnPVP:hover, #startBtnAI:hover, #closeHelp:hover, #mainMenuBtn1:hover, .mainMenuBtn2:hover {
+.helpButton:hover, #startBtnPVP:hover, #startBtnAI:hover, #closeHelp:hover, #mainMenuBtn1:hover, .mainMenuBtn2:hover, .resetGameBtn:hover {
     animation: 0.25s fadeBtn;
     background: #ecf0f1;
     color: #2c3e50;
