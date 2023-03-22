@@ -1,23 +1,31 @@
-    
     import { joinRoom, selfId } from 'https://cdn.skypack.dev/trystero/ipfs';
+
+    const config = {appId: 'starCitizen'};
+    let menuRoom;
+    let queueRoom;
+    let gameRoom;
+    let online = document.getElementById('playerNumber');
+    // menuRoom.onPeerLeave(peerId => console.log(`${peerId} left`));
+    function updateOnline (){
+        const numberOfPeers = menuRoom.getPeers().length;
+        online.textContent(numberOfPeers)
+    }
+    joinRoom(config, 'menuRoom');
+    updateOnline()
     // Variables
     var player1 = document.getElementById("player1");
     var player2 = document.getElementById("player2"); 
-    var currentStep;
     let boardTiles = document.querySelectorAll('tile');
     const gameLog = document.getElementById('gameLogDisplay');
     var chaosTimer = 0;
     var chaosValue = 1;
-    const startTile = document.getElementById("1");
     var turn = 1;
-    var testNumber;
     var gameEnded = false;
     let mainMenuBtn1 = document.getElementById("mainMenuBtn1").style.display = "none";
     
     // Die Rolling Variables
     var dieNumberLanded = 3;
     var isDieRolling = false;
-
      // Assign board spaces from HTML to arrays
     const board1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     for (var i = 0; i <= 14; i++) {
@@ -42,21 +50,21 @@
         chaosMeter[i] = document.getElementById('Chaos' + i);
     }
 
-        // player objects
-        player1 = {
-            previousValue: 1,
-            currentTile: 0, 
-            playerPath: board1,
-            victoryPoints: 0,
-        }
-    
-        player2 = {
-            previousValue: 1,
-            currentTile: 0,
-            playerPath: board1,
-            victoryPoints: 0,
-            isBot: undefined,
-        }
+    // player objects
+    player1 = {
+        previousValue: 1,
+        currentTile: 0, 
+        playerPath: board1,
+        victoryPoints: 0,
+    }
+
+    player2 = {
+        previousValue: 1,
+        currentTile: 0,
+        playerPath: board1,
+        victoryPoints: 0,
+        isBot: undefined,
+    }
 
     // function holding the stats/info of the cards
     function Card(title, desc, image, action, Atype, hover, chaos1, chaos2, chaos3, chaos4, chaos5) {
@@ -89,8 +97,8 @@
     // The player draws a random chaos card. (This happens when the player lands on a chaos tile.)
     function drawCard (){
         if (cards.length > 0) {
-            randIn = Math.floor(Math.random() * cards.length);
-            cardPicked = cards[randIn];
+            var randIn = Math.floor(Math.random() * cards.length);
+            var cardPicked = cards[randIn];
             showCard(cardPicked)
             switch(cardPicked.action){
                 case 'losePoints':
@@ -158,6 +166,8 @@
     function hideCard() {
         $('.actionCard').css('display', 'none');
     }
+
+    document.getElementById('dismissBtn').addEventListener("click", () => hideCard());
 
     // Deducts points from a player
     function losePoints (chaos, cardType){
@@ -279,17 +289,8 @@
         updateVP();
         underFlow()
     }
-
-    function testPoints() {
-        player1.victoryPoints += 4;
-        player2.victoryPoints += 4;
-        updateVP();
-        underFlow();
-    }
-
     // Moves the player piece a set amount of spaces backwards
     function goBackSpaces (chaos, cardType){
-        console.log('test')
         if (cardType == 'spacing') {
             switch (chaos) {
                 case 1:
@@ -411,14 +412,30 @@
             return chaosValue;
         };
         // return chaosMeter;
-        randIn = Math.floor(Math.random() * chaosImg.length);
-        chaosPic = chaosImg.splice(randIn, 1);
+        var randIn = Math.floor(Math.random() * chaosImg.length);
+        var chaosPic = chaosImg.splice(randIn, 1);
         $(chaosMeter[chaosValue]).css('background', 'url(' + chaosPic + ')');
         chaosImg2.push(chaosPic);
     }
 
     // Starts the game with default values
     function start(isBot) {
+        console.log(`
+        ░░░░░▄▄▄▄▀▀▀▀▀▀▀▀▄▄▄▄▄▄░░░░░░░
+        ░░░░░█░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░▀▀▄░░░░
+        ░░░░█░░░▒▒▒▒▒▒░░░░░░░░▒▒▒░░█░░░
+        ░░░█░░░░░░▄██▀▄▄░░░░░▄▄▄░░░░█░░
+        ░▄▀▒▄▄▄▒░█▀▀▀▀▄▄█░░░██▄▄█░░░░█░
+        █░▒█▒▄░▀▄▄▄▀░░░░░░░░█░░░▒▒▒▒▒░█
+        █░▒█░█▀▄▄░░░░░█▀░░░░▀▄░░▄▀▀▀▄▒█
+        ░█░▀▄░█▄░█▀▄▄░▀░▀▀░▄▄▀░░░░█░░█░
+        ░░█░░░▀▄▀█▄▄░█▀▀▀▄▄▄▄▀▀█▀██░█░░
+        ░░░█░░░░██░░▀█▄▄▄█▄▄█▄████░█░░░
+        ░░░░█░░░░▀▀▄░█░░░█░█▀██████░█░░
+        ░░░░░▀▄░░░░░▀▀▄▄▄█▄█▄█▄█▄▀░░█░░
+        ░░░░░░░▀▄▄░▒▒▒▒░░░░░░░░░░▒░░░█░
+        ░░░░░░░░░░▀▀▄▄░▒▒▒▒▒▒▒▒▒▒░░░░█░
+        ░░░░░░░░░░░░░░▀▄▄▄▄▄░░░░░░░░█░░`);
         $('.rollBtn').css('display', 'block'); // This makes sure the rollBtn is active when a new game starts since the button is disabled once the game ends
         turn = 1;
         player1.currentTile = 1;
@@ -452,6 +469,12 @@
             document.getElementById('player2Img').src="/images/misc/Player2.png";
         }
     };
+
+
+
+    document.getElementById('startBtnPVP').addEventListener("click", () => start(false));
+    document.getElementById('startBtnAI').addEventListener("click", () => start(true));
+
     
     // Uses the 3 arrays to move the player incrementally
     function movePlayers() {
@@ -473,7 +496,7 @@
 
     // Logic for the money tile if a player lands on it
     function moneyTile () {
-        randIn = Math.floor(Math.random() * 5);
+        var randIn = Math.floor(Math.random() * 4)  + 1;
         console.log(randIn)
         if (turn == 1) {
             player1.victoryPoints += randIn;
@@ -540,6 +563,7 @@
         console.log('player Paths ', player1.playerPath, player2.playerPath)
     }
 
+    document.getElementById('pathA').addEventListener("click", () => Path1());
     // If a player chose path 2 on the popup
     function Path2 (){
         let popUp = document.getElementById('popupSplitCont');
@@ -562,9 +586,10 @@
         console.log('turn after ', turn);
     }
 
+    document.getElementById('pathB').addEventListener("click", () => Path2());
     // Handles special tiles that players land on. E.g. Landing on a money tile runs moneyTile() function.
-    function turnAction (){
-        if (turn == 1){
+    function turnAction() {
+        if (turn == 1) {
             switch (player1.playerPath[player1.currentTile]) {
                 case board1[7]:
                 case board1[13]:
@@ -634,13 +659,12 @@
                     turn *= -1;
             }
         }
-
     }
 
     // Switches the positions of both players. (Used for the portals card)
     function switchPlayers() {
-        tempNum = player1.currentTile;
-        tempPath = player1.playerPath;
+        var tempNum = player1.currentTile;
+        var tempPath = player1.playerPath;
         console.log('before:', player1.playerPath[player1.currentTile], player2.playerPath[player2.currentTile]);
         player1.currentTile = player2.currentTile;
         player2.currentTile = tempNum;
@@ -654,7 +678,7 @@
     }
 
     // This will switch the points of both player's current balance of victory points. (Used for the black hole card)
-    function switchPoints (){
+    function switchPoints () {
         var tempNum = player1.victoryPoints;
         player1.victoryPoints = player2.victoryPoints;
         player2.victoryPoints = tempNum;
@@ -726,7 +750,7 @@
     }
 
     // The bot rolls the die and moves
-    setInterval(function botMove(){
+    setInterval(function botMove() {
         // The bot will check if it is their turn and if the game has ended. The bot checks if it has ended so it does not continue rolling indefinitely
         if (turn == -1 && !gameEnded) { 
             if (player2.isBot) {
@@ -745,8 +769,8 @@
 
     //this function will generate a random number between 1 and 6 (or whatever value you send it)
     function getRandomInt(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
+      var min = Math.ceil(min);
+      var max = Math.floor(max);
       return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
     }
 
@@ -830,7 +854,7 @@
 
 // Help Page
 var Helptoggle = 1;
-function toggleHelp () {
+function toggleHelp() {
     if (Helptoggle == 1) {
         $('.helpMenu').css('visibility', 'visible');
     } else if (Helptoggle == -1) {
@@ -838,6 +862,8 @@ function toggleHelp () {
     } 
     Helptoggle *= -1;
 }
+document.getElementById("helpBtn").addEventListener("click", () => toggleHelp());
+document.getElementById("closeHelp").addEventListener("click", () => toggleHelp());
 
 // Resets the game. (Players are set back to start, values are set back to starting default, etc.)
 function resetGame() {
@@ -873,10 +899,17 @@ function resetGame() {
     gameEnded = false;
     console.log("Game Ended: " + gameEnded);
 }
+document.getElementById('resetGameBtn').addEventListener("click", () => resetGame());
 
 // Function that returns the player to main menu
 function returnToMainMenu() {
+    menuRoom.onPeerJoin(peerId => {
+        const numberOfPeers = mainMenuRoom.getPeers().length;
+
+        console.log(`${peerId} has joined the room. ${numberOfPeers} ${numberOfPeers == 1 ? 'peer is' : 'peers are'} online.`);
+    });
     resetGame();
+    var chaos = chaosMeter[chaosValue];
     $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)');
     $('.chaosMeter, .gameMenu, #gameBoard, .sign').css('display', '2s none');
     $('.chaosMeter, .gameMenu, .sign').css('display', 'none');
@@ -889,4 +922,28 @@ function returnToMainMenu() {
     $('.helpButton').css('height', '10%');
     $('#mainMenuBtn1').css('display', 'none');
     console.log("Returning to main menu...");
+}
+document.getElementById('mainMenuBtn1').addEventListener("click", () => returnToMainMenu());
+document.getElementById('mainMenuBtn2').addEventListener("click", () => returnToMainMenu());
+
+// When the user clicks on the button, toggle between hiding and showing the dropdown content
+function toggleDropdown() {
+    console.log("TOGGLE DROPDOWN")
+    document.getElementByIdById("pvpDropdown").classList.toggle("show");
+}
+
+document.getElementById("pvpDropBtn").addEventListener("click", () => toggleDropdown);
+
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches(".pvpDropBtn")) {
+        var dropdowns = document.getElementsByClassname("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropDown = dropdowns[i];
+            if (openDropDown.classList.contains("show")) {
+                openDropDown.classList.Remove("show");
+            }
+        }
+    }
 }

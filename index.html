@@ -10,21 +10,30 @@
     <link rel="stylesheet" href="style.css">
     <script src="jquery-3.6.3.js"></script>
     <link rel="icon" type="image/x-icon" href="/images/Misc/Clown_favicon.png">
-    <title>Board Game</title>
+    <title>🚀 Starmageddon 👨‍🚀</title>
 </head>
     <body>
-        <div id="title"></div>
-        <button class="helpButton" onclick="toggleHelp()">Help</button>
-        <button id="mainMenuBtn1" onclick="returnToMainMenu()">Main Menu</button> <!--This one is used for mid round, not to be confused with the main menu button in the winPopup-->
-        <input type="button" value="Player vs Player" id="startBtnPVP" onclick="start(false);">
-        <input type="button" value="Player vs AI" id="startBtnAI" onclick="start(true);">
-        <p class="credits">Created by Ayden Cortez and Ayden Arakelian.</p>
+            <div id="title"></div>
+            <button class="helpButton" id="helpBtn">Help</button>
+            <button id="mainMenuBtn1">Main Menu</button> <!--This one is used for mid round, not to be confused with the main menu button in the winPopup-->
+            <input type="button" value="Player vs AI" id="startBtnAI">
+            <div id="pvpGamemodesDropdown">
+                <button class="pvpDropBtn" id="pvpDropBtn">PVP Gamemodes</button>
+                <div id="pvpDropdown" class="dropdown-content">
+                    <li><input type="button" id="startBtnOnline"></li>
+                    <li><input type="button" id="startBtnPVP"></li>
+                </div>
+            </div>   
+            <p class="credits">Created by Ayden Cortez and Ayden Arakelian.</p>
+            <div id="playerCount">
+                <p>Players Online: <span id="playerNumber"></span></p>
+            </div>
 
         <div class="popupCont" id="popupSplitCont">
             <div class="popup">
                 <h2>Pick a Path</h2>
-                <input type="button" id="pathA" value="Path 1" onclick="Path1()">
-                <input type="button" id="pathB" value="Path 2" onclick="Path2()">
+                <input type="button" id="pathA" value="Path 1">
+                <input type="button" id="pathB" value="Path 2">
             </div>
         </div>
         <div class="popupCont" id="winPopupCont">
@@ -32,12 +41,12 @@
                 <h2>Player <span id="winningPlayer"></span> has made it to the end</h2>
                 <p style="color: green"> +5 Victory Points</p>
                 <h1 id="winner"></h1>
-                <button class="resetGameBtn" onclick="resetGame()">Play Again?</button>
-                <button class="mainMenuBtn2" onclick="returnToMainMenu()">Main Menu</button>
+                <button class="resetGameBtn" id="resetGameBtn">Play Again?</button>
+                <button id="mainMenuBtn2">Main Menu</button>
             </div>
         </div>
         <div class="actionCard" draggable="true">
-            <input type="button" class="dismissBtn" onclick="hideCard()" value="x">
+            <input type="button" class="dismissBtn" id="dismissBtn" value="x">
             <h3 id="cardName">TEST CARD</h3>
             <img id="cardImg" src="images/Misc/placeholderCard.png" alt="card image">
             <p class="cardDesc" id="cardDesc">Lorem ipsum, dolor sit amet consectetur adipisicinisquam?</p>
@@ -179,7 +188,7 @@
 
     <div id="overlay" class="helpMenu">
         <div class="helpPage" style="overflow-y: scroll;">
-            <button id="closeHelp" onclick="toggleHelp()">Close</button>
+            <button id="closeHelp">Close</button>
             <h2>Rules and Instructions</h2>
             <p>Welcome to Starmageddon. A simple game, requiring 1-2 players, where you must be able to get to the end of the game with the most points
             <i>(How generic)</i> you might be saying. But that's not all, this game has many surprises of <b>Chaos</b>. It's best to remember that this is an <u>unforgiving</u> game and that it is heavily <u>luck-based</u>. Have fun!</p>
@@ -212,7 +221,6 @@
             </ul>
         </div>
     </div>
-</div>
 
         <script src="boardGame.js" type="module"></script>
     </body>
