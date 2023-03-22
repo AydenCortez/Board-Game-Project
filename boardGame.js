@@ -1,3 +1,5 @@
+    
+    import { joinRoom, selfId } from 'https://cdn.skypack.dev/trystero/ipfs';
     // Variables
     var player1 = document.getElementById("player1");
     var player2 = document.getElementById("player2"); 
@@ -18,25 +20,25 @@
 
      // Assign board spaces from HTML to arrays
     const board1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-    for (i = 0; i <= 14; i++) {
+    for (var i = 0; i <= 14; i++) {
         board1[i] = document.getElementById(i);
     }
     
     // Assign path 1 spaces from HTML to arrays
     let path1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-    for (i = 0; i <= 14; i++) {
+    for (var i = 0; i <= 14; i++) {
         path1[i] = document.getElementById('A' + i);
     }
 
     // Assign path 2 spaces from HTML to arrays
     let path2 = [1, 2, 3, 4, 5, 6, 7, 8];
-    for (i = 0; i <= 10; i++) {
+    for (var i = 0; i <= 10; i++) {
         path2[i] = document.getElementById('B' + i);
     }
 
     // chaos meter array
     var chaosMeter = [1, 2, 3, 4, 5]
-    for (i = 0; i <=5; i++) {
+    for (var i = 0; i <=5; i++) {
         chaosMeter[i] = document.getElementById('Chaos' + i);
     }
 
@@ -419,14 +421,13 @@
     function start(isBot) {
         $('.rollBtn').css('display', 'block'); // This makes sure the rollBtn is active when a new game starts since the button is disabled once the game ends
         turn = 1;
-        isWinner = null;
         player1.currentTile = 1;
         player2.currentTile = 1;        
         $('#player1').appendTo(board1[player1.currentTile]);
         $('#player2').appendTo(board1[player1.currentTile]);
         // $(player1.victoryPoints).appendTo('#player1VP');
         updateVP();
-        chaos = chaosMeter[chaosValue];
+        var chaos = chaosMeter[chaosValue];
         $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)');
         $('.chaosMeter, .gameMenu, #gameBoard, .sign').css('animation', '2s fadeIn');
         $('.chaosMeter, .gameMenu, .sign').css('display', 'flex');
@@ -450,7 +451,7 @@
             $('#player2').css('background-image', 'url(/images/misc/Player2.png)');
             document.getElementById('player2Img').src="/images/misc/Player2.png";
         }
-    }
+    };
     
     // Uses the 3 arrays to move the player incrementally
     function movePlayers() {
