@@ -60,21 +60,39 @@ body {
     100% {background-color: rgb(52, 152, 219);}
 }
 
+#mainMenuScreen {
+    width: 100%;
+    height: 100%;
+}
+
 #title {
-    position: absolute;
+    position: relative;
     top: 20%;
+    left: 22%;
     width: 1000px;
     height: 250px;
     background: url(/images/Misc/TitleOutline.png)
 }
 
+#pvpDropBtn {
+    position: relative;
+    width: 10%;
+    height: 10%;
+    left: 45%;
+}
+
+
 .credits {
+    position: relative;
+    left: 40%;
+    top: 20%;
     color: red;
     margin-bottom: 2%;
 }
 
 #playerCount {
     position: absolute;
+    left: 45%;
     display: flex;
     align-items: center;
     width: 10%;

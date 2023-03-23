@@ -1,7 +1,8 @@
     import { joinRoom, selfId } from 'https://cdn.skypack.dev/trystero/ipfs';
 
     const config = {appId: 'starCitizen'};
-    let menuRoom;
+    let menuRoom = (config, 'room')
+    menuRoom.onPeerJoin(peerId => console.log(`${peerId} joined`))
     let queueRoom;
     let gameRoom;
     let online = document.getElementById('playerNumber');
@@ -10,13 +11,12 @@
         const numberOfPeers = menuRoom.getPeers().length;
         online.textContent(numberOfPeers)
     }
-    joinRoom(config, 'menuRoom');
     updateOnline()
     // Variables
     var player1 = document.getElementById("player1");
     var player2 = document.getElementById("player2"); 
     let boardTiles = document.querySelectorAll('tile');
-    const gameLog = document.getElementById('gameLogDisplay');
+    const gameLog = document.getElementById('gameLogDisplay'); 
     var chaosTimer = 0;
     var chaosValue = 1;
     var turn = 1;
