@@ -155,6 +155,11 @@
     // Hides the card that the player drew
     function hideCard() {
         $('.actionCard').css('display', 'none');
+        $('#chaosCon1').css('color', 'black')
+        $('#chaosCon2').css('color', 'black')
+        $('#chaosCon3').css('color', 'black')
+        $('#chaosCon4').css('color', 'black')
+        $('#chaosCon5').css('color', 'black')
     }
 
     // Deducts points from a player
@@ -168,6 +173,7 @@
                     } else {
                         player2.victoryPoints -= 3;
                     }
+                    $('#chaosCon1').css('color', 'red')
                     return chaos;
                 case 3:
                 case 4:
@@ -176,6 +182,7 @@
                     } else {
                         player2.victoryPoints -= 4;
                     }
+                    $('#chaosCon2').css('color', 'red')
                     return chaos;
                 case 5:
                     if (turn == 1) {
@@ -183,6 +190,7 @@
                     } else {
                         player2.victoryPoints -= 5;
                     }
+                    $('#chaosCon3').css('color', 'red')
                     return chaos;
                 default:
                     break;
@@ -197,6 +205,7 @@
                     } else {
                         player2.victoryPoints -= 2;
                     }
+                    $('#chaosCon1').css('color', 'red')
                     return chaos;
                 case 3:
                 case 4:
@@ -205,6 +214,7 @@
                     } else {
                         player2.victoryPoints -= 3;
                     }
+                    $('#chaosCon2').css('color', 'red')
                     return chaos;
                 case 5:
                     if (turn == 1) {
@@ -212,6 +222,7 @@
                     } else {
                         player2.victoryPoints -= 6;
                     }
+                    $('#chaosCon3').css('color', 'red')
                     return chaos;
                 default:
                     break;
@@ -231,6 +242,7 @@
                         player1.victoryPoints -= 1;
                         player2.victoryPoints += 1;
                     };
+                    $('#chaosCon1').css('color', 'red')
                     break;
                 case 3:
                 case 4:
@@ -238,12 +250,14 @@
                         player1.victoryPoints -= 2;
                         player2.victoryPoints += 2;
                     }
+                    $('#chaosCon2').css('color', 'red')
                     break;
                 case 5:
                     if (player2.victoryPoints > 0){
                         player1.victoryPoints -= 3;
                         player2.victoryPoints -= 3;
                     }
+                    $('#chaosCon3').css('color', 'red')
                     break;
                 default:
                     break;
@@ -256,6 +270,7 @@
                         player2.victoryPoints -= 1;
                         player1.victoryPoints += 1;
                     };
+                    $('#chaosCon1').css('color', 'red')
                     break;
                 case 3:
                 case 4:
@@ -263,12 +278,14 @@
                         player2.victoryPoints -= 2;
                         player1.victoryPoints += 2;
                     }
+                    $('#chaosCon2').css('color', 'red')
                     break;
                 case 5:
                     if (player2.victoryPoints > 0){
                         player2.victoryPoints -= 3;
                         player1.victoryPoints -= 3;    
                     }
+                    $('#chaosCon3').css('color', 'red')
                     break;
                 default:
                     break;
@@ -298,6 +315,7 @@
                         player2.currentTile -= 1;
                         player2.previousValue = player2.currentTile;
                     }
+                    $('#chaosCon1').css('color', 'red')
                     break;
                 case 2:
                 case 3:
@@ -309,6 +327,7 @@
                         player2.currentTile -= 2;
                         player2.previousValue = player2.currentTile;
                     }
+                    $('#chaosCon2').css('color', 'red')
                     break;
                 case 5:
                     if (turn == 1) {
@@ -318,6 +337,7 @@
                         player2.currentTile -= 4;
                         player2.previousValue = player2.currentTile;
                     }
+                    $('#chaosCon3').css('color', 'red')
                     break
                 default:
                     break;
@@ -332,6 +352,7 @@
                         player2.currentTile -= 1;
                         player2.previousValue = player2.currentTile;
                     }
+                    $('#chaosCon1').css('color', 'red')
                     break;
                 case 2:
                 case 3:
@@ -346,6 +367,7 @@
                         player2.previousValue = player2.currentTile;
                         player2.victoryPoints -=1;
                     }
+                    $('#chaosCon2').css('color', 'red')
                     break;
                 default:
                     break;
