@@ -2,16 +2,19 @@
     var player1 = document.getElementById("player1");
     var player2 = document.getElementById("player2"); 
     var currentStep;
-    let boardTiles = document.querySelectorAll('tile');
     const gameLog = document.getElementById('gameLogDisplay');
-    var chaosTimer = 0;
-    var chaosValue = 1;
+    let chaosTimer = 0;
+    let chaosValue = 1;
     const startTile = document.getElementById("1");
     var turn = 1;
     var testNumber;
     var gameEnded = false;
     let mainMenuBtn1 = document.getElementById("mainMenuBtn1").style.display = "none";
+    // Audio
     
+    let mainMenuMusic = new Audio('/Audio/Music/mainMusic.mp3');
+    mainMenuMusic.volume = 1
+    // mainMenuMusic.autoplay = true;
     // Die Rolling Variables
     var dieNumberLanded = 3;
     var isDieRolling = false;
@@ -86,6 +89,8 @@
 
     // The player draws a random chaos card. (This happens when the player lands on a chaos tile.)
     function drawCard (){
+        let cardSFX = new Audio('/Audio/SFX/flipCard.mp3');
+        cardSFX.play();
         if (cards.length > 0) {
             randIn = Math.floor(Math.random() * cards.length);
             cardPicked = cards[randIn];
@@ -155,11 +160,11 @@
     // Hides the card that the player drew
     function hideCard() {
         $('.actionCard').css('display', 'none');
-        $('#chaosCon1').css('color', 'black')
-        $('#chaosCon2').css('color', 'black')
-        $('#chaosCon3').css('color', 'black')
-        $('#chaosCon4').css('color', 'black')
-        $('#chaosCon5').css('color', 'black')
+        $('#chaosCon1').css('color', 'black');
+        $('#chaosCon2').css('color', 'black');
+        $('#chaosCon3').css('color', 'black');
+        $('#chaosCon4').css('color', 'black');
+        $('#chaosCon5').css('color', 'black');
     }
 
     // Deducts points from a player
@@ -173,7 +178,7 @@
                     } else {
                         player2.victoryPoints -= 3;
                     }
-                    $('#chaosCon1').css('color', 'red')
+                    $('#chaosCon1').css('color', 'red');
                     return chaos;
                 case 3:
                 case 4:
@@ -182,7 +187,7 @@
                     } else {
                         player2.victoryPoints -= 4;
                     }
-                    $('#chaosCon2').css('color', 'red')
+                    $('#chaosCon2').css('color', 'red');
                     return chaos;
                 case 5:
                     if (turn == 1) {
@@ -190,7 +195,7 @@
                     } else {
                         player2.victoryPoints -= 5;
                     }
-                    $('#chaosCon3').css('color', 'red')
+                    $('#chaosCon3').css('color', 'red');
                     return chaos;
                 default:
                     break;
@@ -205,7 +210,7 @@
                     } else {
                         player2.victoryPoints -= 2;
                     }
-                    $('#chaosCon1').css('color', 'red')
+                    $('#chaosCon1').css('color', 'red');
                     return chaos;
                 case 3:
                 case 4:
@@ -214,7 +219,7 @@
                     } else {
                         player2.victoryPoints -= 3;
                     }
-                    $('#chaosCon2').css('color', 'red')
+                    $('#chaosCon2').css('color', 'red');
                     return chaos;
                 case 5:
                     if (turn == 1) {
@@ -222,7 +227,7 @@
                     } else {
                         player2.victoryPoints -= 6;
                     }
-                    $('#chaosCon3').css('color', 'red')
+                    $('#chaosCon3').css('color', 'red');
                     return chaos;
                 default:
                     break;
@@ -242,7 +247,7 @@
                         player1.victoryPoints -= 1;
                         player2.victoryPoints += 1;
                     };
-                    $('#chaosCon1').css('color', 'red')
+                    $('#chaosCon1').css('color', 'red');
                     break;
                 case 3:
                 case 4:
@@ -250,14 +255,14 @@
                         player1.victoryPoints -= 2;
                         player2.victoryPoints += 2;
                     }
-                    $('#chaosCon2').css('color', 'red')
+                    $('#chaosCon2').css('color', 'red');
                     break;
                 case 5:
                     if (player2.victoryPoints > 0){
                         player1.victoryPoints -= 3;
                         player2.victoryPoints -= 3;
                     }
-                    $('#chaosCon3').css('color', 'red')
+                    $('#chaosCon3').css('color', 'red');
                     break;
                 default:
                     break;
@@ -270,7 +275,7 @@
                         player2.victoryPoints -= 1;
                         player1.victoryPoints += 1;
                     };
-                    $('#chaosCon1').css('color', 'red')
+                    $('#chaosCon1').css('color', 'red');
                     break;
                 case 3:
                 case 4:
@@ -278,14 +283,14 @@
                         player2.victoryPoints -= 2;
                         player1.victoryPoints += 2;
                     }
-                    $('#chaosCon2').css('color', 'red')
+                    $('#chaosCon2').css('color', 'red');
                     break;
                 case 5:
                     if (player2.victoryPoints > 0){
                         player2.victoryPoints -= 3;
                         player1.victoryPoints -= 3;    
                     }
-                    $('#chaosCon3').css('color', 'red')
+                    $('#chaosCon3').css('color', 'red');
                     break;
                 default:
                     break;
@@ -315,7 +320,7 @@
                         player2.currentTile -= 1;
                         player2.previousValue = player2.currentTile;
                     }
-                    $('#chaosCon1').css('color', 'red')
+                    $('#chaosCon1').css('color', 'red');
                     break;
                 case 2:
                 case 3:
@@ -327,7 +332,7 @@
                         player2.currentTile -= 2;
                         player2.previousValue = player2.currentTile;
                     }
-                    $('#chaosCon2').css('color', 'red')
+                    $('#chaosCon2').css('color', 'red');
                     break;
                 case 5:
                     if (turn == 1) {
@@ -352,7 +357,7 @@
                         player2.currentTile -= 1;
                         player2.previousValue = player2.currentTile;
                     }
-                    $('#chaosCon1').css('color', 'red')
+                    $('#chaosCon1').css('color', 'red');
                     break;
                 case 2:
                 case 3:
@@ -367,7 +372,7 @@
                         player2.previousValue = player2.currentTile;
                         player2.victoryPoints -=1;
                     }
-                    $('#chaosCon2').css('color', 'red')
+                    $('#chaosCon2').css('color', 'red');
                     break;
                 default:
                     break;
@@ -424,7 +429,10 @@
 
     // Updates the number of chaos and chaos icons
     function setChaos() {
+        let chaosSFX = new Audio('/Audio/SFX/chaosAlert.mp3');
+
         if (chaosTimer == 8 || chaosTimer == 16 || chaosTimer == 24 || chaosTimer == 32) {
+            chaosSFX.play();
             chaosValue += 1;
             $('#gameLogDisplay').append('<li style=color:red; font-weight:bold;>' + '!! The chaos has increased to ' + chaosValue + ' !!' + '</li>');
         } else {
@@ -439,6 +447,7 @@
 
     // Starts the game with default values
     function start(isBot) {
+        mainMenuMusic.play();
         $('.rollBtn').css('display', 'block'); // This makes sure the rollBtn is active when a new game starts since the button is disabled once the game ends
         turn = 1;
         isWinner = null;
@@ -771,11 +780,15 @@
       return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
     }
 
+    
+
     //our main roll dice function on click
     function rollDice() {
     if (isDieRolling)
         return;
     isDieRolling = true;
+    let diceSFX = new Audio('/Audio/SFX/dice.mp3');
+    diceSFX.play();
     changeColorDice();
     //genberate a random number between 1 and 6 with out getRandomInt function
      var randNum = getRandomInt(1,7); 
