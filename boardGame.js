@@ -10,6 +10,7 @@
     var testNumber;
     var gameEnded = false;
     let mainMenuBtn1 = document.getElementById("mainMenuBtn1").style.display = "none";
+    let muteBtn1 = document.getElementById("muteBtn").style.display = "none";
     // Audio
     
     let mainMenuMusic = new Audio('/Audio/Music/mainMusic.mp3');
@@ -473,6 +474,11 @@
         $('#mainMenuBtn1').css('left', '28%');
         $('#mainMenuBtn1').css('width', '5%');
         $('#mainMenuBtn1').css('height', '5%');
+        $('#muteBtn').css('display', 'block');
+        $('#muteBtn').css('top', '5%');
+        $('#muteBtn').css('left', '34%');
+        $('#muteBtn').css('width', '5%');
+        $('#muteBtn').css('height', '5%');
         player2.isBot = isBot;
         if (player2.isBot) {
             $('#player2').css('background-image', 'url(/images/misc/Player2_AI.png)');
@@ -923,5 +929,25 @@ function returnToMainMenu() {
     $('.helpButton').css('width', '10%');
     $('.helpButton').css('height', '10%');
     $('#mainMenuBtn1').css('display', 'none');
+    $('#muteBtn').css('display', 'none');
     console.log("Returning to main menu...");
+}
+
+// Mute a singular HTML5 element
+function muteMe(elem) {
+    if (elem.muted == true)
+        elem.muted = false;
+    else
+        elem.muted = true;
+
+    elem.pause();
+
+    console.log("Mute Page");
+}
+
+// Try to mute all video and audio elements on the page
+function mutePage() {
+    let elems = mainMenuMusic;
+
+    [].forEach.call(elems, function(elem) { muteMe(elem); })
 }
