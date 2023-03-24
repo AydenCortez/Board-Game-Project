@@ -14,6 +14,7 @@
     
     let mainMenuMusic = new Audio('/Audio/Music/mainMusic.mp3');
     mainMenuMusic.volume = 1
+    mainMenuMusic.loop = true;
     // mainMenuMusic.autoplay = true;
     // Die Rolling Variables
     var dieNumberLanded = 3;
