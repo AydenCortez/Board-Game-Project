@@ -88,10 +88,10 @@
     cards[6] = new Card('Black Hole', 'Oh no....', '/images/Cards/Card_Singularity.png', 'switchPoints', null, 'Switch Victory Points');
     cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png', 'losePoints', 'hazard', 'Lose Points', 'Chaos 1-2: 2 Points', 'Chaos 3-4: 3 Points', 'Chaos 5: 6 Points');
 
-
+    let cardSFX = new Audio('/Audio/SFX/flipCard.mp3');
     // The player draws a random chaos card. (This happens when the player lands on a chaos tile.)
     function drawCard (){
-        let cardSFX = new Audio('/Audio/SFX/flipCard.mp3');
+        
         cardSFX.play();
         if (cards.length > 0) {
             randIn = Math.floor(Math.random() * cards.length);
@@ -428,10 +428,10 @@
     // Images for the different chaos icons
     var chaosImg = ['/images/Chaos_Symbols/Chaos_Symbol_2.png', '/images/Chaos_Symbols/Chaos_Symbol_3.png', '/images/Chaos_Symbols/Chaos_Symbol_4.png', '/images/Chaos_Symbols/Chaos_Symbol_5.png'];
     var chaosImg2 = []; // Chaos Images already used
-
+    let chaosSFX = new Audio('/Audio/SFX/chaosAlert.mp3');
     // Updates the number of chaos and chaos icons
     function setChaos() {
-        let chaosSFX = new Audio('/Audio/SFX/chaosAlert.mp3');
+        
 
         if (chaosTimer == 8 || chaosTimer == 16 || chaosTimer == 24 || chaosTimer == 32) {
             chaosSFX.play();
@@ -787,14 +787,14 @@
       return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
     }
 
-    
+    let diceSFX = new Audio('/Audio/SFX/dice.mp3');
 
     //our main roll dice function on click
     function rollDice() {
     if (isDieRolling)
         return;
     isDieRolling = true;
-    let diceSFX = new Audio('/Audio/SFX/dice.mp3');
+    
     diceSFX.play();
     changeColorDice();
     //genberate a random number between 1 and 6 with out getRandomInt function
@@ -944,10 +944,23 @@ function muteMe(elem) {
 
     console.log("Mute Page");
 }
-
+let toggle = 1;
 // Try to mute all video and audio elements on the page
 function mutePage() {
-    let elems = mainMenuMusic;
+    
+    if (toggle == 1){
+        mainMenuMusic.muted = true
+        cardSFX.muted = true
+        diceSFX.muted = true
+        chaosSFX.muted = true
+        toggle *= -1;
+    } else if (toggle == -1) {
+        mainMenuMusic.muted = false
+        cardSFX.muted = false
+        diceSFX.muted = false
+        chaosSFX.muted = false
+        toggle *= -1; 
+    }
 
     [].forEach.call(elems, function(elem) { muteMe(elem); })
 }
