@@ -944,23 +944,25 @@ function muteMe(elem) {
 
     console.log("Mute Page");
 }
-let toggle = 1;
+let muteToggle = 1;
 // Try to mute all video and audio elements on the page
 function mutePage() {
     
-    if (toggle == 1){
+    if (muteToggle == 1){
         mainMenuMusic.muted = true
         cardSFX.muted = true
         diceSFX.muted = true
         chaosSFX.muted = true
-        toggle *= -1;
-    } else if (toggle == -1) {
+        $('#muteBtn').css('background-color', 'red')
+        // $('#muteBtn').mouseover.css('background-color', 'red')
+        muteToggle *= -1;
+    } else if (muteToggle == -1) {
         mainMenuMusic.muted = false
         cardSFX.muted = false
         diceSFX.muted = false
         chaosSFX.muted = false
-        toggle *= -1; 
-    }
+        $('#muteBtn').css('background-color', '#2c3e50')
 
-    [].forEach.call(elems, function(elem) { muteMe(elem); })
+        muteToggle *= -1; 
+    }
 }
