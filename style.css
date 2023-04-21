@@ -17,7 +17,7 @@ body {
     display: none;
     margin:0;
 	padding:0;
-	background: url(/images/Misc/space-background.jpg);
+	background: url(/images/Misc/space-background.webp);
     background-size: cover;
 	display:flex;
 	align-items:center;
@@ -65,7 +65,7 @@ body {
 
 .credits {
     color: red;
-    margin-bottom: 1%;
+    margin-bottom: 2%;
 }
 
 .popupCont {
@@ -495,39 +495,41 @@ hr {
     margin-top: 1%;
 }
 
-.helpButton {
+.helpButton,
+#mainMenuBtn1,
+#muteBtn {
     position: absolute;
     left: 57%;
-    /* margin-bottom: 91vh;
-    margin-left: 1vw; */
     padding: 0px;
     width: 10%;
     height: 10%;
     z-index: 2;
-    /* width: 50px;
-    height: 50px; */
-    z-index: 2;
 }
 
-#startBtn {
+#startBtnPVP {
     position: absolute;
     width: 10%;
     height: 10%;
 }
 
-#creditsBtn {
+#startBtnAI {
     position: absolute;
     left: 33%;
     width: 10%;
     height: 10%;
 }
 
-.helpButton, #startBtn, #creditsBtn {
+.helpButton, #startBtnPVP, #startBtnAI, .resetGameBtn, #mainMenuBtn1, .mainMenuBtn2, #muteBtn {
     top: 55%;
     background-color: #2c3e50;
     color: #ecf0f1;
     border: 1px solid #ecf0f1;
     font-size: 1.2rem;
+}
+
+.resetGameBtn,
+.mainMenuBtn2 {
+    margin-top: 2%;
 }
 
 #closeHelp {
@@ -539,7 +541,7 @@ hr {
     margin: 0% 0% 2% 0%;
 }
 
-.helpButton:hover, #startBtn:hover, #creditsBtn:hover, #closeHelp:hover {
+.helpButton:hover, #startBtnPVP:hover, #startBtnAI:hover, #closeHelp:hover, #mainMenuBtn1:hover, .mainMenuBtn2:hover, .resetGameBtn:hover, #muteBtn:hover {
     animation: 0.25s fadeBtn;
     background: #ecf0f1;
     color: #2c3e50;

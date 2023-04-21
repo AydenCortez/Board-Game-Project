@@ -2,15 +2,21 @@
     var player1 = document.getElementById("player1");
     var player2 = document.getElementById("player2"); 
     var currentStep;
-    let boardTiles = document.querySelectorAll('tile');
     const gameLog = document.getElementById('gameLogDisplay');
-    var chaosTimer = 0;
-    var chaosValue = 1;
+    let chaosTimer = 0;
+    let chaosValue = 1;
     const startTile = document.getElementById("1");
     var turn = 1;
     var testNumber;
-
+    var gameEnded = false;
+    let mainMenuBtn1 = document.getElementById("mainMenuBtn1").style.display = "none";
+    let muteBtn1 = document.getElementById("muteBtn").style.display = "none";
+    // Audio
     
+    let mainMenuMusic = new Audio('/Audio/Music/mainMusic.mp3');
+    mainMenuMusic.volume = 1
+    mainMenuMusic.loop = true;
+    // mainMenuMusic.autoplay = true;
     // Die Rolling Variables
     var dieNumberLanded = 3;
     var isDieRolling = false;
@@ -82,9 +88,11 @@
     cards[6] = new Card('Black Hole', 'Oh no....', '/images/Cards/Card_Singularity.png', 'switchPoints', null, 'Switch Victory Points');
     cards[7] = new Card('Workplace Hazard', "Someone didn't bring their gloves™!", '/images/Cards/Card_Hazard.png', 'losePoints', 'hazard', 'Lose Points', 'Chaos 1-2: 2 Points', 'Chaos 3-4: 3 Points', 'Chaos 5: 6 Points');
 
-
+    let cardSFX = new Audio('/Audio/SFX/flipCard.mp3');
     // The player draws a random chaos card. (This happens when the player lands on a chaos tile.)
     function drawCard (){
+        
+        cardSFX.play();
         if (cards.length > 0) {
             randIn = Math.floor(Math.random() * cards.length);
             cardPicked = cards[randIn];
@@ -154,6 +162,11 @@
     // Hides the card that the player drew
     function hideCard() {
         $('.actionCard').css('display', 'none');
+        $('#chaosCon1').css('color', 'black');
+        $('#chaosCon2').css('color', 'black');
+        $('#chaosCon3').css('color', 'black');
+        $('#chaosCon4').css('color', 'black');
+        $('#chaosCon5').css('color', 'black');
     }
 
     // Deducts points from a player
@@ -167,6 +180,7 @@
                     } else {
                         player2.victoryPoints -= 3;
                     }
+                    $('#chaosCon1').css('color', 'red');
                     return chaos;
                 case 3:
                 case 4:
@@ -175,6 +189,7 @@
                     } else {
                         player2.victoryPoints -= 4;
                     }
+                    $('#chaosCon2').css('color', 'red');
                     return chaos;
                 case 5:
                     if (turn == 1) {
@@ -182,6 +197,7 @@
                     } else {
                         player2.victoryPoints -= 5;
                     }
+                    $('#chaosCon3').css('color', 'red');
                     return chaos;
                 default:
                     break;
@@ -196,6 +212,7 @@
                     } else {
                         player2.victoryPoints -= 2;
                     }
+                    $('#chaosCon1').css('color', 'red');
                     return chaos;
                 case 3:
                 case 4:
@@ -204,6 +221,7 @@
                     } else {
                         player2.victoryPoints -= 3;
                     }
+                    $('#chaosCon2').css('color', 'red');
                     return chaos;
                 case 5:
                     if (turn == 1) {
@@ -211,6 +229,7 @@
                     } else {
                         player2.victoryPoints -= 6;
                     }
+                    $('#chaosCon3').css('color', 'red');
                     return chaos;
                 default:
                     break;
@@ -226,15 +245,27 @@
             switch (chaos) {
                 case 1:
                 case 2:
-                    player1.victoryPoints -= 1;
-                    player2.victoryPoints += 1;
+                    if (player1.victoryPoints > 0) {
+                        player1.victoryPoints -= 1;
+                        player2.victoryPoints += 1;
+                    };
+                    $('#chaosCon1').css('color', 'red');
+                    break;
                 case 3:
                 case 4:
-                    player1.victoryPoints -= 2;
-                    player2.victoryPoints += 2;
+                    if (player2.victoryPoints > 0){
+                        player1.victoryPoints -= 2;
+                        player2.victoryPoints += 2;
+                    }
+                    $('#chaosCon2').css('color', 'red');
+                    break;
                 case 5:
-                    player1.victoryPoints -= 3;
-                    player2.victoryPoints -= 3;
+                    if (player2.victoryPoints > 0){
+                        player1.victoryPoints -= 3;
+                        player2.victoryPoints -= 3;
+                    }
+                    $('#chaosCon3').css('color', 'red');
+                    break;
                 default:
                     break;
             }
@@ -242,20 +273,40 @@
             switch (chaos) {
                 case 1:
                 case 2:
-                    player2.victoryPoints -= 2;
-                    player1.victoryPoints += 2;
+                    if (player2.victoryPoints > 0) {
+                        player2.victoryPoints -= 1;
+                        player1.victoryPoints += 1;
+                    };
+                    $('#chaosCon1').css('color', 'red');
+                    break;
                 case 3:
                 case 4:
-                    player2.victoryPoints -= 3;
-                    player1.victoryPoints += 3
+                    if (player2.victoryPoints > 0) {
+                        player2.victoryPoints -= 2;
+                        player1.victoryPoints += 2;
+                    }
+                    $('#chaosCon2').css('color', 'red');
+                    break;
                 case 5:
-                    player2.victoryPoints -= 6;
-                    player1.victoryPoints -= 6;
+                    if (player2.victoryPoints > 0){
+                        player2.victoryPoints -= 3;
+                        player1.victoryPoints -= 3;    
+                    }
+                    $('#chaosCon3').css('color', 'red');
+                    break;
                 default:
                     break;
             }
         }
         updateVP();
+        underFlow()
+    }
+
+    function testPoints() {
+        player1.victoryPoints += 4;
+        player2.victoryPoints += 4;
+        updateVP();
+        underFlow();
     }
 
     // Moves the player piece a set amount of spaces backwards
@@ -271,6 +322,7 @@
                         player2.currentTile -= 1;
                         player2.previousValue = player2.currentTile;
                     }
+                    $('#chaosCon1').css('color', 'red');
                     break;
                 case 2:
                 case 3:
@@ -282,6 +334,7 @@
                         player2.currentTile -= 2;
                         player2.previousValue = player2.currentTile;
                     }
+                    $('#chaosCon2').css('color', 'red');
                     break;
                 case 5:
                     if (turn == 1) {
@@ -291,6 +344,7 @@
                         player2.currentTile -= 4;
                         player2.previousValue = player2.currentTile;
                     }
+                    $('#chaosCon3').css('color', 'red')
                     break
                 default:
                     break;
@@ -305,6 +359,7 @@
                         player2.currentTile -= 1;
                         player2.previousValue = player2.currentTile;
                     }
+                    $('#chaosCon1').css('color', 'red');
                     break;
                 case 2:
                 case 3:
@@ -319,6 +374,7 @@
                         player2.previousValue = player2.currentTile;
                         player2.victoryPoints -=1;
                     }
+                    $('#chaosCon2').css('color', 'red');
                     break;
                 default:
                     break;
@@ -371,11 +427,14 @@
 
     // Images for the different chaos icons
     var chaosImg = ['/images/Chaos_Symbols/Chaos_Symbol_2.png', '/images/Chaos_Symbols/Chaos_Symbol_3.png', '/images/Chaos_Symbols/Chaos_Symbol_4.png', '/images/Chaos_Symbols/Chaos_Symbol_5.png'];
-    var chaosImg2 = [];
-
+    var chaosImg2 = []; // Chaos Images already used
+    let chaosSFX = new Audio('/Audio/SFX/chaosAlert.mp3');
     // Updates the number of chaos and chaos icons
     function setChaos() {
+        
+
         if (chaosTimer == 8 || chaosTimer == 16 || chaosTimer == 24 || chaosTimer == 32) {
+            chaosSFX.play();
             chaosValue += 1;
             $('#gameLogDisplay').append('<li style=color:red; font-weight:bold;>' + '!! The chaos has increased to ' + chaosValue + ' !!' + '</li>');
         } else {
@@ -383,13 +442,15 @@
         };
         // return chaosMeter;
         randIn = Math.floor(Math.random() * chaosImg.length);
-        chaosPic = chaosImg.splice(randIn, 1)
+        chaosPic = chaosImg.splice(randIn, 1);
         $(chaosMeter[chaosValue]).css('background', 'url(' + chaosPic + ')');
         chaosImg2.push(chaosPic);
     }
 
-    // Starts the game and resets the values
+    // Starts the game with default values
     function start(isBot) {
+        mainMenuMusic.play();
+        $('.rollBtn').css('display', 'block'); // This makes sure the rollBtn is active when a new game starts since the button is disabled once the game ends
         turn = 1;
         isWinner = null;
         player1.currentTile = 1;
@@ -402,19 +463,33 @@
         $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)');
         $('.chaosMeter, .gameMenu, #gameBoard, .sign').css('animation', '2s fadeIn');
         $('.chaosMeter, .gameMenu, .sign').css('display', 'flex');
-        $('#startBtn, #creditsBtn, #title, .credits').css('display', 'none');
+        $('#startBtnPVP, #startBtnAI, #title, .credits').css('display', 'none');
         $('#gameBoard').removeAttr('style');
-        $('.helpButton').css('top', '5%',);
-        $('.helpButton').css('left', '22%',);
-        $('.helpButton').css('width', '5%',);
-        $('.helpButton').css('height', '5%',);
+        $('.helpButton').css('top', '5%');
+        $('.helpButton').css('left', '22%');
+        $('.helpButton').css('width', '5%');
+        $('.helpButton').css('height', '5%');
+        $('#mainMenuBtn1').css('display', 'block');
+        $('#mainMenuBtn1').css('top', '5%');
+        $('#mainMenuBtn1').css('left', '28%');
+        $('#mainMenuBtn1').css('width', '5%');
+        $('#mainMenuBtn1').css('height', '5%');
+        $('#muteBtn').css('display', 'block');
+        $('#muteBtn').css('top', '5%');
+        $('#muteBtn').css('left', '34%');
+        $('#muteBtn').css('width', '5%');
+        $('#muteBtn').css('height', '5%');
         player2.isBot = isBot;
         if (player2.isBot) {
             $('#player2').css('background-image', 'url(/images/misc/Player2_AI.png)');
             document.getElementById('player2Img').src="/images/misc/Player2_AI.png";
         }
+        else {
+            $('#player2').css('background-image', 'url(/images/misc/Player2.png)');
+            document.getElementById('player2Img').src="/images/misc/Player2.png";
+        }
     }
-    // start();
+    
     // Uses the 3 arrays to move the player incrementally
     function movePlayers() {
         if (turn === 1) {
@@ -453,14 +528,17 @@
     // Popup function that lets player choose a path
     var popupActive = false;
     function popUp (){
+        if (gameEnded)
+            return;
+        
         if (turn == 1){
             $('#player1').appendTo(board1[14]);
         } else {
             $('#player2').appendTo(board1[14]);
         }
-        let popUp = document.getElementById('popupCont');
-        popUp.style.display = 'flex';
-        popUp.style.animation = '0.5s fadeIn';
+        let splitPopUp = document.getElementById('popupSplitCont');
+        splitPopUp.style.display = 'flex';
+        splitPopUp.style.animation = '0.5s fadeIn';
         $('.rollBtn').css('display', 'none');
         popupActive = true;
         console.log('turn is ', turn);
@@ -478,7 +556,7 @@
 
     // If a player chose path 1 on the popup
     function Path1 (){
-        let popUp = document.getElementById('popupCont');
+        let popUp = document.getElementById('popupSplitCont');
         if (turn == 1) {
             player1.playerPath = path1;
             player1.currentTile = 0;
@@ -501,7 +579,7 @@
 
     // If a player chose path 2 on the popup
     function Path2 (){
-        let popUp = document.getElementById('popupCont');
+        let popUp = document.getElementById('popupSplitCont');
         if (turn == 1) {
             player1.playerPath = path2;
             player1.currentTile = 0;
@@ -620,12 +698,15 @@
         updateVP();
     }
 
+    let winPopUp = document.getElementById('winPopupCont');
+
     // Checks for winning player. Runs logic for winning the game, like displaying the winner popup
     function endTile (){
-        let winPopUp = document.getElementById('winPopupCont');
         let winningPlayer = document.getElementById('winningPlayer');
         if (turn == 1) {
             if (player1.playerPath == path1 && player1.currentTile >= 15) {
+                gameEnded = true;
+                $('.rollBtn').css('display', 'none');
                 winPopUp.style.display = 'flex';
                 $('#player1').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
@@ -635,6 +716,8 @@
                 winner();
             }
             if (player1.playerPath == path2 && player1.currentTile >= 11) {
+                gameEnded = true;
+                $('.rollBtn').css('display', 'none');
                 winPopUp.style.display = 'flex';
                 $('#player1').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
@@ -644,7 +727,9 @@
                 winner();
             }
         } else {
-            if (player2.playerPath == path1 && player2.currentTile >= 15){
+            if (player2.playerPath == path1 && player2.currentTile >= 15) {
+                gameEnded = true;
+                $('.rollBtn').css('display', 'none');
                 winPopUp.style.display = 'flex';
                 $('#player2').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
@@ -653,7 +738,9 @@
                 $('#popupCont').css('visibility', 'hidden');
                 winner();
             }
-            if (player2.playerPath == path2 && player2.currentTile >= 11){
+            if (player2.playerPath == path2 && player2.currentTile >= 11) {
+                gameEnded = true;
+                $('.rollBtn').css('display', 'none');
                 winPopUp.style.display = 'flex';
                 $('#player2').appendTo('#end');
                 winPopUp.style.animation = '0.5s fadeIn';
@@ -663,6 +750,8 @@
                 winner();
             }
         }
+        console.log("Game Ended: " + gameEnded);
+        
         updateVP();
     }
 
@@ -677,9 +766,10 @@
         }
     }
 
-    // The bot rolls teh dice and moves
+    // The bot rolls the die and moves
     setInterval(function botMove(){
-        if (turn == -1) {
+        // The bot will check if it is their turn and if the game has ended. The bot checks if it has ended so it does not continue rolling indefinitely
+        if (turn == -1 && !gameEnded) { 
             if (player2.isBot) {
                 if (popupActive == false) {
                     rollDice();
@@ -701,11 +791,15 @@
       return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
     }
 
+    let diceSFX = new Audio('/Audio/SFX/dice.mp3');
+
     //our main roll dice function on click
     function rollDice() {
     if (isDieRolling)
         return;
     isDieRolling = true;
+    
+    diceSFX.play();
     changeColorDice();
     //genberate a random number between 1 and 6 with out getRandomInt function
      var randNum = getRandomInt(1,7); 
@@ -788,4 +882,91 @@ function toggleHelp () {
         $('.helpMenu').css('visibility', 'hidden');
     } 
     Helptoggle *= -1;
+}
+
+// Resets the game. (Players are set back to start, values are set back to starting default, etc.)
+function resetGame() {
+    player1.playerPath = board1;
+    player2.playerPath = board1;
+    $('#player1').appendTo(board1[1]);
+    $('#player2').appendTo(board1[1]);
+    player1.currentTile = 1;
+    player2.currentTile = 1;
+    player1.previousValue = 1;
+    player2.previousValue = 1;
+    player1.victoryPoints = 0;
+    player2.victoryPoints = 0;
+
+    $(gameLog).children().remove();
+    if (player2.isBot) {
+        start(true);
+    }
+    else {
+        start(false);
+    }
+
+    chaosTimer = 0;
+    chaosValue = 1;
+    $("#Chaos2, #Chaos3, #Chaos4, #Chaos5").css("background", "white");
+    chaosImg2 = [];
+    chaosImg = [];
+    chaosImg.push('/images/Chaos_Symbols/Chaos_Symbol_2.png', '/images/Chaos_Symbols/Chaos_Symbol_3.png', '/images/Chaos_Symbols/Chaos_Symbol_4.png', '/images/Chaos_Symbols/Chaos_Symbol_5.png');
+
+    console.log(chaosImg);
+    console.log(chaosImg2);
+    $(winPopUp).css("display", "none");
+    gameEnded = false;
+    console.log("Game Ended: " + gameEnded);
+}
+
+// Function that returns the player to main menu
+function returnToMainMenu() {
+    resetGame();
+    $(chaos).css('background', 'url(/images/Chaos_Symbols/Chaos_Symbol_1.png)');
+    $('.chaosMeter, .gameMenu, #gameBoard, .sign').css('display', '2s none');
+    $('.chaosMeter, .gameMenu, .sign').css('display', 'none');
+    $('#startBtnPVP, #startBtnAI, #title, .credits').css('display', 'block');
+    $('#gameBoard').css('display', 'none');
+    
+    $('.helpButton').css('top', '55%');
+    $('.helpButton').css('left', '57%');
+    $('.helpButton').css('width', '10%');
+    $('.helpButton').css('height', '10%');
+    $('#mainMenuBtn1').css('display', 'none');
+    $('#muteBtn').css('display', 'none');
+    console.log("Returning to main menu...");
+}
+
+// Mute a singular HTML5 element
+function muteMe(elem) {
+    if (elem.muted == true)
+        elem.muted = false;
+    else
+        elem.muted = true;
+
+    elem.pause();
+
+    console.log("Mute Page");
+}
+let muteToggle = 1;
+// Try to mute all video and audio elements on the page
+function mutePage() {
+    
+    if (muteToggle == 1){
+        mainMenuMusic.muted = true
+        cardSFX.muted = true
+        diceSFX.muted = true
+        chaosSFX.muted = true
+        $('#muteBtn').css('background-color', 'red')
+        // $('#muteBtn').mouseover.css('background-color', 'red')
+        muteToggle *= -1;
+    } else if (muteToggle == -1) {
+        mainMenuMusic.muted = false
+        cardSFX.muted = false
+        diceSFX.muted = false
+        chaosSFX.muted = false
+        $('#muteBtn').css('background-color', '#2c3e50')
+
+        muteToggle *= -1; 
+    }
 }
